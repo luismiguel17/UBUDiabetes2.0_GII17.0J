@@ -1,3 +1,41 @@
 <resources>
-    <string name="app_name">GII17.0J</string>
+    <string name="app_name">UBUDiabetes 2.0</string>
+    <string name="title_activity_perfil">Perfil</string>
+    <string name="action_settings">Ajustes de perfil</string>
+    <string name="action_acerca">Acerca de...</string>
+    <string name="action_idioma">Idioma</string>
+
+    <!--- Strings de Perfil -->
+
+    <string name="tv_txt_perfil">Perfil de Usuario</string>
+    <string name="h_nombre_de_usuario">Introduce tu nombre</string>
+    <string name="h_edad">Introduce tu edad</string>
+    <string name="h_basal">Uds I.Basal</string>
+    <string name="h_rapida">Uds I.Rápida</string>
+    <string name="h_estatura">Introduce tu estatura(cm)</string>
+    <string name="h_peso">Introduce tu peso(kg)</string>
+    <string name="tv_txt_ly1.1_profile_maxmin">Introduce los valores de glucemia deseados entre 80 y 250 mg/dl</string>
+    <string name="h_min">mín.(mg/dl)</string>
+    <string name="h_max">máx.(mg/dl)</string>
+    <string name="tv_txt_insulina">Insulina del bolo</string>
+    <string name="rb_txt_Rápida">Rápida</string>
+    <string name="rb_txt_UltraRápida">Ultrarrápida</string>
+    <string name="tv_txt_uds">Unidades de insulina</string>
+    <string name="bt_guardar">Guardar</string>
+    <string name="minmax_incorrecto">Introduce valores min y max de glucemia entre los valores indicados</string>
+    <string name="minmax_orden">El valor min de glucemia no puedes ser mayor que el valor máximo</string>
+
+    <string name="primeraEjecucion">primeraEjecucion</string>
+    <string name="nombre">nombre</string>
+    <string name="edad">edad</string>
+    <string name="estatura">estatura</string>
+    <string name="peso">peso</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="udsBasal">udsBasal"</string>
+    <string name="udsRapida">udsRapida</string>
+    <string name="rapida">rapida</string>
+    <string name="ultrarrapida">ultrarrapida</string>
+    <string name="glucemia">glucemia</string>
+
 </resources>
