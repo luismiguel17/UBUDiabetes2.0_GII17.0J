@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.ubu.lmi.gii170j.interfaz.PerfilFragment"
-    tools:showIn="@layout/activity_perfil">
-
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ly1_id_profile"
@@ -253,4 +249,4 @@
             android:text="@string/bt_guardar"
             android:textColor="#fff"/>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</ScrollView>

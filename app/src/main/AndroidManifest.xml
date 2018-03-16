@@ -12,6 +12,27 @@
         <activity
             android:name=".interfaz.Perfil"
             android:label="@string/title_activity_perfil"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".interfaz.MenuPrincipal"
+            android:label="@string/title_activity_menu_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".interfaz.RegistroGlucemias"
+            android:label="@string/title_activity_registro_glucemias"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".interfaz.Incidencias"
+            android:label="@string/title_activity_incidencias"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".interfaz.Historial"
+            android:label="@string/title_activity_historial"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".interfaz.Carbohidratos"
+            android:label="@string/title_activity_carbohidratos"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

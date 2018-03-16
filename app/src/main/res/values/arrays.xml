@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--- Elementos para el spinner de selección de periodo de RegistroGlucemias -->
+    <string-array name="spinnerPeriodo">
+        <item>Antes de desayunar</item>
+        <item>Después de desayunar</item>
+        <item>Antes de almorzar</item>
+        <item>Después de almorzar</item>
+        <item>Antes de comer</item>
+        <item>Después de comer</item>
+        <item>Antes de merendar</item>
+        <item>Después de merendar</item>
+        <item>Antes de cenar</item>
+        <item>Después de cenar</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de Incidencias por valores por exceso -->
+    <string-array name="spinnerIncidenciasAlto">
+        <item>Desconocida</item>
+        <item>Comer en exceso</item>
+        <item>Enfermedad</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de Incidencias por valores por defecto -->
+    <string-array name="spinnerIncidenciasBajo">
+        <item>Desconocida</item>
+        <item>Estrés</item>
+        <item>Exceso de ejercicio físico</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección dedel tipo de intensidad de la actividad física -->
+    <string-array name="spinnerIntensidad">
+        <item>Ninguna</item>
+        <item>Larga (más de 2 horas)</item>
+        <item>Media (de 60 a 90 minutos)</item>
+        <item>Irregular e intermitente</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de tipos de ejercicio de intensidad alta -->
+    <string-array name="spinnerIntensidadLarga">
+        <item>Natación</item>
+        <item>Ciclismo</item>
+        <item>Montañismo</item>
+        <item>Senderismo</item>
+        <item>Paseo</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de tipos de ejercicio de intensidad media -->
+    <string-array name="spinnerIntensidaMedia">
+        <item>Fútbol</item>
+        <item>Baloncesto</item>
+        <item>Tenis</item>
+        <item>Balonmano</item>
+        <item>Volleyball</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de tipos de ejercicio de intensidad irregular -->
+    <string-array name="spinnerIntensidadIrregular">
+        <item>Esquí</item>
+    </string-array>
+    <!--- Elementos para el spinner de selección cuando no se selecciona ejercicio -->
+    <string-array name="spinnerIntensidadNinguna">
+        <item>Ninguno</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección del tipo de alimento -->
+    <string-array name="spinerTipoAlimento">
+        <item>Lacteos</item>
+        <item>Cereales y derivados. Harinas, legumbres y tubérculos</item>
+        <item>Frutas</item>
+        <item>Hortalizas</item>
+        <item>Fruta grasa y seca</item>
+        <item>Bebidas</item>
+        <item>Otros</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de cada alimento -->
+    <string-array name="spinerLacteos">
+        <!-- Lacteos - 22 -->
+        <item>Cuajada</item>
+        <item>Flan</item>
+        <item>Helado de crema</item>
+        <item>Helado de hielo</item>
+        <item>Helado sin azucar añadido</item>
+        <item>Kéfir</item>
+        <item>Leche desnatada</item>
+        <item>Leche semidesnatada</item>
+        <item>Leche entera</item>
+        <item>Leche condensada</item>
+        <item>Leche en polvo</item>
+        <item>Nata líquida</item>
+        <item>Natillas</item>
+        <item>Petit suisse</item>
+        <item>Queso fresco</item>
+        <item>Queso fresco de pasta, sémis o curados</item>
+        <item>Yogur natural entero o desnat.</item>
+        <item>Yogur desnatado sabores o fruta</item>
+        <item>Yogur entero sabores o fruta</item>
+        <item>Yogur líquido</item>
+        <item>Yogur tipo Actimel</item>
+        <item>Yogur tipo Actimel 0%</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de cada alimento -->
+    <string-array name="spinerCereales">
+        <!-- Cereales 74 -->
+        <item>Arroz, crudo</item>
+        <item>Arroz, cocido</item>
+        <item>Arroz integral, crudo</item>
+        <item>Arroz intregral, cocido</item>
+        <item>Arroz hinchado para desayuno</item>
+        <item>Arroz salvaje, crudo</item>
+        <item>Arroz salvaje, cocido</item>
+        <item>Avena, crudo</item>
+        <item>Avena, cocido</item>
+        <item>Avena copos</item>
+        <item>Boniato</item>
+        <item>Cebada, crudo</item>
+        <item>Cebada, cocido</item>
+        <item>Centeno, crudo</item>
+        <item>Centeno, cocido</item>
+        <item>Cereales desayuno</item>
+        <item>Cereales desay. ricos en fibra tipo All-bram, óptima</item>
+        <item>Cuscús, crudo</item>
+        <item>Cuscús, cocido</item>
+        <item>Fideos de arroz, tipo Udon, cocido</item>
+        <item>Fideos de soja, cocido</item>
+        <item>Galletas tipo Digestiva</item>
+        <item>Galletas tipo Maria</item>
+        <item>Galletas tipo Príncipe</item>
+        <item>Galleta sin azúcar</item>
+        <item>Garbanzo, crudo</item>
+        <item>Garbanzo, cocido</item>
+        <item>Guisantes congenlados, frescos de lata</item>
+        <item>Harina de trigo o maíz</item>
+        <item>Harina de centeno</item>
+        <item>Harina de soja</item>
+        <item>Hojaldre crudo</item>
+        <item>Hojaldre horneado</item>
+        <item>Judias blancas, crudo</item>
+        <item>Judias blancas, cocido</item>
+        <item>Lentejas, crudo</item>
+        <item>Lentejas, cocido</item>
+        <item>Maíz en lata</item>
+        <item>Maíz en lata sin azúcar añadido</item>
+        <item>Maíz tostado (quicos)</item>
+        <item>Mijo, crudo</item>
+        <item>Mijo, cocido</item>
+        <item>Müesli</item>
+        <item>Pan blanco</item>
+        <item>Pan de centeno</item>
+        <item>Pan de molde</item>
+        <item>Pan de hamburguesa o Frankfurt</item>
+        <item>Pan de trigo integral</item>
+        <item>Pan rallado</item>
+        <item>Pan tostado o biscote</item>
+        <item>Pan en bastoncillos</item>
+        <item>Pasta alimenticia, crudo</item>
+        <item>Parta alimenticia, cocido</item>
+        <item>Pasta al huevo, crudo</item>
+        <item>Pasta cocida, hervida</item>
+        <item>Patata, horno o asada</item>
+        <item>Patatas fritas</item>
+        <item>Patatas chips</item>
+        <item>Puré de patatas, copos</item>
+        <item>Puré de patatas, elabor. con leche</item>
+        <item>Quinoa, crudo</item>
+        <item>Quinoa, cocido</item>
+        <item>Sémola de trigo, crudo</item>
+        <item>Sémola de trigo, cocido</item>
+        <item>Soja seca, crudo</item>
+        <item>Soja seca, hervido</item>
+        <item>Sushi</item>
+        <item>Tapioca, crudo</item>
+        <item>Tapioca, cocido</item>
+        <item>Trigo sarraceno, crudo</item>
+        <item>Trigo sarraceno, cocido</item>
+        <item>Trigo tierno, crudo</item>
+        <item>Trigo tierno, cocido</item>
+        <item>Yuca, cocido</item>
+    </string-array>
+
+    <string-array name="spinnerFrutas">
+        <!-- Fruta 42 -->
+        <item>Aguacate</item>
+        <item>Albaricoque</item>
+        <item>Arándano</item>
+        <item>Castaña cruda</item>
+        <item>Castaña tostada</item>
+        <item>Cereza</item>
+        <item>Chirimoya</item>
+        <item>Ciruela</item>
+        <item>Coco fresco</item>
+        <item>Coco seco</item>
+        <item>Dátil</item>
+        <item>Frambuesa</item>
+        <item>Fresones</item>
+        <item>Granada</item>
+        <item>Grosella</item>
+        <item>Grosella negra</item>
+        <item>Higos</item>
+        <item>Kiwi</item>
+        <item>Limón</item>
+        <item>Lichi</item>
+        <item>Mandarina</item>
+        <item>Mango</item>
+        <item>Manzana</item>
+        <item>Manzana asada</item>
+        <item>Melocotón</item>
+        <item>Melocotón en conserva</item>
+        <item>Melón</item>
+        <item>Membrillo</item>
+        <item>Membrillo, dulce de</item>
+        <item>Moras</item>
+        <item>Naranja</item>
+        <item>Nectarina</item>
+        <item>Nispero</item>
+        <item>Pera</item>
+        <item>Papaya</item>
+        <item>Paraguayo</item>
+        <item>Piña</item>
+        <item>Piña en conserva</item>
+        <item>Piña en su jugo</item>
+        <item>Plátano</item>
+        <item>Sandía</item>
+        <item>Uva</item>
+    </string-array>
+
+    <string-array name="spinnerHortalizas">
+        <!-- Hortalizas - 42 -->
+        <item>Acelga</item>
+        <item>Ajo</item>
+        <item>Alcachofa</item>
+        <item>Apio</item>
+        <item>Apio-nabo</item>
+        <item>Berenjena</item>
+        <item>Berro</item>
+        <item>Berza</item>
+        <item>Borraja</item>
+        <item>Brócoli</item>
+        <item>Calabacín</item>
+        <item>Calabaza</item>
+        <item>Cardo</item>
+        <item>Cebolla</item>
+        <item>Cebolla frita en aros</item>
+        <item>Champiñón</item>
+        <item>Col ácida</item>
+        <item>Col Bruselas, Coliflor</item>
+        <item>Escarola</item>
+        <item>Endibia</item>
+        <item>Espárrago blanco en conserva</item>
+        <item>Espárrago verde</item>
+        <item>Espinaca</item>
+        <item>Grelos</item>
+        <item>Judia verde</item>
+        <item>Lechuga</item>
+        <item>Lombarda</item>
+        <item>Nabo</item>
+        <item>Palmitos</item>
+        <item>Pepino</item>
+        <item>Pimiento rojo/verde</item>
+        <item>Puerro</item>
+        <item>Rábano</item>
+        <item>Remolacha</item>
+        <item>Repollo</item>
+        <item>Ruibarbo</item>
+        <item>Setas</item>
+        <item>Soja en brotes</item>
+        <item>Tomate</item>
+        <item>Zanahoria</item>
+        <item>Zanahoria hervida</item>
+        <item>Zanahoria en conserva</item>
+    </string-array>
+
+    <string-array name="spinnerFrutaGrasaSeca">
+        <!-- Fruta grasa y seca - 15 -->
+        <item>Aceituna</item>
+        <item>Albaricoque seco</item>
+        <item>Almenda</item>
+        <item>Almendra tostada</item>
+        <item>Avellana</item>
+        <item>Cacahuete</item>
+        <item>Ciruela pasa</item>
+        <item>Dátil seco</item>
+        <item>Higo seco</item>
+        <item>Nuez</item>
+        <item>Piñón</item>
+        <item>Pipas</item>
+        <item>Pistacho</item>
+        <item>Sésamo</item>
+        <item>Uva pasa</item>
+    </string-array>
+
+    <string-array name="spinerBebidas">
+        <!-- Bebidas - 26 -->
+        <item>Bebida isotónica</item>
+        <item>Bebida refrescante tipo cola o sabores</item>
+        <item>Bebida refrescante tipo cola o sabores light o sin azúcar</item>
+        <item>Bebida de cacao</item>
+        <item>Bebida de soja</item>
+        <item>Bebida energética</item>
+        <item>Bitter</item>
+        <item>Cava brut</item>
+        <item>Cava seco o semiseco</item>
+        <item>Cerveza</item>
+        <item>Cerveza light</item>
+        <item>Cerveza sin alcohol</item>
+        <item>Destilados (ginebra, whisky, ron, vodka)</item>
+        <item>Gaseosa</item>
+        <item>Horchata</item>
+        <item>Horchata light</item>
+        <item>Licor de melocotón o manzana</item>
+        <item>Mosto</item>
+        <item>Sangría</item>
+        <item>Sidra</item>
+        <item>Tónica</item>
+        <item>Vermut</item>
+        <item>Vino blanco o tinto</item>
+        <item>Vino dulce</item>
+        <item>Zumo de fruta comercial</item>
+        <item>Zumo de fruta natural o sin azúcar añadido</item>
+    </string-array>
+
+    <string-array name="spinerOtros">
+        <!-- Otros - 57 -->
+        <item>Azúcar blanco</item>
+        <item>Azúcar moreno</item>
+        <item>Barrita energética (de cereales)</item>
+        <item>Bizcocho o melindro</item>
+        <item>Bollería en general</item>
+        <item>Cruasán</item>
+        <item>Cacao en polvo</item>
+        <item>Cacao en polvo sin azúcar</item>
+        <item>Calamares a la romana</item>
+        <item>Canelones con bechamel</item>
+        <item>Caramelo</item>
+        <item>Chocolate blanco o con leche</item>
+        <item>Chocolote negro</item>
+        <item>Churros</item>
+        <item>Crema de cacao</item>
+        <item>Crema de cacahuete</item>
+        <item>Crema pastelera</item>
+        <item>Croquetas</item>
+        <item>Donut</item>
+        <item>Empanadilla de carne</item>
+        <item>Ensaimada</item>
+        <item>Fructosa(edulcorante)</item>
+        <item>Gazpacho comercial</item>
+        <item>Gelatina comercial</item>
+        <item>Glucosa (líquida o en pastillas)</item>
+        <item>Golosinas</item>
+        <item>Ketchup</item>
+        <item>Lasaña</item>
+        <item>Levadura</item>
+        <item>Magdalena</item>
+        <item>Mazapán</item>
+        <item>Merengue</item>
+        <item>Mermelada</item>
+        <item>Mermelada light</item>
+        <item>Miel</item>
+        <item>Mostaza</item>
+        <item>Palomitas</item>
+        <item>Pastel de chocolate</item>
+        <item>Pastel de crema</item>
+        <item>Pepinillos en vinagre</item>
+        <item>Pizza</item>
+        <item>Regaliz</item>
+        <item>Salsa barbacoa</item>
+        <item>Salsa bechamel</item>
+        <item>Salsa boñolesa</item>
+        <item>Salsa carbonara</item>
+        <item>Salsa de tomate comercial</item>
+        <item>Salsa de soja</item>
+        <item>Sucedáneo de café, tipo EKO</item>
+        <item>Surimi (palitos de cangrejo)</item>
+        <item>Tarta de manzana</item>
+        <item>Tofú</item>
+        <item>Tortilla de patatas</item>
+        <item>Turrón tipo Alicante</item>
+        <item>Turrón tipo Jijona</item>
+        <item>Vinagre</item>
+        <item>Vinagre tipo Módena (caramelizado)</item>
+    </string-array>
+
+    <!--- Elementos para rellenar la tabla de alimentos en la base de datos -->
+    <string-array name="arrayTipoAlimento">
+        <item>Lacteos</item>
+        <item>Cereales y derivados. Harinas, legumbres y tubérculos</item>
+        <item>Frutas</item>
+        <item>Hortalizas</item>
+        <item>Fruta grasa y seca</item>
+        <item>Bebidas</item>
+        <item>Otros</item>
+    </string-array>
+
+    <!-- Número de items a cargar para cada tipo de alimento. -->
+    <string-array name="numeroTipoAlimento">
+        <item>22</item> <!-- 22 lacteos -->
+        <item>74</item> <!-- 74 cereales -->
+        <item>42</item> <!-- 42 frutas -->
+        <item>42</item> <!-- 42 hortalizas -->
+        <item>15</item> <!-- 15 fruta grasa y seca -->
+        <item>26</item> <!-- 26 bebidas -->
+        <item>57</item> <!-- 57 otros -->
+    </string-array>
+
+    <!--- Elementos para rellenar la tabla de alimentos en la base de datos -->
+    <string-array name="arrayAlimentos">
+        <!-- Lacteos - 22 -->
+        <item>Cuajada</item>
+        <item>Flan</item>
+        <item>Helado de crema</item>
+        <item>Helado de hielo</item>
+        <item>Helado sin azucar añadido</item>
+        <item>Kéfir</item>
+        <item>Leche desnatada</item>
+        <item>Leche semidesnatada</item>
+        <item>Leche entera</item>
+        <item>Leche condensada</item>
+        <item>Leche en polvo</item>
+        <item>Nata líquida</item>
+        <item>Natillas</item>
+        <item>Petit suisse</item>
+        <item>Queso fresco</item>
+        <item>Queso fresco de pasta, sémis o curados</item>
+        <item>Yogur natural entero o desnat.</item>
+        <item>Yogur desnatado sabores o fruta</item>
+        <item>Yogur entero sabores o fruta</item>
+        <item>Yogur líquido</item>
+        <item>Yogur tipo Actimel</item>
+        <item>Yogur tipo Actimel 0%</item>
+
+        <!-- Cereales - 74 -->
+        <item>Arroz, crudo</item>
+        <item>Arroz, cocido</item>
+        <item>Arroz integral, crudo</item>
+        <item>Arroz intregral, cocido</item>
+        <item>Arroz hinchado para desayuno</item>
+        <item>Arroz salvaje, crudo</item>
+        <item>Arroz salvaje, cocido</item>
+        <item>Avena, crudo</item>
+        <item>Avena, cocido</item>
+        <item>Avena copos</item>
+        <item>Boniato</item>
+        <item>Cebada, crudo</item>
+        <item>Cebada, cocido</item>
+        <item>Centeno, crudo</item>
+        <item>Centeno, cocido</item>
+        <item>Cereales desayuno</item>
+        <item>Cereales desay. ricos en fibra tipo All-bram, óptima</item>
+        <item>Cuscús, crudo</item>
+        <item>Cuscús, cocido</item>
+        <item>Fideos de arroz, tipo Udon, cocido</item>
+        <item>Fideos de soja, cocido</item>
+        <item>Galletas tipo Digestiva</item>
+        <item>Galletas tipo Maria</item>
+        <item>Galletas tipo Príncipe</item>
+        <item>Galleta sin azúcar</item>
+        <item>Garbanzo, crudo</item>
+        <item>Garbanzo, cocido</item>
+        <item>Guisantes congenlados, frescos de lata</item>
+        <item>Harina de trigo o maíz</item>
+        <item>Harina de centeno</item>
+        <item>Harina de soja</item>
+        <item>Hojaldre crudo</item>
+        <item>Hojaldre horneado</item>
+        <item>Judias blancas, crudo</item>
+        <item>Judias blancas, cocido</item>
+        <item>Lentejas, crudo</item>
+        <item>Lentejas, cocido</item>
+        <item>Maíz en lata</item>
+        <item>Maíz en lata sin azúcar añadido</item>
+        <item>Maíz tostado (quicos)</item>
+        <item>Mijo, crudo</item>
+        <item>Mijo, cocido</item>
+        <item>Müesli</item>
+        <item>Pan blanco</item>
+        <item>Pan de centeno</item>
+        <item>Pan de molde</item>
+        <item>Pan de hamburguesa o Frankfurt</item>
+        <item>Pan de trigo integral</item>
+        <item>Pan rallado</item>
+        <item>Pan tostado o biscote</item>
+        <item>Pan en bastoncillos</item>
+        <item>Pasta alimenticia, crudo</item>
+        <item>Parta alimenticia, cocido</item>
+        <item>Pasta al huevo, crudo</item>
+        <item>Pasta cocida, hervida</item>
+        <item>Patata, horno o asada</item>
+        <item>Patatas fritas</item>
+        <item>Patatas chips</item>
+        <item>Puré de patatas, copos</item>
+        <item>Puré de patatas, elabor. con leche</item>
+        <item>Quinoa, crudo</item>
+        <item>Quinoa, cocido</item>
+        <item>Sémola de trigo, crudo</item>
+        <item>Sémola de trigo, cocido</item>
+        <item>Soja seca, crudo</item>
+        <item>Soja seca, hervido</item>
+        <item>Sushi</item>
+        <item>Tapioca, crudo</item>
+        <item>Tapioca, cocido</item>
+        <item>Trigo sarraceno, crudo</item>
+        <item>Trigo sarraceno, cocido</item>
+        <item>Trigo tierno, crudo</item>
+        <item>Trigo tierno, cocido</item>
+        <item>Yuca, cocido</item>
+
+        <!-- Frutas - 42 -->
+        <item>Aguacate</item>
+        <item>Albaricoque</item>
+        <item>Arándano</item>
+        <item>Castaña cruda</item>
+        <item>Castaña tostada</item>
+        <item>Cereza</item>
+        <item>Chirimoya</item>
+        <item>Ciruela</item>
+        <item>Coco fresco</item>
+        <item>Coco seco</item>
+        <item>Dátil</item>
+        <item>Frambuesa</item>
+        <item>Fresones</item>
+        <item>Granada</item>
+        <item>Grosella</item>
+        <item>Grosella negra</item>
+        <item>Higos</item>
+        <item>Kiwi</item>
+        <item>Limón</item>
+        <item>Lichi</item>
+        <item>Mandarina</item>
+        <item>Mango</item>
+        <item>Manzana</item>
+        <item>Manzana asada</item>
+        <item>Melocotón</item>
+        <item>Melocotón en conserva</item>
+        <item>Melón</item>
+        <item>Membrillo</item>
+        <item>Membrillo, dulce de</item>
+        <item>Moras</item>
+        <item>Naranja</item>
+        <item>Nectarina</item>
+        <item>Nispero</item>
+        <item>Pera</item>
+        <item>Papaya</item>
+        <item>Paraguayo</item>
+        <item>Piña</item>
+        <item>Piña en conserva</item>
+        <item>Piña en su jugo</item>
+        <item>Plátano</item>
+        <item>Sandía</item>
+        <item>Uva</item>
+
+        <!-- Hortalizas - 42 -->
+        <item>Acelga</item>
+        <item>Ajo</item>
+        <item>Alcachofa</item>
+        <item>Apio</item>
+        <item>Apio-nabo</item>
+        <item>Berenjena</item>
+        <item>Berro</item>
+        <item>Berza</item>
+        <item>Borraja</item>
+        <item>Brócoli</item>
+        <item>Calabacín</item>
+        <item>Calabaza</item>
+        <item>Cardo</item>
+        <item>Cebolla</item>
+        <item>Cebolla frita en aros</item>
+        <item>Champiñón</item>
+        <item>Col ácida</item>
+        <item>Col Bruselas, Coliflor</item>
+        <item>Escarola</item>
+        <item>Endibia</item>
+        <item>Espárrago blanco en conserva</item>
+        <item>Espárrago verde</item>
+        <item>Espinaca</item>
+        <item>Grelos</item>
+        <item>Judia verde</item>
+        <item>Lechuga</item>
+        <item>Lombarda</item>
+        <item>Nabo</item>
+        <item>Palmitos</item>
+        <item>Pepino</item>
+        <item>Pimiento rojo/verde</item>
+        <item>Puerro</item>
+        <item>Rábano</item>
+        <item>Remolacha</item>
+        <item>Repollo</item>
+        <item>Ruibarbo</item>
+        <item>Setas</item>
+        <item>Soja en brotes</item>
+        <item>Tomate</item>
+        <item>Zanahoria</item>
+        <item>Zanahoria hervida</item>
+        <item>Zanahoria en conserva</item>
+
+        <!-- Fruta grasa y seca - 15 -->
+        <item>Aceituna</item>
+        <item>Albaricoque seco</item>
+        <item>Almenda</item>
+        <item>Almendra tostada</item>
+        <item>Avellana</item>
+        <item>Cacahuete</item>
+        <item>Ciruela pasa</item>
+        <item>Dátil seco</item>
+        <item>Higo seco</item>
+        <item>Nuez</item>
+        <item>Piñón</item>
+        <item>Pipas</item>
+        <item>Pistacho</item>
+        <item>Sésamo</item>
+        <item>Uva pasa</item>
+
+        <!-- Bebidas - 26 -->
+        <item>Bebida isotónica</item>
+        <item>Bebida refrescante tipo cola o sabores</item>
+        <item>Bebida refrescante tipo cola o sabores light o sin azúcar</item>
+        <item>Bebida de cacao</item>
+        <item>Bebida de soja</item>
+        <item>Bebida energética</item>
+        <item>Bitter</item>
+        <item>Cava brut</item>
+        <item>Cava seco o semiseco</item>
+        <item>Cerveza</item>
+        <item>Cerveza light</item>
+        <item>Cerveza sin alcohol</item>
+        <item>Destilados (ginebra, whisky, ron, vodka)</item>
+        <item>Gaseosa</item>
+        <item>Horchata</item>
+        <item>Horchata light</item>
+        <item>Licor de melocotón o manzana</item>
+        <item>Mosto</item>
+        <item>Sangría</item>
+        <item>Sidra</item>
+        <item>Tónica</item>
+        <item>Vermut</item>
+        <item>Vino blanco o tinto</item>
+        <item>Vino dulce</item>
+        <item>Zumo de fruta comercial</item>
+        <item>Zumo de fruta natural o sin azúcar añadido</item>
+
+        <!-- Otros - 57 -->
+        <item>Azúcar blanco</item>
+        <item>Azúcar moreno</item>
+        <item>Barrita energética (de cereales)</item>
+        <item>Bizcocho o melindro</item>
+        <item>Bollería en general</item>
+        <item>Cruasán</item>
+        <item>Cacao en polvo</item>
+        <item>Cacao en polvo sin azúcar</item>
+        <item>Calamares a la romana</item>
+        <item>Canelones con bechamel</item>
+        <item>Caramelo</item>
+        <item>Chocolate blanco o con leche</item>
+        <item>Chocolote negro</item>
+        <item>Churros</item>
+        <item>Crema de cacao</item>
+        <item>Crema de cacahuete</item>
+        <item>Crema pastelera</item>
+        <item>Croquetas</item>
+        <item>Donut</item>
+        <item>Empanadilla de carne</item>
+        <item>Ensaimada</item>
+        <item>Fructosa(edulcorante)</item>
+        <item>Gazpacho comercial</item>
+        <item>Gelatina comercial</item>
+        <item>Glucosa (líquida o en pastillas)</item>
+        <item>Golosinas</item>
+        <item>Ketchup</item>
+        <item>Lasaña</item>
+        <item>Levadura</item>
+        <item>Magdalena</item>
+        <item>Mazapán</item>
+        <item>Merengue</item>
+        <item>Mermelada</item>
+        <item>Mermelada light</item>
+        <item>Miel</item>
+        <item>Mostaza</item>
+        <item>Palomitas</item>
+        <item>Pastel de chocolate</item>
+        <item>Pastel de crema</item>
+        <item>Pepinillos en vinagre</item>
+        <item>Pizza</item>
+        <item>Regaliz</item>
+        <item>Salsa barbacoa</item>
+        <item>Salsa bechamel</item>
+        <item>Salsa boñolesa</item>
+        <item>Salsa carbonara</item>
+        <item>Salsa de tomate comercial</item>
+        <item>Salsa de soja</item>
+        <item>Sucedáneo de café, tipo EKO</item>
+        <item>Surimi (palitos de cangrejo)</item>
+        <item>Tarta de manzana</item>
+        <item>Tofú</item>
+        <item>Tortilla de patatas</item>
+        <item>Turrón tipo Alicante</item>
+        <item>Turrón tipo Jijona</item>
+        <item>Vinagre</item>
+        <item>Vinagre tipo Módena (caramelizado)</item>
+
+
+    </string-array>
+
+</resources>
