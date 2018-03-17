@@ -23,17 +23,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:ems="10"
             android:layout_marginTop="50dp"
             android:hint="@string/h_vglucemia"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bt_guardar"
             android:id="@+id/button"
-            android:background="#00c4eb"
+            android:background="@drawable/btn_save_profile"
             android:textColor="#ffffff"
             android:onClick="guardarGlucemiaOnClick"
             android:layout_marginTop="50dp"

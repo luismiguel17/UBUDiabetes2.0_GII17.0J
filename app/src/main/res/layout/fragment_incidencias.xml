@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bt_guardar"
-            android:background="#00c4eb"
+            android:background="@drawable/btn_Incidencias"
             android:textColor="#ffffff"
             android:onClick="incidenciasOnClick"
             android:layout_marginTop="40dp"

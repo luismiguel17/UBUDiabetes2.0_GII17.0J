@@ -19,7 +19,6 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="#871414"
             android:orientation="vertical">
 
             <TextView
@@ -30,7 +29,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/tv_txt_perfil"
                 android:textAlignment="center"
-                android:textColor="#FFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -90,8 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="#871414">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_id_ly1.2_profile_maxmin"
@@ -99,18 +97,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tv_txt_ly1.1_profile_maxmin"
                 android:textAlignment="center"
-                android:textColor="#FFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/ly1.2.1_id_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:background="#871414"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center">
 
                 <EditText
                     android:id="@+id/et_id_ly2.1_profile_min"
@@ -120,19 +119,25 @@
                     android:hint="@string/h_min"
                     android:textColorHint="#fff"
                     android:inputType="number"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
 
                 <EditText
                     android:id="@+id/et_id_ly2.1_profile_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginStart="50dp"
                     android:background="@drawable/et_profilestyle"
                     android:hint="@string/h_max"
                     android:textColorHint="#fff"
                     android:inputType="number"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
 
             </LinearLayout>
 
@@ -143,8 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="#871414">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_id_ly1.3_profile_insulina"
@@ -153,7 +157,7 @@
                 android:layout_gravity="center"
                 android:text="@string/tv_txt_insulina"
                 android:textAlignment="center"
-                android:textColor="#FFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -169,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/rb_txt_Rápida"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -178,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/rb_txt_UltraRápida"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"/>
             </RadioGroup>
         </LinearLayout>
@@ -189,8 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="#871414">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_id_ly1.4_profile_uds_insulina"
@@ -198,18 +201,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/tv_txt_uds"
-                android:textColor="#FFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/ly1.4.1_id_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:background="#871414"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center">
 
                 <EditText
                     android:id="@+id/et_udsBasal"
@@ -219,19 +223,25 @@
                     android:hint="@string/h_basal"
                     android:textColorHint="#fff"
                     android:inputType="number"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
 
                 <EditText
                     android:id="@+id/et_udsRapida"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginStart="50dp"
                     android:background="@drawable/et_profilestyle"
                     android:hint="@string/h_rapida"
                     android:textColorHint="#fff"
                     android:inputType="number"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -247,6 +257,7 @@
             android:focusable="false"
             android:onClick="guardarperfilOnClick"
             android:text="@string/bt_guardar"
-            android:textColor="#fff"/>
+            android:textColor="#fff"
+            android:layout_marginBottom="20dp" />
     </LinearLayout>
 </ScrollView>

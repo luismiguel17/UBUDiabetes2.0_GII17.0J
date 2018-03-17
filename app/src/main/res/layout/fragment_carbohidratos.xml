@@ -8,6 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
         tools:showIn="@layout/activity_carbohidratos">
 
         <TextView
@@ -48,28 +51,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <Button
                 android:id="@+id/bt_finalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/bt_finalizar"
-                android:background="#00c4eb"
+                android:background="@drawable/btns_CarboHidratos"
                 android:textColor="#ffffff"
                 android:onClick="finalizarOnClick"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="40dp"/>
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/bt_mascomida"
-                android:background="#00c4eb"
+                android:background="@drawable/btns_CarboHidratos"
                 android:textColor="#ffffff"
                 android:onClick="añadirOtroOnClick"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="40dp"/>
         </LinearLayout>
 
     </LinearLayout>
