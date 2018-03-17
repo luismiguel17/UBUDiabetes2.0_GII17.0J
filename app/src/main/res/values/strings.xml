@@ -41,7 +41,7 @@
 
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_activity_menu_principal">Menu Principal</string>
     <string name="acerca_de">UBUDiabetes 2.0 Aplicación de control de la diabetes en dispositivos móviles. Realizada la versión 2.0 por Luis Miguel Inapanta (febrero 2016). \n\</string>
     <string name="bt_bolo">Calcular bolo</string>
     <string name="main_registro">Registro de glucemias</string>
@@ -54,7 +54,7 @@
 
 
     <!--- Strings de Registro de glucemia -->
-    <string name="title_activity_registro_glucemias">RegistroGlucemias</string>
+    <string name="title_activity_registro_glucemias">Registro de Glucemias</string>
     <string name="tv_glucemia">Introduce el valor de glucemia</string>
     <string name="h_vglucemia">Introduzca el valor de glucemia</string>
 

@@ -6,34 +6,53 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".interfaz.Perfil"
-            android:label="@string/title_activity_perfil"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
         <activity
             android:name=".interfaz.MenuPrincipal"
             android:label="@string/title_activity_menu_principal"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
         <activity
             android:name=".interfaz.RegistroGlucemias"
             android:label="@string/title_activity_registro_glucemias"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".interfaz.MenuPrincipal">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ubu.lmi.gii170j.interfaz.MenuPrincipal" />
+        </activity>
         <activity
             android:name=".interfaz.Incidencias"
             android:label="@string/title_activity_incidencias"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".interfaz.RegistroGlucemias" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ubu.lmi.gii170j.interfaz.RegistroGlucemias" />
+        </activity>
+
         <activity
             android:name=".interfaz.Historial"
             android:label="@string/title_activity_historial"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".interfaz.Carbohidratos"
             android:label="@string/title_activity_carbohidratos"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".interfaz.RegistroGlucemias">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".interfaz.RegistroGlucemias"/>
+        </activity>
     </application>
 
 </manifest>

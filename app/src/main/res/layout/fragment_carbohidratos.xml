@@ -17,22 +17,27 @@
             android:id="@+id/tv_carbohidratos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_carbohidratos"
             android:layout_gravity="center"
-            android:textColor="@color/colorPrimaryDark" />
+            android:text="@string/tv_carbohidratos"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/sp_comidas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
         <Spinner
             android:id="@+id/spiner_tipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,14 +45,16 @@
             android:id="@+id/tv_valorgramos"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/et_gramos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:ems="10"
-            android:layout_gravity="center" />
+            android:ems="5"
+            android:layout_gravity="center"
+            android:paddingLeft="5dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/bt_finalizar"
-                android:background="@drawable/btns_CarboHidratos"
+                android:background="@drawable/btns_carbohidratos"
                 android:textColor="#ffffff"
                 android:onClick="finalizarOnClick"
                 android:layout_marginTop="10dp"
@@ -75,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/bt_mascomida"
-                android:background="@drawable/btns_CarboHidratos"
+                android:background="@drawable/btns_carbohidratos"
                 android:textColor="#ffffff"
                 android:onClick="añadirOtroOnClick"
                 android:layout_marginTop="10dp"
