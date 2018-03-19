@@ -88,4 +88,5 @@
     <string name="tv_valorgramos">Introduce el número de gramos del alimento</string>
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
+    <string name="title_activity_launcher">Launcher</string>
 </resources>
