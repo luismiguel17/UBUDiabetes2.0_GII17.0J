@@ -80,8 +80,14 @@ public class CalculaBolo {
     /**
      * Realiza el calculo del bolo corrector aplicando las formulas necesarias.
      */
+
+    public double calculaGr_HC_Ratio(){
+        double operando = gramosHidratosCarbono / calculaRatio();
+        return operando;
+    }
+
     public double calculoBoloCorrector() {
-        double operando1 = gramosHidratosCarbono / calculaRatio();
+        double operando1 = calculaGr_HC_Ratio();
         double operando2 = calculaUdsGlucemia();
 
         return (operando1 + operando2);
