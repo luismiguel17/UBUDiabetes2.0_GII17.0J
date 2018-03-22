@@ -282,7 +282,7 @@ public class Carbohidratos extends AppCompatActivity {
      * @param gramosPorRacion gramos por ración en la tabla de la federación española
      * @return formula aplicada para el cálculo o cero si no es valorable
      */
-    private double calcularGramosDeHidratosDeCarbono(int numeroGramos, String gramosPorRacion) {
+    public double calcularGramosDeHidratosDeCarbono(int numeroGramos, String gramosPorRacion) {
         if (Double.parseDouble(gramosPorRacion) == 0) {
             return 0.0; // evita el bug de división por cero con alimentos con valor "no es valorable"
         }

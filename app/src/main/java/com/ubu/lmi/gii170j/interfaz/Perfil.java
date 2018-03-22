@@ -104,7 +104,7 @@ public class Perfil extends AppCompatActivity {
             Toast.makeText(Perfil.this, R.string.minmax_orden, Toast.LENGTH_SHORT).show();
         } else if (nombre.length() == 0 || edad.length() == 0 || estatura.length() == 0 || peso.length() == 0 || max.length() == 0 || min.length() == 0 ||
                 udsBasal.length() == 0 || udsRapida.length() == 0) {
-            Toast.makeText(Perfil.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Perfil.this, R.string.textfieldEmpty, Toast.LENGTH_SHORT).show();
         } else {
             editorPreferencias.putBoolean("primeraEjecucion", true);
             editorPreferencias.putString(getString(R.string.nombre), nombre);

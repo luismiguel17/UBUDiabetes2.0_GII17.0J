@@ -48,7 +48,7 @@ public class CalculaBolo_CasoPrueba_FalloTest {
         valoresP = new ValoresPOJO(rapida,insulinaBasal,insulinaRapida,glucemiaMinima,glucemiaMaxima,glucemia);
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,gramosHC);
-        System.out.println("Ratio:" + (float)calculadorBolo.calculaRatio());
+        //System.out.println("Ratio:" + (float)calculadorBolo.calculaRatio());
         assertEquals((float)(500/insTotal),(float)calculadorBolo.calculaRatio(),4);
     }
 
@@ -63,7 +63,7 @@ public class CalculaBolo_CasoPrueba_FalloTest {
         valoresP = new ValoresPOJO(rapida,insulinaBasal,insulinaRapida,glucemiaMinima,glucemiaMaxima,glucemia);
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,gramosHC);
-        System.out.println("FSI:" + (float)calculadorBolo.calculaFactorSensibilidad());
+        //System.out.println("FSI:" + (float)calculadorBolo.calculaFactorSensibilidad());
         assertEquals((float)(1500/insTotal),(float)calculadorBolo.calculaFactorSensibilidad(),2);
     }
 
@@ -80,7 +80,7 @@ public class CalculaBolo_CasoPrueba_FalloTest {
         valoresP = new ValoresPOJO(rapida,insulinaBasal,insulinaRapida,glucemiaMinima,glucemiaMaxima,glucemia);
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,gramosHC);
-        System.out.println("GObjetivo:" + (float)calculadorBolo.calculaGlucemiaObjetivo());
+        //System.out.println("GObjetivo:" + (float)calculadorBolo.calculaGlucemiaObjetivo());
         assertEquals((float)((glucemiaMinima+glucemiaMaxima)/2),(float)calculadorBolo.calculaGlucemiaObjetivo(),3);
     }
 
@@ -140,8 +140,9 @@ public class CalculaBolo_CasoPrueba_FalloTest {
         //UI necesarias para cubrir los hidratos de carbono de los alimentos que vayan a tomar en esa comida.
         double uiAlimentos = gramosHC/ratio;
 
-        System.out.println("Uds Bolo Corrector(manual):" + (uiGlucemia + uiAlimentos));
-        assertEquals((float)(uiGlucemia + uiAlimentos),(float)calculadorBolo.calculoBoloCorrector(),3);
+        System.out.println("Uds Bolo Corrector(manual): " + (int)Math.rint((uiGlucemia + uiAlimentos)));
+        System.out.println("Uds Bolo Corrector(Programa): " + (int)Math.rint(calculadorBolo.calculoBoloCorrector()));
+        assertEquals((int)Math.rint((uiGlucemia + uiAlimentos)),(int)Math.rint(calculadorBolo.calculoBoloCorrector()));
     }
 
 }

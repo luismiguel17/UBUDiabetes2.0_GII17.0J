@@ -25,6 +25,7 @@
     <string name="bt_guardar">Guardar</string>
     <string name="minmax_incorrecto">Introduce valores min y max de glucemia entre los valores indicados</string>
     <string name="minmax_orden">El valor min de glucemia no puedes ser mayor que el valor máximo</string>
+    <string name="textfieldEmpty">Rellene todos los campos</string>
 
     <string name="primeraEjecucion">primeraEjecucion</string>
     <string name="nombre">nombre</string>
