@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.ubu.lmi.gii170j.R;
-
 public class Launcher extends AppCompatActivity {
 
     @Override
@@ -15,7 +13,7 @@ public class Launcher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario",MODE_PRIVATE);
         Boolean arranque = misPreferencias.getBoolean("primeraEjecucion", false);
-        Intent perfil = new Intent(this, Perfil.class);
+        Intent perfil = new Intent(this, Registro.class);
         Intent menuPrincipal = new Intent(this, MenuPrincipal.class);
 
         if(!arranque){

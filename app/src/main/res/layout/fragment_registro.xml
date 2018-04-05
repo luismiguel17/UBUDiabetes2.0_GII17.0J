@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView_fragmentProfile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".interfaz.Registro">
+    <LinearLayout
+        android:id="@+id/ly_fragmentProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ly_id_cabeceraProfile"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#00c4eb"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgV2_fragmentperfil"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_add_a_photo_black_24dp"
+                android:clickable="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ly_id_DatPers_fragementProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_datospersonales_fragmenteProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/datosPersonales"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_nombreUs_fragmentProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/nameUser"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_id_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:inputType="text" />
+
+            <LinearLayout
+                android:id="@+id/ly_dp1_1_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_edadUs_fragmentProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/edadUser"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_alturadUs_fragmentProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/alturaUser"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_pesodUs_fragmentProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/pesoUser"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_dp1_2_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_id_edad"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp" />
+
+                <EditText
+                    android:id="@+id/et_id_estatura"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="10dp" />
+
+                <EditText
+                    android:id="@+id/et_id_peso"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_dm_fragmentProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="519dp">
+
+            <TextView
+                android:id="@+id/tv_datosMedicos_fragmentProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/datosMedicos"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_ly_dm_fragmentProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/valoresGlucemiadeseados"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:id="@+id/ly_dm1_1_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_min_ly_dm1_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="85dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/glu_min" />
+
+                <TextView
+                    android:id="@+id/tv_max_ly_dm1_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/glu_max" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lydm1_2_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_id_ly2.1_registro_min"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_marginLeft="82dp"
+                    android:layout_marginTop="10dp" />
+
+                <EditText
+                    android:id="@+id/et_id_ly2.1_registro_max"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_dm1_2_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_insuBolo_fragmentProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/tv_txt_insulina"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rg_id_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/rb_id_rapida"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/rb_txt_Rápida"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/rb_id_ultrarrapida"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/rb_txt_UltraRápida"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_dm1_3_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_ly_dm1_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/tv_txt_uds"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ly_dm1_3_1_fragmentProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_udsBasal_fragmentProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="85dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/h_basal" />
+
+                    <TextView
+                        android:id="@+id/tv_udsRapida_fragmentProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="45dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/h_rapida" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ly_dm1_3_2_fragmentProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_udsBasal"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="92dp"
+                        android:layout_marginTop="10dp" />
+
+                    <EditText
+                        android:id="@+id/et_udsRapida"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="65dp"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+            android:id="@+id/bt_guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_save_registro"
+            android:enabled="true"
+            android:focusable="false"
+            android:text="@string/bt_guardar"
+            android:onClick="guardarperfilOnClick"
+            android:textColor="#fff" />
+    </LinearLayout>
+</ScrollView>

@@ -8,32 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".interfaz.Launcher"></activity>
         <activity
-            android:name=".interfaz.Launcher">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".interfaz.Perfil"
+            android:name=".interfaz.Registro"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".interfaz.MenuPrincipal"
             android:label="@string/title_activity_menu_principal"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".interfaz.RegistroGlucemias"
             android:label="@string/title_activity_registro_glucemias"
-            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".interfaz.MenuPrincipal"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ubu.lmi.gii170j.interfaz.MenuPrincipal" />
@@ -42,8 +32,8 @@
             android:name=".interfaz.Incidencias"
             android:label="@string/title_activity_incidencias"
             android:parentActivityName=".interfaz.RegistroGlucemias"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ubu.lmi.gii170j.interfaz.RegistroGlucemias" />
@@ -51,18 +41,23 @@
         <activity
             android:name=".interfaz.Historial"
             android:label="@string/title_activity_historial"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".interfaz.Carbohidratos"
             android:label="@string/title_activity_carbohidratos"
             android:parentActivityName=".interfaz.RegistroGlucemias"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".interfaz.RegistroGlucemias" />
+        </activity>
+        <activity android:name=".interfaz.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

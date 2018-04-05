@@ -2,10 +2,7 @@ package com.ubu.lmi.gii170j.interfaz;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -15,18 +12,18 @@ import android.widget.Toast;
 import com.ubu.lmi.gii170j.BuildConfig;
 import com.ubu.lmi.gii170j.R;
 
-public class Perfil extends AppCompatActivity {
+public class Registro extends AppCompatActivity {
 
     /**
      * Tag for log.
      */
-    private static String TAG = Perfil.class.getName();
+    private static String TAG = Registro.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_resgistro);
 
         cargarPreferencias();
     }
@@ -41,14 +38,14 @@ public class Perfil extends AppCompatActivity {
         EditText edadEt = (EditText) findViewById(R.id.et_id_edad);
         EditText estaturaEt = (EditText) findViewById(R.id.et_id_estatura);
         EditText pesoEt = (EditText) findViewById(R.id.et_id_peso);
-        EditText maxEt = (EditText) findViewById(R.id.et_id_ly2_1_profile_max);
-        EditText minEt = (EditText) findViewById(R.id.et_id_ly2_1_profile_min);
+        EditText maxEt = (EditText) findViewById(R.id.et_id_ly2_1_registro_max);
+        EditText minEt = (EditText) findViewById(R.id.et_id_ly2_1_registro_min);
         EditText uds1Et = (EditText) findViewById(R.id.et_udsBasal);
         EditText uds2Et = (EditText) findViewById(R.id.et_udsRapida);
         RadioButton rapidaCheck = (RadioButton) findViewById(R.id.rb_id_rapida);
         RadioButton ultrarrapidaCheck = (RadioButton) findViewById(R.id.rb_id_ultrarrapida);
 
-            nombreEt.setText(misPreferencias.getString(getString(R.string.nombre), ""));
+        nombreEt.setText(misPreferencias.getString(getString(R.string.nombre), ""));
         edadEt.setText(misPreferencias.getString(getString(R.string.edad), ""));
         estaturaEt.setText(misPreferencias.getString(getString(R.string.estatura), ""));
         pesoEt.setText(misPreferencias.getString(getString(R.string.peso), ""));
@@ -77,8 +74,8 @@ public class Perfil extends AppCompatActivity {
         EditText edadEt = (EditText) findViewById(R.id.et_id_edad);
         EditText estaturaEt = (EditText) findViewById(R.id.et_id_estatura);
         EditText pesoEt = (EditText) findViewById(R.id.et_id_peso);
-        EditText maxEt = (EditText) findViewById(R.id.et_id_ly2_1_profile_max);
-        EditText minEt = (EditText) findViewById(R.id.et_id_ly2_1_profile_min);
+        EditText maxEt = (EditText) findViewById(R.id.et_id_ly2_1_registro_max);
+        EditText minEt = (EditText) findViewById(R.id.et_id_ly2_1_registro_min);
         EditText udsBasalEt = (EditText) findViewById(R.id.et_udsBasal);
         EditText udsRapidaEt = (EditText) findViewById(R.id.et_udsRapida);
         RadioButton rapidaCheck = (RadioButton) findViewById(R.id.rb_id_rapida);
@@ -99,12 +96,12 @@ public class Perfil extends AppCompatActivity {
         int maxVal = Integer.parseInt(max);
 
         if (minVal < 80 || maxVal > 250) {
-            Toast.makeText(Perfil.this, R.string.minmax_incorrecto, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registro.this, R.string.minmax_incorrecto, Toast.LENGTH_SHORT).show();
         } else if (minVal > maxVal) {
-            Toast.makeText(Perfil.this, R.string.minmax_orden, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registro.this, R.string.minmax_orden, Toast.LENGTH_SHORT).show();
         } else if (nombre.length() == 0 || edad.length() == 0 || estatura.length() == 0 || peso.length() == 0 || max.length() == 0 || min.length() == 0 ||
                 udsBasal.length() == 0 || udsRapida.length() == 0) {
-            Toast.makeText(Perfil.this, R.string.textfieldEmpty, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registro.this, R.string.textfieldEmpty, Toast.LENGTH_SHORT).show();
         } else {
             editorPreferencias.putBoolean("primeraEjecucion", true);
             editorPreferencias.putString(getString(R.string.nombre), nombre);

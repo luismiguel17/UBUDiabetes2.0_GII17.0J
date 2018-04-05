@@ -6,7 +6,7 @@
     <string name="action_idioma">Idioma</string>
 
 
-    <!--- Strings de Perfil -->
+    <!--- StringsRegistrorfil -->
 
     <string name="tv_txt_perfil">Perfil de Usuario</string>
     <string name="h_nombre_de_usuario">Introduce tu nombre</string>
@@ -90,4 +90,17 @@
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
     <string name="title_activity_launcher">Launcher</string>
+
+    <!-- Strings de Perfil (Nuevo) -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="datosPersonales">Datos Personales</string>
+    <string name="nameUser">Nombre</string>
+    <string name="apellidosUser">Apellidos</string>
+    <string name="edadUser">Edad</string>
+    <string name="alturaUser">Altura</string>
+    <string name="pesoUser">Peso</string>
+    <string name="datosMedicos">Datos Médicos</string>
+    <string name="valoresGlucemiadeseados">Valores de Glucemia deseados (Entre 80 y 250 mg/dl)</string>
+    <string name="glu_min">Mínimo</string>
+    <string name="glu_max">Máximo.</string>
 </resources>
