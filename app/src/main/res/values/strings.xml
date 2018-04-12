@@ -86,7 +86,7 @@
     <string name="bolo">Bolo corrector</string>
     <string name="title_activity_carbohidratos">Carbohidratos</string>
     <string name="tv_carbohidratos">Selecciona el alimento de la ingesta</string>
-    <string name="tv_valorgramos">Introduce el número de gramos del alimento</string>
+    <string name="tv_valorgramos">Introduce la cantidad del alimento (Grs)</string>
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
     <string name="title_activity_launcher">Launcher</string>
@@ -97,10 +97,18 @@
     <string name="nameUser">Nombre</string>
     <string name="apellidosUser">Apellidos</string>
     <string name="edadUser">Edad</string>
-    <string name="alturaUser">Altura</string>
-    <string name="pesoUser">Peso</string>
+    <string name="alturaUser">Altura (cm)</string>
+    <string name="pesoUser">Peso (kg)</string>
     <string name="datosMedicos">Datos Médicos</string>
     <string name="valoresGlucemiadeseados">Valores de Glucemia deseados (Entre 80 y 250 mg/dl)</string>
     <string name="glu_min">Mínimo</string>
     <string name="glu_max">Máximo.</string>
+
+    <!-- Buscador de Alimentos-->
+    <string name="buscaralimento">Buscar alimento</string>
+    <!-- Strings nuevos-Cambios -->
+    <string name="grupoalimento">Grupo</string>
+    <string name="alimento">Alimento</string>
+    <string name="listaingesta">Lista de Ingesta:</string>
+
 </resources>

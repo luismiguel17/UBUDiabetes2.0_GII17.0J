@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.ubu.lmi.gii170j.BuildConfig;
 import com.ubu.lmi.gii170j.R;
@@ -43,7 +48,7 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public static final int COLUMNA_RACION = 2;
 
-    private Spinner listaComida, listaTipo;
+    //private Spinner listaComida, listaTipo; --ANTIGUO
     private final int RESULT_EXIT = 0;
     /*
     private static final String INTENSIDAD_ALTA = "Larga (más de 2 horas)";
@@ -55,6 +60,9 @@ public class Carbohidratos extends AppCompatActivity {
     private String[] tipoAlimento;
     private String[] numeroTipoAlimento;
     private String[] alimento;
+
+
+
 
     /**
      * Datos de las raciones en gramos para cada tipo de alimento.
@@ -133,6 +141,31 @@ public class Carbohidratos extends AppCompatActivity {
     ArrayList<String> arrayAlimentos = new ArrayList<>();
     ArrayList<Integer> arrayRaciones = new ArrayList<>();
 
+    /**
+     * Nuevos cambios
+     *
+     */
+
+    //Creamos nuestro objeto listView para mostrar la lista de ingesta del Usuario.
+    private ListView listViewIngesta;
+
+    //Creamos nuestro objeto button para agregar alimentos a nuestra listView
+    private Button buttonAddAlimento;
+    //Creamos nuestro objeto button para eliminar alimentos de nuestra listView
+    private Button buttonRemoveAlimento;
+    //Creamos nuestro objeto EditText para introducir la cantidad del alimento (Gr)
+    private EditText editTextGramos;
+    //Creamos nuestro objeto AutoCompleteTextView para el buscador de alimentos
+    private AutoCompleteTextView autoCompleteTextViewBuscador;
+    //Creamos nuestro objeto spinner para nuestra lista total de alimentos
+    private Spinner listaComida;
+    private ArrayList<String> totalAlimentos;
+    private ArrayList<String> ingestaAlimentosList;
+    private ArrayAdapter<String> adpListaIngesta;
+
+    //Prueba mostrar sumatorioCH
+    //private TextView editTextSumatorioCH;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,10 +174,42 @@ public class Carbohidratos extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        EditText carboEt = (EditText) findViewById(R.id.et_gramos);
-        carboEt.setText("0");
+
+        editTextGramos = (EditText) findViewById(R.id.et_gramos);
+        editTextGramos.setText("0");
+
+        /**
+         * Nuevos cambios
+         */
+        //Obtenemos la referencia a la listView del Xml
+        listViewIngesta = (ListView) findViewById(R.id.lv_id_listaingesta_fc);
+        //Obtenemos la referencia al button add del Xml
+        buttonAddAlimento = (Button) findViewById(R.id.bt_id_addAlimento);
+        //Obtenemos la referencia al button remove del Xml
+        buttonRemoveAlimento = (Button)findViewById(R.id.bt_id_removeAlimento);
+        //Obtenemos la referencia al buscador de alimentos
+        autoCompleteTextViewBuscador = (AutoCompleteTextView) findViewById(R.id.actv_id_buscador);
+        //Obtenemos la referencia al spinner de todos los alimentos
+        listaComida = (Spinner) findViewById(R.id.spiner_alimentos);
+
+        //Creamos un Arraylist para la lista de ingesta de alimentos del usuario
+        ingestaAlimentosList = new ArrayList<String>();
+
+        // Creamos una adaptador para la lista Ingesta de alimentos del usuario
+        adpListaIngesta = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice ,ingestaAlimentosList);
+        listViewIngesta.setAdapter(adpListaIngesta);
+
+        //Creamos un adaptador para el buscador y el spinner de alimentos
+        ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
+        autoCompleteTextViewBuscador.setAdapter(adpTodos);
+        listaComida.setAdapter(adpTodos);
+
+        //Prueba mostrar sumatorioCH
+       // editTextSumatorioCH =(TextView)findViewById(R.id.tv_id_sumatorioCH);
+
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editor = misPreferencias.edit();
+
 
         // Si la tabla de alimentos no estaba creada... se crea
         if (!misPreferencias.getBoolean("tablaAlimentos", false)) {
@@ -153,17 +218,35 @@ public class Carbohidratos extends AppCompatActivity {
             editor.apply();
         }
 
+
+
+        // Comportamiento de la listview cuando se selecciona una item
+        listViewIngesta.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                buttonRemoveAlimento.setVisibility(View.VISIBLE);
+                view.setSelected(true);
+                return true;
+            }
+        });
+
         //Generamos los adaptadores para todos los posibles spinners
-        final ArrayAdapter adpTipoAlimento = ArrayAdapter.createFromResource(this, R.array.spinerTipoAlimento, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpTipoAlimento = ArrayAdapter.createFromResource(this, R.array.spinerTipoAlimento, android.R.layout.simple_spinner_item);
 
-        final ArrayAdapter adpLacteo = ArrayAdapter.createFromResource(this, R.array.spinerLacteos, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpArroz = ArrayAdapter.createFromResource(this, R.array.spinerCereales, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpFruta = ArrayAdapter.createFromResource(this, R.array.spinnerFrutas, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpHortaliza = ArrayAdapter.createFromResource(this, R.array.spinnerHortalizas, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpFrutaGrasaSeca = ArrayAdapter.createFromResource(this, R.array.spinnerFrutaGrasaSeca, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpBebida = ArrayAdapter.createFromResource(this, R.array.spinerBebidas, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpOtros = ArrayAdapter.createFromResource(this, R.array.spinerOtros, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpLacteo = ArrayAdapter.createFromResource(this, R.array.spinerLacteos, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpArroz = ArrayAdapter.createFromResource(this, R.array.spinerCereales, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpFruta = ArrayAdapter.createFromResource(this, R.array.spinnerFrutas, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpHortaliza = ArrayAdapter.createFromResource(this, R.array.spinnerHortalizas, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpFrutaGrasaSeca = ArrayAdapter.createFromResource(this, R.array.spinnerFrutaGrasaSeca, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpBebida = ArrayAdapter.createFromResource(this, R.array.spinerBebidas, android.R.layout.simple_spinner_item);
+        //final ArrayAdapter adpOtros = ArrayAdapter.createFromResource(this, R.array.spinerOtros, android.R.layout.simple_spinner_item);
 
+
+
+        //Inicializamos nuestralistView con el arrayAdapter
+
+        /**
         listaComida = (Spinner) findViewById(R.id.sp_comidas);
         listaComida.setAdapter(adpTipoAlimento);
         listaTipo = (Spinner) findViewById(R.id.spiner_tipo);
@@ -194,11 +277,15 @@ public class Carbohidratos extends AppCompatActivity {
             }
         });
 
-        listaTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+         **/
+
+        /**
+        //listaTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listaComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                comida = listaTipo.getAdapter().getItem(position).toString();
+                comida = listaComida.getAdapter().getItem(position).toString();
             }
 
             @Override
@@ -207,24 +294,29 @@ public class Carbohidratos extends AppCompatActivity {
             }
         });
 
+
+         **/
     }
 
     /**
      * Función rellena la tabla de alimentos a partir del archivo arrays.xml
      */
     public void rellenarTablaAlimentos() {
+        //Categoria de loas Alimentos.
         tipoAlimento = getResources().getStringArray(R.array.arrayTipoAlimento);
+        //Numero total de alimentos en cada categoria
         numeroTipoAlimento = getResources().getStringArray(R.array.numeroTipoAlimento);
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Tipos de alimentos: " + tipoAlimento.length);
             Log.d(TAG, "Numero de elementos de tipos de alimentos: " + numeroTipoAlimento.length);
         }
-
-
+        //Todos los alimentos (Todas las categorias)
         alimento = getResources().getStringArray(R.array.arrayAlimentos);
-
         DataBaseManager dbmanager = new DataBaseManager(this);
         ContentValues values = new ContentValues();
+
+
+
         int contadorNumeroTipoAlimento = 0;
         int acumulado = Integer.parseInt(numeroTipoAlimento[contadorNumeroTipoAlimento]);
 
@@ -253,14 +345,22 @@ public class Carbohidratos extends AppCompatActivity {
      * @param view
      */
     public void añadirOtroOnClick(View view) {
-        EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
-        String gramos = gramosEt.getText().toString();
+        //EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
+        String gramos = editTextGramos.getText().toString();
+        comida = listaComida.getSelectedItem().toString();
         int numeroGramos = 0;
         if (!gramos.equals("")) {
             numeroGramos = Integer.parseInt(gramos);
         }
-        gramosEt.setText("0");
+        /**
+         * Nuevo cambio
+         */
+        ingestaAlimentosList.add(comida + " \t " + " \t " + editTextGramos.getText().toString() + " grs");
+        editTextGramos.setText("0");
+        autoCompleteTextViewBuscador.setText("");
+        adpListaIngesta.notifyDataSetChanged();
 
+        //Accedemos a la Bd
         DataBaseManager dbmanager = new DataBaseManager(this);
         final Cursor cursorAlimentos = dbmanager.selectAlimento(comida);
         if (cursorAlimentos.moveToFirst()) {
@@ -273,6 +373,7 @@ public class Carbohidratos extends AppCompatActivity {
                 Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
             }
         }
+
     }
 
     /**
@@ -289,6 +390,25 @@ public class Carbohidratos extends AppCompatActivity {
         return (numeroGramos * GRAMOS_DE_HC) / Double.parseDouble(gramosPorRacion);
     }
 
+
+    public void removeOnClick(View view) {
+        SparseBooleanArray itemSeleccionado = listViewIngesta.getCheckedItemPositions();
+
+        int contLista = listViewIngesta.getCount();
+
+        for(int i=0;i< contLista;i++){
+
+            if(itemSeleccionado.get(i)){
+                adpListaIngesta.remove(ingestaAlimentosList.get(i));
+            }
+        }
+
+        itemSeleccionado.clear();
+        adpListaIngesta.notifyDataSetChanged();
+    }
+
+
+
     /**
      * Función que define el comportamiento de la aplicación al pulsar el boton Finalizar
      * Genera una instancia de CalculaBolo, obtiene el resultado, y lo muestra por pantalla
@@ -297,8 +417,11 @@ public class Carbohidratos extends AppCompatActivity {
      * @param view
      */
     public void finalizarOnClick(View view) {
-        EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
-        String gramos = gramosEt.getText().toString();
+
+        /**
+
+        //EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
+        String gramos = editTextGramos.getText().toString();
         int numeroGramos = 0;
         if (!gramos.equals("")) {
             numeroGramos = Integer.parseInt(gramos);
@@ -317,6 +440,8 @@ public class Carbohidratos extends AppCompatActivity {
             }
         }
 
+
+         **/
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         // Cargar valores de preferencias
         boolean rapida = misPreferencias.getBoolean(getString(R.string.rapida), false);
@@ -334,11 +459,15 @@ public class Carbohidratos extends AppCompatActivity {
         CalculaBolo cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
 
         // Version 1.1.1, se calcula el bolo SIN DECIMALES, redondeando al entero más cercano.
-        int boloResult = (int) Math.rint(cb.calculoBoloCorrector());
+        //int boloResult = (int) Math.rint(cb.calculoBoloCorrector());
+
+        double boloResult = cb.calculoBoloCorrector();
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Bolo calculado: " + boloResult);
         }
+
+
         //String comentarioFinal = generaComentarioBolo(tipoEjer, boloResult);
         String comentarioFinal = generaComentarioBolo(boloResult);
 
@@ -364,8 +493,10 @@ public class Carbohidratos extends AppCompatActivity {
      *
      * @param bolo resultado del calculo del bolo corrector
      */
-    private String generaComentarioBolo(int bolo) {
-        String comentario = getString(R.string.resultado_bolo) + String.format(" %d", bolo);
+
+    //private String generaComentarioBolo(int bolo) {
+    private String generaComentarioBolo(double bolo) {
+        String comentario = getString(R.string.resultado_bolo) + String.format(" %f", bolo);
         if (bolo < 0) {
             comentario += "\n" + getString(R.string.ingerir_carbohidratos);
         }

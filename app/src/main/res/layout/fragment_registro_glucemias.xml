@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@string/bt_guardar"
             android:id="@+id/button"
-            android:background="@drawable/btn_save_profile"
+            android:background="@drawable/btn_save_registro"
             android:textColor="#ffffff"
             android:onClick="guardarGlucemiaOnClick"
             android:layout_marginTop="50dp"
