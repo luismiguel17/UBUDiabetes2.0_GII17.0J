@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -62,11 +61,13 @@ public class Carbohidratos extends AppCompatActivity {
     private static final String INTENSIDAD_IRREGULAR = "Irregular e intermitente";
     */
     private String comida;
+    private String gramosPorRacion ="";
+    private String indiceGlucemico="";
     private double sumatorioRaciones;
     private String[] tipoAlimento;
     private String[] numeroTipoAlimento;
     private String[] alimento;
-    private String[] indiceGlucemico;
+    private String[] indicesGlucemico;
 
 
 
@@ -168,7 +169,7 @@ public class Carbohidratos extends AppCompatActivity {
     private Spinner listaComida;
     private ArrayList<String> totalAlimentos;
     private ArrayList<String> ingestaAlimentosList;
-    private ArrayAdapter<String> adpListaIngesta;
+    //private ArrayAdapter<String> adpListaIngesta;
 
     //Prueba mostrar sumatorioCH
     private TextView editTextSumatorioCH;
@@ -178,6 +179,10 @@ public class Carbohidratos extends AppCompatActivity {
     private Alimento alimento_ingesta;
     private ArrayList<Alimento> userlist_ingesta;
     private IngestaUsuario_ListAdapter adp_ListaIngesta;
+
+    //para eliminar items de la lisview
+    private int itemSelec=0;
+    //private int contItemsIngesta =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +205,7 @@ public class Carbohidratos extends AppCompatActivity {
         buttonAddAlimento = (Button) findViewById(R.id.bt_id_addAlimento);
         //Obtenemos la referencia al button remove del Xml
         buttonRemoveAlimento = (Button)findViewById(R.id.bt_id_removeAlimento);
+        buttonRemoveAlimento.setVisibility(View.INVISIBLE);
         //Obtenemos la referencia al buscador de alimentos
         autoCompleteTextViewBuscador = (AutoCompleteTextView) findViewById(R.id.actv_id_buscador);
         //Obtenemos la referencia al spinner de todos los alimentos
@@ -209,8 +215,8 @@ public class Carbohidratos extends AppCompatActivity {
         ingestaAlimentosList = new ArrayList<String>();
 
         // Creamos una adaptador para la lista Ingesta de alimentos del usuario
-        adpListaIngesta = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice ,ingestaAlimentosList);
-        listViewIngesta.setAdapter(adpListaIngesta);
+        //adpListaIngesta = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice ,ingestaAlimentosList);
+        //listViewIngesta.setAdapter(adpListaIngesta);
 
         //Creamos un adaptador para el buscador y el spinner de alimentos
         ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
@@ -219,7 +225,7 @@ public class Carbohidratos extends AppCompatActivity {
 
         //Prueba mostrar sumatorioCH
        editTextSumatorioCH =(TextView)findViewById(R.id.tv_id_sumatorioCH);
-       editTextSumatorioCH.setText("Bolo calculado: ");
+       //editTextSumatorioCH.setText("Bolo calculado: ");
 
 
         //** Nuevo- Para la listView con varias columnas
@@ -243,13 +249,15 @@ public class Carbohidratos extends AppCompatActivity {
 
 
         // Comportamiento de la listview cuando se selecciona una item
-        listViewIngesta.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        listViewIngesta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                buttonRemoveAlimento.setVisibility(View.VISIBLE);
-                view.setSelected(true);
-                return true;
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+             buttonRemoveAlimento.setVisibility(View.VISIBLE);
+             itemSelec = position;
+             //contItemsIngesta = listViewIngesta.getCount();
+             //userlist_ingesta.remove(position);
+             //adp_ListaIngesta.notifyDataSetChanged();
             }
         });
 
@@ -335,7 +343,7 @@ public class Carbohidratos extends AppCompatActivity {
         //Todos los alimentos (Todas las categorias)
         alimento = getResources().getStringArray(R.array.arrayAlimentos);
         //Indices Glucemicos de todos los alimentos
-        indiceGlucemico = getResources().getStringArray(R.array.arrayIndicesGlucemicos);
+        indicesGlucemico = getResources().getStringArray(R.array.arrayIndicesGlucemicos);
         DataBaseManager dbmanager = new DataBaseManager(this);
         ContentValues values = new ContentValues();
 
@@ -347,12 +355,12 @@ public class Carbohidratos extends AppCompatActivity {
         for (int i = 0; i < alimento.length; ++i) {
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Procesando tipo de alimento: " + tipoAlimento[contadorNumeroTipoAlimento] +
-                        " Alimento: " + alimento[i] + " 1 Ración en gramos: " + raciones[i] + "indice glucemico: " + indiceGlucemico[i]);
+                        " Alimento: " + alimento[i] + " 1 Ración en gramos: " + raciones[i] + "indice glucemico: " + indicesGlucemico[i]);
             }
             values.put("tipoAlimento", tipoAlimento[contadorNumeroTipoAlimento]);
             values.put("alimento", alimento[i]);
             values.put("racion", raciones[i]);
-            values.put("indiceGlucemico", indiceGlucemico[i]);
+            values.put("indiceGlucemico", indicesGlucemico[i]);
             dbmanager.insertar("alimentos", values);
             values.clear();
             // si hemos procesado todos los alimentos de un cierto y no hay más tipos de alimentos a procesar
@@ -374,32 +382,20 @@ public class Carbohidratos extends AppCompatActivity {
         String gramos = editTextGramos.getText().toString();
         comida = listaComida.getSelectedItem().toString();
         //Nuevo-Para la listView con varias columnas
-        String gramosPorRacion ="";
-        String indiceGlucemico="";
+        //String gramosPorRacion ="";
+        //String indiceGlucemico="";
 
         int numeroGramos = 0;
         if (!gramos.equals("")) {
             numeroGramos = Integer.parseInt(gramos);
         }
-
-        /**
-         * Nuevo cambio
-         */
-        /**
-        ingestaAlimentosList.add(comida + " \t " + " \t " + editTextGramos.getText().toString() + " grs");
-        editTextGramos.setText("0");
-        autoCompleteTextViewBuscador.setText("");
-        adpListaIngesta.notifyDataSetChanged();
-        **/
         //Accedemos a la Bd
         DataBaseManager dbmanager = new DataBaseManager(this);
         final Cursor cursorAlimentos = dbmanager.selectAlimento(comida);
         if (cursorAlimentos.moveToFirst()) {
             gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
             indiceGlucemico = cursorAlimentos.getString(COLUMNA_IG);
-            //String ig_alimento = cursorAlimentos.getString(COLUMNA_IG);
-            // RMS: Cambiamos el cálculo de la formula en la versión 1.1
-            //sumatorioRaciones += Integer.parseInt(n) * nracion; // Versión 1.0
+
             sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gramosPorRacion);
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Cursor:" + cursorAlimentos.getString(1));
@@ -419,27 +415,25 @@ public class Carbohidratos extends AppCompatActivity {
 
     }
 
-    /**
-     *
-     * @param alimento
-     * @return
-     */
-    /**
-    public int buscadorIndiceGlucemico (String alimento){
-        int retorno = 0;
-        DataBaseManager dbmanager = new DataBaseManager(this);
-        final Cursor cursorAlimentos = dbmanager.selectAlimento(alimento);
-        if (cursorAlimentos.moveToFirst()) {
-            retorno = Integer.parseInt(cursorAlimentos.getString(COLUMNA_IG));
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG,"Buscador de Indice Glucemico:");
-                Log.d(TAG, "Alimento: " + alimento );
-                Log.d(TAG, "Indice Glucemico): " + retorno);
-            }
+
+    public void removeOnClick(View view) {
+        String num_gramos = alimento_ingesta.getGramos();
+        userlist_ingesta.remove(itemSelec);
+        adp_ListaIngesta.notifyDataSetChanged();
+        buttonRemoveAlimento.setVisibility(View.INVISIBLE);
+
+        //sumatorioRaciones -= calcularGramosDeHidratosDeCarbono(Integer.parseInt(num_gramos), gramosPorRacion);
+
+        listViewIngesta.clearAnimation();
+
+        //editTextSumatorioCH.setText("Conteo actual de carbohidratos (HC): " + sumatorioRaciones);
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Eliminacion alimento: " + alimento_ingesta.getNombre());
+            //Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
         }
-        return retorno;
+
     }
-     **/
+
 
 
     /**
@@ -457,21 +451,7 @@ public class Carbohidratos extends AppCompatActivity {
     }
 
 
-    public void removeOnClick(View view) {
-        SparseBooleanArray itemSeleccionado = listViewIngesta.getCheckedItemPositions();
 
-        int contLista = listViewIngesta.getCount();
-
-        for(int i=0;i< contLista;i++){
-
-            if(itemSeleccionado.get(i)){
-                adpListaIngesta.remove(ingestaAlimentosList.get(i));
-            }
-        }
-
-        itemSeleccionado.clear();
-        adpListaIngesta.notifyDataSetChanged();
-    }
 
 
 

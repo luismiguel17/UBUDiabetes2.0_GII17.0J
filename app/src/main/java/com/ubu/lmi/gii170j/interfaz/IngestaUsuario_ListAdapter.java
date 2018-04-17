@@ -7,14 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ubu.lmi.gii170j.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class IngestaUsuario_ListAdapter extends ArrayAdapter<Alimento>{
     //private LayoutInflater ly_inflater;
@@ -41,11 +39,11 @@ class IngestaUsuario_ListAdapter extends ArrayAdapter<Alimento>{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String nombre = getItem(position).getNombre();
-        String gr_HC = getItem(position).getRacionHC();
+        String gramos = getItem(position).getGramos();
         String iglu = getItem(position).getIg();
         int indiceGlucemico= Integer.parseInt(iglu);
 
-        Alimento alimento = new Alimento(nombre,gr_HC,iglu);
+        Alimento alimento = new Alimento(nombre,gramos,iglu);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView= inflater.inflate(mResource,parent,false);
 
@@ -54,7 +52,7 @@ class IngestaUsuario_ListAdapter extends ArrayAdapter<Alimento>{
         TextView tv_ig = (TextView)convertView.findViewById(R.id.tv_id_ig);
 
         tv_nombre.setText(nombre);
-        tv_grHC.setText(gr_HC);
+        tv_grHC.setText(gramos);
         tv_ig.setText(iglu);
         if(indiceGlucemico == ELEVADO || indiceGlucemico > ELEVADO){
             tv_ig.setBackgroundColor(Color.RED);

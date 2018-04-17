@@ -4,13 +4,13 @@ class Alimento {
     //Nombre del alimento
     private String nombre;
     //1 RACIÓN DE HC SON (EN GRAMOS)
-    private String racionHC;
+    private String gramos;
     //Indice Glucemico del alimento
     private String ig;
 
-    public Alimento(String name, String r_HC, String i_g) {
+    public Alimento(String name, String gr_alimento, String i_g) {
         this.nombre = name;
-        this.racionHC = r_HC;
+        this.gramos = gr_alimento;
         this.ig = i_g;
     }
 
@@ -18,8 +18,8 @@ class Alimento {
         return nombre;
     }
 
-    public String getRacionHC() {
-        return racionHC;
+    public String getGramos() {
+        return gramos;
     }
 
     public String getIg() {

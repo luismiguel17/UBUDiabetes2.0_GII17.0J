@@ -106,9 +106,13 @@
 
     <!-- Buscador de Alimentos-->
     <string name="buscaralimento">Buscar alimento</string>
+    <string name="tv_selecionAlimento">Seleccione alimento</string>
     <!-- Strings nuevos-Cambios -->
-    <string name="grupoalimento">Grupo</string>
-    <string name="alimento">Alimento</string>
     <string name="listaingesta">Lista de Ingesta:</string>
+    <!-- ListView Ingesta Alimentos Usuario-->
+    <string name="tv_lv_nombreAlimento">Alimento</string>
+    <string name="tv_lv_gr">Cantidad(gr)</string>
+    <string name="tv_lv_ig">I.G.</string>
+
 
 </resources>
