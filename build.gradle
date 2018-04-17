@@ -1,8 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-//Sonarqube
-//apply plugin: "org.sonarqube"
-
-
 buildscript {
     
     repositories {
@@ -26,6 +22,20 @@ buildscript {
 
 }
 
+plugins {
+    id "org.sonarqube" version "2.6"
+}
+//Sonarqube
+apply plugin: "org.sonarqube"
+
+
+sonarqube {
+    properties {
+        property 'sonar.projectName', 'UBUDiabtes2.0_GII17.0J'
+        property "sonar.projectKey", "org.sonarqube:ubudiabetes2.0"
+    }
+}
+
 allprojects {
 
     group = "org.sonarqube"
@@ -38,6 +48,7 @@ allprojects {
         jcenter()
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

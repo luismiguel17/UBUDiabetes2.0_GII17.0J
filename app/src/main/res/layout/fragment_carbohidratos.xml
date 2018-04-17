@@ -30,7 +30,7 @@
             android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="@string/alimento"
+            android:text="@string/tv_selecionAlimento"
             android:textColor="@color/colorPrimaryDark"/>
         <Spinner
             android:id="@+id/spiner_alimentos"
@@ -102,18 +102,52 @@
                 android:text="@string/listaingesta"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"/>
+            <LinearLayout
+                android:id="@+id/ly_id_listView_ingesta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_id_listView_alimento"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="20dp"
+                    android:text="@string/tv_lv_nombreAlimento"/>
+                <TextView
+                    android:id="@+id/tv_id_listView_gr"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:text="@string/tv_lv_gr"
+                    android:gravity="end" />
+
+                <TextView
+                    android:id="@+id/tv_id_listView_ig"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:text="@string/tv_lv_ig"
+                    android:gravity="end"/>
+
+            </LinearLayout>
             <ListView
                 android:id="@+id/lv_id_listaingesta_fc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp">
-
+                android:paddingLeft="10dp">
             </ListView>
             <TextView
                 android:id="@+id/tv_id_sumatorioCH"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="15sp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="start"/>
 
         </LinearLayout>
     </LinearLayout>

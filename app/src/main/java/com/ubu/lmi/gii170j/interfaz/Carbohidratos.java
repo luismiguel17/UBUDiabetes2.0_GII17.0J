@@ -48,6 +48,12 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public static final int COLUMNA_RACION = 2;
 
+    /**
+     * Posición en la tabla de alimentos donde se almacenan los indices Glucemicos del alimento.
+     */
+
+    public static final int COLUMNA_IG = 3;
+
     //private Spinner listaComida, listaTipo; --ANTIGUO
     private final int RESULT_EXIT = 0;
     /*
@@ -60,6 +66,7 @@ public class Carbohidratos extends AppCompatActivity {
     private String[] tipoAlimento;
     private String[] numeroTipoAlimento;
     private String[] alimento;
+    private String[] indiceGlucemico;
 
 
 
@@ -164,7 +171,13 @@ public class Carbohidratos extends AppCompatActivity {
     private ArrayAdapter<String> adpListaIngesta;
 
     //Prueba mostrar sumatorioCH
-    //private TextView editTextSumatorioCH;
+    private TextView editTextSumatorioCH;
+
+    //Nuevo-Para la listview con varias columnas
+
+    private Alimento alimento_ingesta;
+    private ArrayList<Alimento> userlist_ingesta;
+    private IngestaUsuario_ListAdapter adp_ListaIngesta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,7 +218,16 @@ public class Carbohidratos extends AppCompatActivity {
         listaComida.setAdapter(adpTodos);
 
         //Prueba mostrar sumatorioCH
-       // editTextSumatorioCH =(TextView)findViewById(R.id.tv_id_sumatorioCH);
+       editTextSumatorioCH =(TextView)findViewById(R.id.tv_id_sumatorioCH);
+       editTextSumatorioCH.setText("Bolo calculado: ");
+
+
+        //** Nuevo- Para la listView con varias columnas
+        userlist_ingesta = new ArrayList<>();
+        adp_ListaIngesta = new IngestaUsuario_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
+        listViewIngesta.setAdapter(adp_ListaIngesta);
+       // adp_ListaIngesta = new IngestaUsuario_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
+        //listViewIngesta.setAdapter(adp_ListaIngesta);
 
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editor = misPreferencias.edit();
@@ -312,6 +334,8 @@ public class Carbohidratos extends AppCompatActivity {
         }
         //Todos los alimentos (Todas las categorias)
         alimento = getResources().getStringArray(R.array.arrayAlimentos);
+        //Indices Glucemicos de todos los alimentos
+        indiceGlucemico = getResources().getStringArray(R.array.arrayIndicesGlucemicos);
         DataBaseManager dbmanager = new DataBaseManager(this);
         ContentValues values = new ContentValues();
 
@@ -323,11 +347,12 @@ public class Carbohidratos extends AppCompatActivity {
         for (int i = 0; i < alimento.length; ++i) {
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Procesando tipo de alimento: " + tipoAlimento[contadorNumeroTipoAlimento] +
-                        " Alimento: " + alimento[i] + " 1 Ración en gramos: " + raciones[i]);
+                        " Alimento: " + alimento[i] + " 1 Ración en gramos: " + raciones[i] + "indice glucemico: " + indiceGlucemico[i]);
             }
             values.put("tipoAlimento", tipoAlimento[contadorNumeroTipoAlimento]);
             values.put("alimento", alimento[i]);
             values.put("racion", raciones[i]);
+            values.put("indiceGlucemico", indiceGlucemico[i]);
             dbmanager.insertar("alimentos", values);
             values.clear();
             // si hemos procesado todos los alimentos de un cierto y no hay más tipos de alimentos a procesar
@@ -348,33 +373,74 @@ public class Carbohidratos extends AppCompatActivity {
         //EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
         String gramos = editTextGramos.getText().toString();
         comida = listaComida.getSelectedItem().toString();
+        //Nuevo-Para la listView con varias columnas
+        String gramosPorRacion ="";
+        String indiceGlucemico="";
+
         int numeroGramos = 0;
         if (!gramos.equals("")) {
             numeroGramos = Integer.parseInt(gramos);
         }
+
         /**
          * Nuevo cambio
          */
+        /**
         ingestaAlimentosList.add(comida + " \t " + " \t " + editTextGramos.getText().toString() + " grs");
         editTextGramos.setText("0");
         autoCompleteTextViewBuscador.setText("");
         adpListaIngesta.notifyDataSetChanged();
-
+        **/
         //Accedemos a la Bd
         DataBaseManager dbmanager = new DataBaseManager(this);
         final Cursor cursorAlimentos = dbmanager.selectAlimento(comida);
         if (cursorAlimentos.moveToFirst()) {
-            String gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
+            gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
+            indiceGlucemico = cursorAlimentos.getString(COLUMNA_IG);
+            //String ig_alimento = cursorAlimentos.getString(COLUMNA_IG);
             // RMS: Cambiamos el cálculo de la formula en la versión 1.1
             //sumatorioRaciones += Integer.parseInt(n) * nracion; // Versión 1.0
             sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gramosPorRacion);
             if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Cursor:" + cursorAlimentos.getString(1));
                 Log.d(TAG, "Grams per ration: " + gramosPorRacion + " Grams: " + numeroGramos);
                 Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+                Log.d(TAG, "Indice Glucemico): " + indiceGlucemico);
             }
         }
 
+        alimento_ingesta = new Alimento(comida, gramosPorRacion,indiceGlucemico);
+        userlist_ingesta.add(alimento_ingesta);
+        editTextSumatorioCH.setText("Conteo actual de carbohidratos (HC): " + sumatorioRaciones);
+        editTextGramos.setText("0");
+        autoCompleteTextViewBuscador.setText("");
+        adp_ListaIngesta.notifyDataSetChanged();
+
+
     }
+
+    /**
+     *
+     * @param alimento
+     * @return
+     */
+    /**
+    public int buscadorIndiceGlucemico (String alimento){
+        int retorno = 0;
+        DataBaseManager dbmanager = new DataBaseManager(this);
+        final Cursor cursorAlimentos = dbmanager.selectAlimento(alimento);
+        if (cursorAlimentos.moveToFirst()) {
+            retorno = Integer.parseInt(cursorAlimentos.getString(COLUMNA_IG));
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG,"Buscador de Indice Glucemico:");
+                Log.d(TAG, "Alimento: " + alimento );
+                Log.d(TAG, "Indice Glucemico): " + retorno);
+            }
+        }
+        return retorno;
+    }
+     **/
+
 
     /**
      * Calcula los gramos de HC para el alimento según los gramos ingeridos
