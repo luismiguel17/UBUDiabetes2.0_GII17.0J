@@ -201,7 +201,7 @@
         <item>Higos</item>
         <item>Kiwi</item>
         <item>Limón</item>
-        <item>Lichi</item>
+        <item>Litchi</item>
         <item>Mandarina</item>
         <item>Mango</item>
         <item>Manzana</item>
@@ -276,7 +276,7 @@
         <!-- Fruta grasa y seca - 15 -->
         <item>Aceituna</item>
         <item>Albaricoque seco</item>
-        <item>Almenda</item>
+        <item>Almendra</item>
         <item>Almendra tostada</item>
         <item>Avellana</item>
         <item>Cacahuete</item>
@@ -597,7 +597,7 @@
         <!-- Fruta grasa y seca - 15 -->
         <item>Aceituna</item>
         <item>Albaricoque seco</item>
-        <item>Almenda</item>
+        <item>Almendra</item>
         <item>Almendra tostada</item>
         <item>Avellana</item>
         <item>Cacahuete</item>
@@ -697,8 +697,301 @@
         <item>Turrón tipo Jijona</item>
         <item>Vinagre</item>
         <item>Vinagre tipo Módena (caramelizado)</item>
+    </string-array>
 
+    <!--- Indices Glucemicos para rellenar la tabla de alimentos en la base de datos -->
+    <string-array name="arrayIndicesGlucemicos">
+        <!-- Lacteos - 22 -->
+        <item>35</item>
+        <item>0</item>
+        <item>60</item>
+        <item>65</item>
+        <item>35</item>
+        <item>35</item>
+        <item>32</item>
+        <item>30</item>
+        <item>27</item>
+        <item>61</item>
+        <item>30</item>
+        <item>0</item>
+        <item>0</item>
+        <item>40</item>
+        <item>35</item>
+        <item>0</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>40</item>
+        <item>35</item>
+        <item>35</item>
 
+        <!-- Cereales - 74 -->
+        <item>0</item>
+        <item>70</item>
+        <item>0</item>
+        <item>50</item>
+        <item>85</item>
+        <item>0</item>
+        <item>35</item>
+        <item>0</item>
+        <item>40</item>
+        <item>40</item>
+        <item>50</item>
+        <item>0</item>
+        <item>45</item>
+        <item>0</item>
+        <item>45</item>
+        <item>77</item>
+        <item>50</item>
+        <item>0</item>
+        <item>65</item>
+        <item>50</item>
+        <item>0</item>
+        <item>65</item>
+        <item>70</item>
+        <item>70</item>
+        <item>50</item>
+        <item>0</item>
+        <item>35</item>
+        <item>35</item>
+        <item>78</item>
+        <item>45</item>
+        <item>25</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>35</item>
+        <item>0</item>
+        <item>35</item>
+        <item>65</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>70</item>
+        <item>65</item>
+        <item>70</item>
+        <item>65</item>
+        <item>85</item>
+        <item>85</item>
+        <item>40</item>
+        <item>70</item>
+        <item>70</item>
+        <item>70</item>
+        <item>0</item>
+        <item>50</item>
+        <item>0</item>
+        <item>65</item>
+        <item>0</item>
+        <item>70</item>
+        <item>95</item>
+        <item>90</item>
+        <item>90</item>
+        <item>0</item>
+        <item>35</item>
+        <item>0</item>
+        <item>67</item>
+        <item>0</item>
+        <item>15</item>
+        <item>42</item>
+        <item>0</item>
+        <item>84</item>
+        <item>0</item>
+        <item>40</item>
+        <item>0</item>
+        <item>45</item>
+        <item>55</item>
+
+        <!-- Frutas - 42 -->
+        <item>10</item>
+        <item>30</item>
+        <item>25</item>
+        <item>65</item>
+        <item>65</item>
+        <item>25</item>
+        <item>35</item>
+        <item>35</item>
+        <item>45</item>
+        <item>45</item>
+        <item>70</item>
+        <item>25</item>
+        <item>25</item>
+        <item>35</item>
+        <item>25</item>
+        <item>15</item>
+        <item>35</item>
+        <item>50</item>
+        <item>0</item>
+        <item>50</item>
+        <item>30</item>
+        <item>50</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>60</item>
+        <item>35</item>
+        <item>35</item>
+        <item>25</item>
+        <item>35</item>
+        <item>35</item>
+        <item>55</item>
+        <item>30</item>
+        <item>55</item>
+        <item>35</item>
+        <item>45</item>
+        <item>0</item>
+        <item>50</item>
+        <item>50</item>
+        <item>75</item>
+        <item>45</item>
+
+        <!-- Hortalizas - 42 -->
+        <item>15</item>
+        <item>30</item>
+        <item>20</item>
+        <item>15</item>
+        <item>0</item>
+        <item>20</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>75</item>
+        <item>15</item>
+        <item>15</item>
+        <item>0</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>0</item>
+        <item>30</item>
+        <item>15</item>
+        <item>15</item>
+        <item>30</item>
+        <item>20</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>30</item>
+        <item>15</item>
+        <item>0</item>
+        <item>15</item>
+        <item>15</item>
+        <item>30</item>
+        <item>30</item>
+        <item>85</item>
+        <item>0</item>
+
+        <!-- Fruta grasa y seca - 15 -->
+        <item>15</item>
+        <item>35</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>40</item>
+        <item>70</item>
+        <item>40</item>
+        <item>15</item>
+        <item>15</item>
+        <item>35</item>
+        <item>15</item>
+        <item>35</item>
+        <item>65</item>
+
+        <!-- Bebidas - 26 -->
+        <item>78</item>
+        <item>70</item>
+        <item>0</item>
+        <item>34</item>
+        <item>30</item>
+        <item>70</item>
+        <item>70</item>
+        <item>0</item>
+        <item>0</item>
+        <item>110</item>
+        <item>0</item>
+        <item>110</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>70</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>60</item>
+        <item>45</item>
+
+        <!-- Otros - 57 -->
+        <item>70</item>
+        <item>70</item>
+        <item>70</item>
+        <item>65</item>
+        <item>70</item>
+        <item>70</item>
+        <item>25</item>
+        <item>20</item>
+        <item>0</item>
+        <item>0</item>
+        <item>70</item>
+        <item>70</item>
+        <item>20</item>
+        <item>0</item>
+        <item>55</item>
+        <item>40</item>
+        <item>0</item>
+        <item>0</item>
+        <item>75</item>
+        <item>0</item>
+        <item>0</item>
+        <item>20</item>
+        <item>0</item>
+        <item>0</item>
+        <item>100</item>
+        <item>70</item>
+        <item>55</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>65</item>
+        <item>30</item>
+        <item>85</item>
+        <item>0</item>
+        <item>85</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>45</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </string-array>
 
 </resources>
