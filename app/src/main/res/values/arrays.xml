@@ -431,33 +431,33 @@
         <item>Yogur tipo Actimel 0%</item>
 
         <!-- Cereales - 74 -->
-        <item>Arroz, crudo</item>
-        <item>Arroz, cocido</item>
+        <item>Arroz crudo</item>
+        <item>Arroz cocido</item>
         <item>Arroz integral, crudo</item>
         <item>Arroz intregral, cocido</item>
         <item>Arroz hinchado para desayuno</item>
         <item>Arroz salvaje, crudo</item>
         <item>Arroz salvaje, cocido</item>
-        <item>Avena, crudo</item>
-        <item>Avena, cocido</item>
+        <item>Avena crudo</item>
+        <item>Avena cocido</item>
         <item>Avena copos</item>
         <item>Boniato</item>
-        <item>Cebada, crudo</item>
-        <item>Cebada, cocido</item>
-        <item>Centeno, crudo</item>
-        <item>Centeno, cocido</item>
+        <item>Cebada crudo</item>
+        <item>Cebada cocido</item>
+        <item>Centeno crudo</item>
+        <item>Centeno cocido</item>
         <item>Cereales desayuno</item>
         <item>Cereales desay. ricos en fibra tipo All-bram, óptima</item>
-        <item>Cuscús, crudo</item>
-        <item>Cuscús, cocido</item>
-        <item>Fideos de arroz, tipo Udon, cocido</item>
-        <item>Fideos de soja, cocido</item>
+        <item>Cuscús crudo</item>
+        <item>Cuscús cocido</item>
+        <item>Fideos de arroz, tipo Udon cocido</item>
+        <item>Fideos de soja cocido</item>
         <item>Galletas tipo Digestiva</item>
         <item>Galletas tipo Maria</item>
         <item>Galletas tipo Príncipe</item>
         <item>Galleta sin azúcar</item>
-        <item>Garbanzo, crudo</item>
-        <item>Garbanzo, cocido</item>
+        <item>Garbanzo crudo</item>
+        <item>Garbanzo cocido</item>
         <item>Guisantes congenlados, frescos de lata</item>
         <item>Harina de trigo o maíz</item>
         <item>Harina de centeno</item>
@@ -466,13 +466,13 @@
         <item>Hojaldre horneado</item>
         <item>Judias blancas, crudo</item>
         <item>Judias blancas, cocido</item>
-        <item>Lentejas, crudo</item>
-        <item>Lentejas, cocido</item>
+        <item>Lentejas crudo</item>
+        <item>Lentejas cocido</item>
         <item>Maíz en lata</item>
         <item>Maíz en lata sin azúcar añadido</item>
         <item>Maíz tostado (quicos)</item>
-        <item>Mijo, crudo</item>
-        <item>Mijo, cocido</item>
+        <item>Mijo crudo</item>
+        <item>Mijo cocido</item>
         <item>Müesli</item>
         <item>Pan blanco</item>
         <item>Pan de centeno</item>
@@ -482,29 +482,29 @@
         <item>Pan rallado</item>
         <item>Pan tostado o biscote</item>
         <item>Pan en bastoncillos</item>
-        <item>Pasta alimenticia, crudo</item>
-        <item>Parta alimenticia, cocido</item>
-        <item>Pasta al huevo, crudo</item>
-        <item>Pasta cocida, hervida</item>
-        <item>Patata, horno o asada</item>
+        <item>Pasta alimenticia crudo</item>
+        <item>Parta alimenticia cocido</item>
+        <item>Pasta al huevo crudo</item>
+        <item>Pasta cocida hervida</item>
+        <item>Patata horno o asada</item>
         <item>Patatas fritas</item>
         <item>Patatas chips</item>
-        <item>Puré de patatas, copos</item>
-        <item>Puré de patatas, elabor. con leche</item>
-        <item>Quinoa, crudo</item>
-        <item>Quinoa, cocido</item>
-        <item>Sémola de trigo, crudo</item>
-        <item>Sémola de trigo, cocido</item>
-        <item>Soja seca, crudo</item>
-        <item>Soja seca, hervido</item>
+        <item>Puré de patatas copos</item>
+        <item>Puré de patatas elabor. con leche</item>
+        <item>Quinoa crudo</item>
+        <item>Quinoa cocido</item>
+        <item>Sémola de trigo crudo</item>
+        <item>Sémola de trigo cocido</item>
+        <item>Soja seca crudo</item>
+        <item>Soja seca hervido</item>
         <item>Sushi</item>
-        <item>Tapioca, crudo</item>
-        <item>Tapioca, cocido</item>
-        <item>Trigo sarraceno, crudo</item>
-        <item>Trigo sarraceno, cocido</item>
-        <item>Trigo tierno, crudo</item>
-        <item>Trigo tierno, cocido</item>
-        <item>Yuca, cocido</item>
+        <item>Tapioca crudo</item>
+        <item>Tapioca cocido</item>
+        <item>Trigo sarraceno crudo</item>
+        <item>Trigo sarraceno cocido</item>
+        <item>Trigo tierno crudo</item>
+        <item>Trigo tierno cocido</item>
+        <item>Yuca cocido</item>
 
         <!-- Frutas - 42 -->
         <item>Aguacate</item>
@@ -699,6 +699,300 @@
         <item>Vinagre tipo Módena (caramelizado)</item>
     </string-array>
 
+    <!-- 1 racion de HC son en gramos (por cada alimento) -->
+    <string-array name="arrayRacionesHC">
+        <!-- Lacteos - 22 -->
+        <item>200</item>
+        <item>50</item>
+        <item>50</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>200</item>
+        <item>200</item>
+        <item>200</item>
+        <item>20</item>
+        <item>25</item>
+        <item>300</item>
+        <item>50</item>
+        <item>70</item>
+        <item>250</item>
+        <item>0</item>
+        <item>200</item>
+        <item>125</item>
+        <item>70</item>
+        <item>70</item>
+        <item>100</item>
+        <item>200</item>
+
+        <!-- Cereales - 74 -->
+        <item>13</item>
+        <item>38</item>
+        <item>13</item>
+        <item>40</item>
+        <item>12</item>
+        <item>13</item>
+        <item>34</item>
+        <item>17</item>
+        <item>34</item>
+        <item>15</item>
+        <item>50</item>
+        <item>14</item>
+        <item>42</item>
+        <item>15</item>
+        <item>38</item>
+        <item>15</item>
+        <item>20</item>
+        <item>15</item>
+        <item>65</item>
+        <item>50</item>
+        <item>40</item>
+        <item>16</item>
+        <item>15</item>
+        <item>14</item>
+        <item>18</item>
+        <item>20</item>
+        <item>50</item>
+        <item>100</item>
+        <item>15</item>
+        <item>17</item>
+        <item>70</item>
+        <item>30</item>
+        <item>24</item>
+        <item>20</item>
+        <item>50</item>
+        <item>20</item>
+        <item>50</item>
+        <item>50</item>
+        <item>90</item>
+        <item>20</item>
+        <item>15</item>
+        <item>53</item>
+        <item>15</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>18</item>
+        <item>23</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>50</item>
+        <item>16</item>
+        <item>50</item>
+        <item>35</item>
+        <item>30</item>
+        <item>20</item>
+        <item>15</item>
+        <item>80</item>
+        <item>19</item>
+        <item>48</item>
+        <item>14</item>
+        <item>90</item>
+        <item>30</item>
+        <item>100</item>
+        <item>45</item>
+        <item>12</item>
+        <item>33</item>
+        <item>14</item>
+        <item>42</item>
+        <item>16</item>
+        <item>39</item>
+        <item>33</item>
+
+        <!-- Frutas - 42 -->
+        <item>0</item>
+        <item>150</item>
+        <item>100</item>
+        <item>30</item>
+        <item>25</item>
+        <item>100</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>150</item>
+        <item>15</item>
+        <item>150</item>
+        <item>200</item>
+        <item>70</item>
+        <item>200</item>
+        <item>140</item>
+        <item>100</item>
+        <item>100</item>
+        <item>0</item>
+        <item>70</item>
+        <item>100</item>
+        <item>100</item>
+        <item>100</item>
+        <item>50</item>
+        <item>100</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>20</item>
+        <item>150</item>
+        <item>100</item>
+        <item>100</item>
+        <item>100</item>
+        <item>100</item>
+        <item>125</item>
+        <item>100</item>
+        <item>100</item>
+        <item>85</item>
+        <item>60</item>
+        <item>50</item>
+        <item>200</item>
+        <item>50</item>
+
+        <!-- Hortalizas - 42 -->
+        <item>300</item>
+        <item>40</item>
+        <item>300</item>
+        <item>300</item>
+        <item>500</item>
+        <item>300</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>300</item>
+        <item>300</item>
+        <item>200</item>
+        <item>300</item>
+        <item>150</item>
+        <item>100</item>
+        <item>0</item>
+        <item>0</item>
+        <item>300</item>
+        <item>0</item>
+        <item>300</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>250</item>
+        <item>300</item>
+        <item>0</item>
+        <item>300</item>
+        <item>200</item>
+        <item>300</item>
+        <item>300</item>
+        <item>300</item>
+        <item>300</item>
+        <item>150</item>
+        <item>300</item>
+        <item>0</item>
+        <item>300</item>
+        <item>300</item>
+        <item>300</item>
+        <item>150</item>
+        <item>200</item>
+        <item>225</item>
+
+        <!-- Fruta grasa y seca - 15 -->
+        <item>250</item>
+        <item>15</item>
+        <item>150</item>
+        <item>140</item>
+        <item>150</item>
+        <item>100</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>300</item>
+        <item>300</item>
+        <item>80</item>
+        <item>80</item>
+        <item>100</item>
+        <item>15</item>
+
+        <!-- Bebidas - 26 -->
+        <item>130</item>
+        <item>100</item>
+        <item>0</item>
+        <item>100</item>
+        <item>250</item>
+        <item>80</item>
+        <item>100</item>
+        <item>0</item>
+        <item>250</item>
+        <item>250</item>
+        <item>300</item>
+        <item>250</item>
+        <item>0</item>
+        <item>0</item>
+        <item>75</item>
+        <item>300</item>
+        <item>30</item>
+        <item>70</item>
+        <item>100</item>
+        <item>200</item>
+        <item>100</item>
+        <item>75</item>
+        <item>0</item>
+        <item>75</item>
+        <item>100</item>
+        <item>250</item>
+
+        <!-- Otros - 57 -->
+        <item>10</item>
+        <item>10</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>12</item>
+        <item>22</item>
+        <item>120</item>
+        <item>100</item>
+        <item>12</item>
+        <item>17</item>
+        <item>25</item>
+        <item>25</item>
+        <item>25</item>
+        <item>100</item>
+        <item>40</item>
+        <item>50</item>
+        <item>23</item>
+        <item>50</item>
+        <item>23</item>
+        <item>10</item>
+        <item>150</item>
+        <item>62</item>
+        <item>10</item>
+        <item>18</item>
+        <item>50</item>
+        <item>100</item>
+        <item>130</item>
+        <item>25</item>
+        <item>25</item>
+        <item>11</item>
+        <item>20</item>
+        <item>0</item>
+        <item>13</item>
+        <item>0</item>
+        <item>20</item>
+        <item>25</item>
+        <item>35</item>
+        <item>0</item>
+        <item>40</item>
+        <item>15</item>
+        <item>100</item>
+        <item>100</item>
+        <item>150</item>
+        <item>0</item>
+        <item>100</item>
+        <item>0</item>
+        <item>0</item>
+        <item>100</item>
+        <item>25</item>
+        <item>0</item>
+        <item>120</item>
+        <item>25</item>
+        <item>25</item>
+        <item>0</item>
+        <item>15</item>
+    </string-array>
     <!--- Indices Glucemicos para rellenar la tabla de alimentos en la base de datos -->
     <string-array name="arrayIndicesGlucemicos">
         <!-- Lacteos - 22 -->
@@ -993,5 +1287,6 @@
         <item>0</item>
         <item>0</item>
     </string-array>
+
 
 </resources>
