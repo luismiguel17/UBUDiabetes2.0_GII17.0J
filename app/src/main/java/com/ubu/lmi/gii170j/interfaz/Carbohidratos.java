@@ -141,6 +141,7 @@ public class Carbohidratos extends AppCompatActivity {
 
         //Creamos un adaptador para el buscador y el spinner de alimentos
         ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
+
         autoCompleteTextViewBuscador.setAdapter(adpTodos);
         listaComida.setAdapter(adpTodos);
 
@@ -266,10 +267,11 @@ public class Carbohidratos extends AppCompatActivity {
 
 
         alimento_ingesta = new Alimento(nom_alimento, gramos ,ig_alimento);
-        userlist_ingesta.add(alimento_ingesta);
+        userlist_ingesta.add(0,alimento_ingesta);
         editTextSumatorioCH.setText("Conteo actual de carbohidratos (HC): " + sumatorioRaciones);
         editTextGramos.setText("0");
         autoCompleteTextViewBuscador.setText("");
+        listaComida.setSelection(0);
         adp_ListaIngesta.notifyDataSetChanged();
 
 
