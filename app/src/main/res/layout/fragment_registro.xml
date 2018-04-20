@@ -24,8 +24,9 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="55dp"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_add_a_photo_black_24dp"
-                android:clickable="true" />
+                android:background="@drawable/imageview_profile"
+                android:clickable="true"
+                android:onClick="cargarImage"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ly_id_DatPers_fragementProfile"
@@ -154,9 +155,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/valoresGlucemiadeseados"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/ly_dm1_1_fragmentProfile"
@@ -322,13 +324,68 @@
                         android:layout_marginTop="10dp" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_dm1_3_3_fragmentProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_id_decimalesBolo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/decimalesBolo"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+                <RadioGroup
+                    android:id="@+id/rg2_id_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+                    <RadioButton
+                        android:id="@+id/rb_id_cero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/decimal_bc_cero"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:paddingRight="10dp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_id_uno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/decimal_bc_dos"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:paddingRight="10dp"/>
+                    <RadioButton
+                        android:id="@+id/rb_id_dos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/decimal_bc_tres"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:paddingRight="10dp"/>
+                </RadioGroup>
+
+            </LinearLayout>
         </LinearLayout>
         <Button
             android:id="@+id/bt_guardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_save_registro"
             android:enabled="true"
