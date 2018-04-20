@@ -3,23 +3,25 @@
     android:id="@+id/ly_id_list_ingesta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="100"
     android:orientation="horizontal"
    >
 
     <TextView
         android:id="@+id/tv_id_item_list_ingesta"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="80"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:paddingLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:gravity="start"
         />
     <TextView
         android:id="@+id/tv_id_gralimento"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:textSize="12sp"
         android:textStyle="bold"
         android:gravity="end"
@@ -27,10 +29,11 @@
 
     <TextView
         android:id="@+id/tv_id_ig"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:textSize="12sp"
         android:textStyle="bold"
         android:gravity="end"
-        />
+        android:layout_marginRight="10dp" />
 </LinearLayout>
