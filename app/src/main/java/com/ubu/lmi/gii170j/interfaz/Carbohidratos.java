@@ -2,10 +2,11 @@ package com.ubu.lmi.gii170j.interfaz;
 
 //imports Android
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,24 +55,27 @@ public class Carbohidratos extends AppCompatActivity {
 
     public static final int COLUMNA_IG = 3;
 
-    //private Spinner listaComida, listaTipo; --ANTIGUO
     private final int RESULT_EXIT = 0;
-    /*
-    private static final String INTENSIDAD_ALTA = "Larga (más de 2 horas)";
-    private static final String INTENSIDAD_MEDIA = "Media (de 60 a 90 minutos)";
-    private static final String INTENSIDAD_IRREGULAR = "Irregular e intermitente";
-    */
+    //Consultar Preferencias de Usuario
+    private  SharedPreferences misPreferencias;
+    private boolean rapida;
+    private double insulinaBasal;
+    private double insulinaRapida;
+    private double glucemiaMinima;
+    private double glucemiaMaxima;
+    private double glucemia;
+    private Boolean bc_cero;
+    private Boolean bc_uno;
+    private Boolean bc_dos;
+    private ValoresPOJO valoresPOJO;
+    private CalculaBolo cb;
+
     private String comida;
     private String gramosPorRacion ="";
     private String indiceGlucemico="";
-    private double sumatorioRaciones;
-    /**
-    private String[] tipoAlimento;
-    private String[] numeroTipoAlimento;
-    private String[] alimento;
-    private String[] indicesGlucemico;
-    private String[] raciones;
-    **/
+    private double sumatorioRaciones=0;
+    private double actualSumatorioBoloC=0;
+
     ArrayList<String> arrayAlimentos = new ArrayList<>();
     ArrayList<Integer> arrayRaciones = new ArrayList<>();
 
@@ -90,10 +94,10 @@ public class Carbohidratos extends AppCompatActivity {
     private Spinner listaComida;
     private ArrayList<String> totalAlimentos;
     private ArrayList<String> ingestaAlimentosList;
-    //private ArrayAdapter<String> adpListaIngesta;
 
     //Prueba mostrar sumatorioCH
-    private TextView editTextSumatorioCH;
+    private TextView editTextActualSumatoriHC;
+    private TextView editTextAcuanlBoloC;
 
     //Nuevo-Para la listview con varias columnas
 
@@ -117,9 +121,6 @@ public class Carbohidratos extends AppCompatActivity {
         editTextGramos = (EditText) findViewById(R.id.et_gramos);
         editTextGramos.setText("0");
 
-        /**
-         * Nuevos cambios
-         */
         //Obtenemos la referencia a la listView del Xml
         listViewIngesta = (ListView) findViewById(R.id.lv_id_listaingesta_fc);
         //Obtenemos la referencia al button add del Xml
@@ -135,19 +136,16 @@ public class Carbohidratos extends AppCompatActivity {
         //Creamos un Arraylist para la lista de ingesta de alimentos del usuario
         ingestaAlimentosList = new ArrayList<String>();
 
-        // Creamos una adaptador para la lista Ingesta de alimentos del usuario
-        //adpListaIngesta = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice ,ingestaAlimentosList);
-        //listViewIngesta.setAdapter(adpListaIngesta);
-
         //Creamos un adaptador para el buscador y el spinner de alimentos
         ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
 
         autoCompleteTextViewBuscador.setAdapter(adpTodos);
         listaComida.setAdapter(adpTodos);
 
-        //Prueba mostrar sumatorioCH
-       editTextSumatorioCH =(TextView)findViewById(R.id.tv_id_sumatorioCH);
-       //editTextSumatorioCH.setText("Bolo calculado: ");
+        //mostrar sumatorioCH
+        editTextActualSumatoriHC =(TextView)findViewById(R.id.tv_id_actualSumatorioCH);
+       //mostrar BoloC actual
+        editTextAcuanlBoloC = (TextView)findViewById(R.id.tv_id_actualBoloC);
 
 
         //** Nuevo- Para la listView con varias columnas
@@ -155,87 +153,40 @@ public class Carbohidratos extends AppCompatActivity {
         adp_ListaIngesta = new IngestaUsuario_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
         listViewIngesta.setAdapter(adp_ListaIngesta);
        // adp_ListaIngesta = new IngestaUsuario_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
-        //listViewIngesta.setAdapter(adp_ListaIngesta);
+        //listViewIngesta.setAdapter(adp_ListaIngesta)
 
-        /**
-        SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-        SharedPreferences.Editor editor = misPreferencias.edit();
+        //Nuevo ValoresPojo
+        misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+        // Cargar valores de preferencias
+        rapida = misPreferencias.getBoolean(getString(R.string.rapida), false);
+        insulinaBasal = Double.parseDouble(misPreferencias.getString(getString(R.string.udsBasal), "0"));
+        insulinaRapida = Double.parseDouble(misPreferencias.getString(getString(R.string.udsRapida), "0"));
+        glucemiaMinima = Double.parseDouble(misPreferencias.getString(getString(R.string.min), "0"));
+        glucemiaMaxima = Double.parseDouble(misPreferencias.getString(getString(R.string.max), "0"));
+        glucemia = misPreferencias.getInt(getString(R.string.glucemia), 0);
+        bc_cero = misPreferencias.getBoolean(getString(R.string.decimal_bc_cero),false);
+        bc_uno = misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false);
+        bc_dos = misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false);
+        valoresPOJO = new ValoresPOJO(rapida, insulinaBasal, insulinaRapida, glucemiaMinima, glucemiaMaxima, glucemia);
 
-         **/
 
-        /**
-        // Si la tabla de alimentos no estaba creada... se crea
-        if (!misPreferencias.getBoolean("tablaAlimentos", false)) {
-            rellenarTablaAlimentos();
-            editor.putBoolean("tablaAlimentos", true);
-            editor.apply();
-        }
 
-         **/
 
-        // Comportamiento de la listview cuando se selecciona una item
+        // Comportamiento de la listview cuando se selecciona un item
         listViewIngesta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-             buttonRemoveAlimento.setVisibility(View.VISIBLE);
-             itemSelec = position;
+                listViewIngesta.setSelector(new ColorDrawable(Color.CYAN));
+                buttonRemoveAlimento.setVisibility(View.VISIBLE);
+                buttonAddAlimento.setVisibility(View.INVISIBLE);
+                itemSelec = position;
 
             }
         });
 
     }
 
-
-    /**
-     * Función rellena la tabla de alimentos a partir del archivo arrays.xml
-     */
-    /**
-    public void rellenarTablaAlimentos() {
-        //Categoria de loas Alimentos.
-        tipoAlimento = getResources().getStringArray(R.array.arrayTipoAlimento);
-        //Numero total de alimentos en cada categoria
-        numeroTipoAlimento = getResources().getStringArray(R.array.numeroTipoAlimento);
-        //Todos los alimentos (Todas las categorias)
-        alimento = getResources().getStringArray(R.array.arrayAlimentos);
-        //Indices Glucemicos de todos los alimentos
-        indicesGlucemico = getResources().getStringArray(R.array.arrayIndicesGlucemicos);
-        //RACIÓN DE HC(EN GRAMOS) de todos loas alimentos
-        raciones = getResources().getStringArray(R.array.arrayRacionesHC);
-
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Total alimentos: " + alimento.length);
-            Log.d(TAG, "Total I.G.: " + indicesGlucemico.length);
-            Log.d(TAG, "Total Racios HC: " + raciones.length);
-
-        }
-
-        DataBaseManager dbmanager = new DataBaseManager(this);
-        ContentValues values = new ContentValues();
-
-        int contadorNumeroTipoAlimento = 0;
-        int acumulado = Integer.parseInt(numeroTipoAlimento[contadorNumeroTipoAlimento]);
-
-        for (int i = 0; i < alimento.length; ++i) {
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "Procesando tipo de alimento: " + tipoAlimento[contadorNumeroTipoAlimento] +
-                        " Alimento: " + alimento[i] + " 1 Ración en gramos: " + raciones[i] + "indice glucemico: " + indicesGlucemico[i]);
-            }
-            values.put("tipoAlimento", tipoAlimento[contadorNumeroTipoAlimento]);
-            values.put("alimento", alimento[i]);
-            values.put("racion", raciones[i]);
-            values.put("indiceGlucemico", indicesGlucemico[i]);
-            dbmanager.insertar("alimentos", values);
-            values.clear();
-            // si hemos procesado todos los alimentos de un cierto y no hay más tipos de alimentos a procesar
-            if (i == acumulado - 1 && contadorNumeroTipoAlimento < tipoAlimento.length - 1) {
-                contadorNumeroTipoAlimento++; // avanzamos al siguiente tipo de alimento
-                acumulado += Integer.parseInt(numeroTipoAlimento[contadorNumeroTipoAlimento]);
-            }
-        }
-    }
-
-     **/
     /**
      * Función que define el comportamiento de la aplicacion al pulsar el boton añadir
      * Acumula el resultado obtenido y deja el editext por defecto para permitir añadir mas alimentos.
@@ -248,31 +199,40 @@ public class Carbohidratos extends AppCompatActivity {
         String ig_alimento ="";
         String gramos = editTextGramos.getText().toString();
         String nom_alimento = listaComida.getSelectedItem().toString();
-
         int numeroGramos = 0;
-        if (!gramos.equals("")) {
+        //Si ha insertados los gramos del alimento
+        if (!gramos.equals("0")) {
             numeroGramos = Integer.parseInt(gramos);
+            informationQuery = consulta_grHC_IG(nom_alimento);
+            gr_HCperRation = informationQuery[0];
+            ig_alimento = informationQuery[1];
+            sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gr_HCperRation);
+            //Bolo corrector Temporal
+            //cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
+            actualSumatorioBoloC = calculaBoloCorrector(sumatorioRaciones);
+
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "After Query: ");
+                Log.d(TAG, "Grams HC per ration: " + gr_HCperRation );
+                Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+            }
+
+
+            alimento_ingesta = new Alimento(nom_alimento, gramos ,ig_alimento);
+            userlist_ingesta.add(0,alimento_ingesta);
+            editTextActualSumatoriHC.setText("Actual Sum HC: " + sumatorioRaciones);
+            editTextAcuanlBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
+            editTextGramos.setText("0");
+            autoCompleteTextViewBuscador.setText("");
+            listaComida.setSelection(0);
+            adp_ListaIngesta.notifyDataSetChanged();
+
+
+
+        }else {
+            Toast.makeText(Carbohidratos.this,  "Inserta una cantidad (Gr)", Toast.LENGTH_LONG).show();
         }
 
-        informationQuery = consulta_grHC_IG(nom_alimento);
-        gr_HCperRation = informationQuery[0];
-        ig_alimento = informationQuery[1];
-        sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gr_HCperRation);
-
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "After Query: ");
-            Log.d(TAG, "Grams HC per ration: " + gr_HCperRation );
-            Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
-        }
-
-
-        alimento_ingesta = new Alimento(nom_alimento, gramos ,ig_alimento);
-        userlist_ingesta.add(0,alimento_ingesta);
-        editTextSumatorioCH.setText("Conteo actual de carbohidratos (HC): " + sumatorioRaciones);
-        editTextGramos.setText("0");
-        autoCompleteTextViewBuscador.setText("");
-        listaComida.setSelection(0);
-        adp_ListaIngesta.notifyDataSetChanged();
 
 
     }
@@ -293,16 +253,27 @@ public class Carbohidratos extends AppCompatActivity {
 
         userlist_ingesta.remove(itemSelec);
         adp_ListaIngesta.notifyDataSetChanged();
+        listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
-        Toast.makeText(Carbohidratos.this, "Eliminado:"+ nom_alimento , Toast.LENGTH_LONG).show();
+
+        Toast.makeText(Carbohidratos.this,  nom_alimento + " Eliminado", Toast.LENGTH_LONG).show();
         buttonRemoveAlimento.setVisibility(View.INVISIBLE);
+        buttonAddAlimento.setVisibility(View.VISIBLE);
 
         sumatorioRaciones -= calcularGramosDeHidratosDeCarbono(Integer.parseInt(num_gramos), gr_HCperRation);
-        listViewIngesta.clearAnimation();
-        editTextSumatorioCH.setText("Conteo actual de carbohidratos (HC): " + sumatorioRaciones);
+        if(sumatorioRaciones == 0.0){
+
+            actualSumatorioBoloC =0.0;
+        }else{
+            actualSumatorioBoloC = calculaBoloCorrector(sumatorioRaciones);
+        }
+
+        editTextActualSumatoriHC.setText("Actual Sum HC: " + sumatorioRaciones);
+        editTextAcuanlBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
+
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Eliminacion alimento: " + nom_alimento);
-            //Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+
         }
 
     }
@@ -357,30 +328,9 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public void finalizarOnClick(View view) {
 
-        SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-        // Cargar valores de preferencias
-        boolean rapida = misPreferencias.getBoolean(getString(R.string.rapida), false);
-        double insulinaBasal = Double.parseDouble(misPreferencias.getString(getString(R.string.udsBasal), "0"));
-        double insulinaRapida = Double.parseDouble(misPreferencias.getString(getString(R.string.udsRapida), "0"));
-        double glucemiaMinima = Double.parseDouble(misPreferencias.getString(getString(R.string.min), "0"));
-        double glucemiaMaxima = Double.parseDouble(misPreferencias.getString(getString(R.string.max), "0"));
-        double glucemia = misPreferencias.getInt(getString(R.string.glucemia), 0);
-
-        Boolean bc_cero = misPreferencias.getBoolean(getString(R.string.decimal_bc_cero),false);
-        Boolean bc_uno = misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false);
-        Boolean bc_dos = misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false);
-
-        ValoresPOJO valoresPOJO = new ValoresPOJO(rapida, insulinaBasal, insulinaRapida, glucemiaMinima, glucemiaMaxima, glucemia);
-
-
-        CalculaBolo cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
-
-        //Nuevo: Cambio calculo del bolo segun numero de decimales
-
         int num_decimal = -1;
 
-        double boloResult = cb.calculoBoloCorrector();
-
+        double boloResult = calculaBoloCorrector(sumatorioRaciones);
         if (bc_cero){
             num_decimal = 0;
         }else if(bc_uno){
@@ -388,8 +338,6 @@ public class Carbohidratos extends AppCompatActivity {
         }else if(bc_dos){
             num_decimal = 2;
         }
-
-        //String comentarioFinal = generaComentarioBolo(tipoEjer, boloResult);
         String comentarioFinal = generaComentarioBolo(boloResult,num_decimal);
 
 
@@ -409,6 +357,15 @@ public class Carbohidratos extends AppCompatActivity {
         alert.show();
     }
 
+    public double calculaBoloCorrector(Double sumatorioHc){
+        double retorno=0.0;
+        cb = new CalculaBolo(valoresPOJO, sumatorioHc);
+
+        retorno = cb.calculoBoloCorrector();
+
+        return retorno;
+    }
+
     /**
      * Función usada para generar el comentario final que se mostrara por pantalla
      *
@@ -417,20 +374,24 @@ public class Carbohidratos extends AppCompatActivity {
     private String generaComentarioBolo(double bolo, int n_decimal) {
 
         String comentario = "";
-
+        String formato ="";
         if(n_decimal == 0){
             int bolo_int = (int) Math.rint(bolo);
-            comentario = getString(R.string.resultado_bolo) + String.format(" %d", bolo_int);
+            formato =  String.format(" %d", bolo_int);
         }
         if(n_decimal == 1){
-            comentario = getString(R.string.resultado_bolo) + String.format(" %.1f", bolo);
+            formato = String.format(" %.1f", bolo);
         }
-        if(n_decimal == 2)
-            comentario = getString(R.string.resultado_bolo) + String.format(" %.2f", bolo);
+        if(n_decimal == 2) {
+            formato = String.format(" %.2f", bolo);
+
+        }
+        comentario = getString(R.string.resultado_bolo) + formato ;
 
         if (bolo < 0) {
             comentario += "\n" + getString(R.string.ingerir_carbohidratos);
         }
+
         return comentario;
     }
 

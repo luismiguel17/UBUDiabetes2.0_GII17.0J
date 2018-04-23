@@ -159,14 +159,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:listSelector="#00c4eb"></ListView>
+                android:drawSelectorOnTop="false">
+            </ListView>
             <TextView
-                android:id="@+id/tv_id_sumatorioCH"
+                android:id="@+id/tv_id_actualSumatorioCH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
+                android:gravity="start"/>
+            <TextView
+                android:id="@+id/tv_id_actualBoloC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:gravity="start"/>
 
         </LinearLayout>
