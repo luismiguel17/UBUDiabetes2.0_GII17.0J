@@ -47,6 +47,7 @@ public class Registro extends AppCompatActivity {
     RadioButton decimal_BC_tresCheck;
 
     ImageView imagePerfil;
+    Uri path;
     Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,8 @@ public class Registro extends AppCompatActivity {
         RadioButton decimal_BC_ceroCheck2 = (RadioButton) findViewById(R.id.rb_id_cero);
         RadioButton decimal_BC_dosCheck2 = (RadioButton) findViewById(R.id.rb_id_uno);
         RadioButton decimal_BC_tresCheck2 = (RadioButton) findViewById(R.id.rb_id_dos);
-
+        //Nuevo-Para la imagen de perfil
+        //ImageView imagePerfil2 = (ImageView) findViewById(R.id.imgV2_fragmentperfil);
 
 
         nombreEt2.setText(misPreferencias.getString(getString(R.string.nombre), ""));
@@ -124,6 +126,9 @@ public class Registro extends AppCompatActivity {
         decimal_BC_dosCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false));
         decimal_BC_tresCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false));
 
+        //Nuevo-Para la imagen de perfil
+        //Uri path_imageP = Uri.parse(misPreferencias.getString(getString(R.string.image_perfil), ""));
+        //imagePerfil2.setImageURI(path_imageP);
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Preferences loaded with previous values (if exist).");
@@ -153,6 +158,8 @@ public class Registro extends AppCompatActivity {
         Boolean bc_cero = decimal_BC_ceroCheck.isChecked();
         Boolean bc_dos = decimal_BC_dosCheck.isChecked();
         Boolean bc_tres = decimal_BC_tresCheck.isChecked();
+        //Nuevo- Para la imagen de perfil
+        //String path_image = path.toString();
 
 
         int minVal = Integer.parseInt(min);
@@ -181,6 +188,8 @@ public class Registro extends AppCompatActivity {
             editorPreferencias.putBoolean(getString(R.string.decimal_bc_cero), bc_cero);
             editorPreferencias.putBoolean(getString(R.string.decimal_bc_dos), bc_dos);
             editorPreferencias.putBoolean(getString(R.string.decimal_bc_tres), bc_tres);
+            //Nuevo - Para la imagen de perfil
+            //editorPreferencias.putString(getString(R.string.image_perfil),path.toString());
 
             editorPreferencias.apply(); // changed a commy by apply by recommendation of IntelliJ
 
@@ -203,24 +212,25 @@ public class Registro extends AppCompatActivity {
 
     }
 
+
     public void cargarImage(View view) {
         Intent intent= new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
         startActivityForResult(intent.createChooser(intent,"Seleccionar Foto"),10);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Comprobamos si seleccionamos una imagen
         if(resultCode==RESULT_OK){
-            Uri path = data.getData();
+            //Uri path = data.getData();
+            path = data.getData();
             //bitmap =
             imagePerfil.setImageURI(path);
-
         }
     }
-
     class RegistroAlimentos extends AsyncTask<String,Void,String> {
         private String[] tipoAlimento;
         private String[] numeroTipoAlimento;

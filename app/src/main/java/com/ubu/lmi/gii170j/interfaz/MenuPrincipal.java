@@ -17,6 +17,9 @@ import com.ubu.lmi.gii170j.R;
 
 public class MenuPrincipal extends AppCompatActivity {
 
+
+    SharedPreferences misPreferencias;
+    SharedPreferences.Editor editorPreferencias;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,15 @@ public class MenuPrincipal extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+        editorPreferencias = misPreferencias.edit();
+        //Nuevoooooooooooooo
+
+
+        //String nomUser = getIntent().getStringExtra("usuario");
+        //Toast.makeText(MenuPrincipal.this, "Bienvenido "+ nomUser , Toast.LENGTH_LONG).show();
+
 
         String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial)};
 
@@ -36,8 +48,8 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-                    SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
+                    //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+                    //SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
                     editorPreferencias.putBoolean("boloCorrector",false);
                     editorPreferencias.apply();
                     Intent i = new Intent(getApplicationContext(), RegistroGlucemias.class);

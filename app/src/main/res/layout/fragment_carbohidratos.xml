@@ -54,6 +54,7 @@
             android:id="@+id/ly_id_addalimento_fc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <EditText
@@ -62,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="5"
-                android:layout_marginLeft="120dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="5dp"/>
@@ -70,8 +70,9 @@
                 android:id="@+id/bt_id_addAlimento"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="35dp"
                 android:onClick="añadirOtroOnClick"
                 android:background="@android:drawable/ic_input_add"/>
 
@@ -105,8 +106,7 @@
                     android:onClick="removeOnClick"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="160dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="120dp"
                     android:background="@android:drawable/ic_delete"/>
             </LinearLayout>
             <LinearLayout

@@ -1,5 +1,9 @@
 package com.ubu.lmi.gii170j.calculos;
 
+import android.util.Log;
+
+import com.ubu.lmi.gii170j.BuildConfig;
+import com.ubu.lmi.gii170j.interfaz.Carbohidratos;
 import com.ubu.lmi.gii170j.persistencia.ValoresPOJO;
 
 /**
@@ -17,6 +21,10 @@ public class CalculaBolo {
      * Valores.
      */
     private ValoresPOJO valores;
+    /**
+     * Tag for log.
+     */
+    private static String TAG = CalculaBolo.class.getName();
 
     /**
      * Constructor.
@@ -90,6 +98,10 @@ public class CalculaBolo {
         double operando1 = calculaGr_HC_Ratio();
         double operando2 = calculaUdsGlucemia();
 
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Grams HC por Ratio Insulina : " + operando1 );
+            Log.d(TAG, "UDs Glucemia: " + operando2);
+        }
         return (operando1 + operando2);
     }
 }
