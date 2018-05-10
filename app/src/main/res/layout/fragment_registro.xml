@@ -58,8 +58,8 @@
                 android:id="@+id/et_id_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:inputType="text" />
 
@@ -68,32 +68,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:weightSum="100"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_edadUs_fragmentProfile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_weight="33"
                     android:text="@string/edadUser"
+                    android:gravity="center"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_alturadUs_fragmentProfile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_weight="33"
+                    android:gravity="center"
                     android:text="@string/alturaUser"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_pesodUs_fragmentProfile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_weight="33"
+                    android:gravity="center"
                     android:text="@string/pesoUser"
                     android:textSize="15dp" />
             </LinearLayout>
@@ -103,31 +107,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
+                android:weightSum="100"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/et_id_edad"
-                    android:layout_width="55dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/et_id_estatura"
-                    android:layout_width="55dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="10dp" />
+                    android:gravity="center"
+                    android:layout_weight="33"/>
 
                 <EditText
                     android:id="@+id/et_id_peso"
-                    android:layout_width="55dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:inputType="number"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -157,6 +165,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_gravity="center"
                 android:text="@string/valoresGlucemiadeseados"
                 android:textSize="15sp" />
 
@@ -165,23 +174,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:weightSum="100"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_min_ly_dm1_1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="85dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_weight="20"
+                    android:gravity="center"
+                    android:textSize="15sp"
                     android:text="@string/glu_min" />
 
                 <TextView
                     android:id="@+id/tv_max_ly_dm1_1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/glu_max" />
+                    android:layout_weight="20"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:text="@string/glu_max"/>
             </LinearLayout>
 
             <LinearLayout
@@ -189,23 +205,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
+                android:weightSum="100"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/et_id_ly2.1_registro_min"
-                    android:layout_width="55dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:layout_marginLeft="82dp"
-                    android:layout_marginTop="10dp" />
-
+                    android:layout_weight="20"
+                    android:gravity="center"
+                    android:ems="5"
+                    android:inputType="number"/>
                 <EditText
                     android:id="@+id/et_id_ly2.1_registro_max"
-                    android:layout_width="55dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_weight="20"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:ems="5"
+                    android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout
@@ -278,22 +300,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
+                    android:weightSum="100"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:orientation="horizontal">
+
 
                     <TextView
                         android:id="@+id/tv_udsBasal_fragmentProfile"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="85dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_weight="30"
+                        android:gravity="center"
+                        android:textSize="15sp"
                         android:text="@string/h_basal" />
-
                     <TextView
                         android:id="@+id/tv_udsRapida_fragmentProfile"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="45dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_weight="30"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:textSize="15sp"
                         android:text="@string/h_rapida" />
 
                 </LinearLayout>
@@ -301,27 +330,32 @@
                 <LinearLayout
                     android:id="@+id/ly_dm1_3_2_fragmentProfile"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_marginTop="10dp"
+                    android:weightSum="100"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/et_udsBasal"
-                        android:layout_width="55dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="92dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_weight="30"
+                        android:gravity="center"
+                        android:ems="5"
+                        android:inputType="number"/>
 
                     <EditText
                         android:id="@+id/et_udsRapida"
-                        android:layout_width="55dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="65dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_weight="30"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:ems="5"
+                        android:inputType="number"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
