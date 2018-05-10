@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ubu.lmi.gii170j">
-    <!-- Permiso para poder Acceder a imagenes de nuestra galeria-->
-    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
 
+    <!-- Permiso para poder Acceder a imagenes de nuestra galeria -->
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -62,7 +62,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".interfaz.Pruebas_Main"></activity>
+        <activity android:name=".interfaz.Pruebas_Main" />
+        <activity
+            android:name=".interfaz.RegistroListaIngesta"
+            android:label="@string/title_activity_registro_lista_ingesta" />
+        <activity
+            android:name=".interfaz.ConsultaDetallesListaIngesta"
+            android:label="@string/title_activity_detalles__lista_ingesta"></activity>
     </application>
 
 </manifest>

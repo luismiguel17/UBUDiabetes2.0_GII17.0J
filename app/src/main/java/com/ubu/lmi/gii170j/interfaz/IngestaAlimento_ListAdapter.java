@@ -14,7 +14,7 @@ import com.ubu.lmi.gii170j.R;
 
 import java.util.ArrayList;
 
-class IngestaUsuario_ListAdapter extends ArrayAdapter<Alimento>{
+class IngestaAlimento_ListAdapter extends ArrayAdapter<Alimento>{
     //private LayoutInflater ly_inflater;
    //private ArrayList<Alimento> alimentos;
     //private int viewResource_id;
@@ -26,7 +26,7 @@ class IngestaUsuario_ListAdapter extends ArrayAdapter<Alimento>{
     static final int MODERADO_MAX = 69;
     static final int BAJO = 55;
 
-    public IngestaUsuario_ListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Alimento> objects) {
+    public IngestaAlimento_ListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Alimento> objects) {
         super(context, resource, objects);
         //this.alimentos = objects;
          //ly_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

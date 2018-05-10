@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tv_id_itemid_list_registros"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="12"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorYellowish"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/tv_id_itemfecha_list_registros"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="45"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorToneBlue"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/tv_id_itemsumHC_list_registros"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="18"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorGreenish"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/tv_id_itemboloC_list_registros"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="25"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorReddish"
+        android:gravity="center"
+        android:layout_marginRight="10dp" />
+</LinearLayout>

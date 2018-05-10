@@ -24,11 +24,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseManager.CREATE_ALIMENTOS);
         db.execSQL(DataBaseManager.CREATE_GLUCEMIAS);
         db.execSQL(DataBaseManager.CREATE_INCIDENCIAS);
+        db.execSQL(DataBaseManager.CREATE_LISTA_INGESTA);
+        db.execSQL(DataBaseManager.CREATE_DETALLES_LISTA_INGESTA);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        // Drop older table if existed
+        db.execSQL("DROP TABLE IF EXISTS glucemias");
+        db.execSQL("DROP TABLE IF EXISTS incidencias");
+        db.execSQL("DROP TABLE IF EXISTS alimentos");
+        db.execSQL("DROP TABLE IF EXISTS listaingesta");
+        db.execSQL("DROP TABLE IF EXISTS detalleslistaingesta");
+
+        // Create tables again
+        onCreate(db);
     }
 }

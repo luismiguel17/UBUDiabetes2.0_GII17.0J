@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly1_id_list_detalles_lista_ingesta"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tv_id_itemtipo_list_detalles"
+        android:layout_width="0dp"
+        android:layout_height="107dp"
+        android:gravity="center"
+        android:layout_weight="25" />
+    <LinearLayout
+        android:id="@+id/ly2_id_list_detalles_lista_ingesta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="75"
+        android:weightSum="100"
+        android:background="@color/colorToneBlue"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ly2.1_id_list_detalles_lista_ingesta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_id_itemnombrealimento_list_detalles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:textSize="20sp"
+                android:text="@string/nombrealimento_detallelista"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_id_itemvaluenombre_list_detalles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="start" />
+        </LinearLayout>
+        <LinearLayout
+           android:id="@+id/ly2.2_id_list_detalles_lista_ingesta"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:weightSum="100"
+           android:orientation="horizontal">
+
+           <TextView
+               android:id="@+id/tv_id_itemcantida_list_detalles"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="50"
+               android:textSize="20sp"
+               android:text="@string/cantidad_detallelista"
+               android:textStyle="bold"
+               android:textColor="@color/colorPrimaryDark"
+               android:gravity="center" />
+           <TextView
+               android:id="@+id/tv_id_itemvaluecantidad_list_detalles"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="50"
+               android:textSize="20sp"
+               android:textStyle="bold"
+               android:textColor="@color/colorPrimaryDark"
+               android:gravity="start" />
+       </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ly2.3_id_list_detalles_lista_ingesta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_id_itemindiceglu_list_detalles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:paddingRight="30dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/indiceglu_detallelista"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="end" />
+            <TextView
+                android:id="@+id/tv_id_itemvalueindiceglu_list_detalles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="start" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

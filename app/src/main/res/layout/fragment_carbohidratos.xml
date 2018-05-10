@@ -2,196 +2,201 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:id="@+id/ly1_id_Carbohidratos"
+    <AutoCompleteTextView
+        android:id="@+id/actv_id_buscador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:showIn="@layout/activity_carbohidratos">
+        android:completionThreshold="1"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:drawableRight="@android:drawable/ic_menu_search"
+        android:hint="@string/buscaralimento"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/actv_id_buscador"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:completionThreshold="1"
-            android:paddingLeft="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="20dp"
-            android:drawableRight="@android:drawable/ic_menu_search"
-            android:hint="@string/buscaralimento"/>
+    <TextView
+        android:id="@+id/tv_id_alimento_fc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/tv_selecionAlimento"
+        android:textColor="@color/colorPrimaryDark"/>
+    <Spinner
+        android:id="@+id/spiner_alimentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_valorgramos"
+        android:id="@+id/tv_valorgramos"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:id="@+id/ly_id_addalimento_fc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_id_alimento_fc"
+        <EditText
+            android:id="@+id/et_gramos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="5"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"/>
+        <Button
+            android:id="@+id/bt_id_addAlimento"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/tv_selecionAlimento"
-            android:textColor="@color/colorPrimaryDark"/>
-        <Spinner
-            android:id="@+id/spiner_alimentos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:onClick="añadirOtroOnClick"
+            android:background="@android:drawable/ic_input_add"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ly_id_listaingesta_fc_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tv_id_listaingesta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_valorgramos"
-            android:id="@+id/tv_valorgramos"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/listaingesta"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
             android:textStyle="bold" />
-        <LinearLayout
-            android:id="@+id/ly_id_addalimento_fc"
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/bt_id_removeAlimento"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/ic_delete"
+            android:onClick="removeOnClick" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_id_listView_ingesta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/tv_id_listView_alimento"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="80"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="start"
+            android:text="@string/tv_lv_nombreAlimento"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_id_listView_gr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="end"
+            android:text="@string/tv_lv_gr"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_id_listView_ig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="10"
+            android:gravity="end"
+            android:text="@string/tv_lv_ig"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_id_listaingesta_fc"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:divider="@color/colorReddish"
+        android:dividerHeight="2dp"
+        android:smoothScrollbar="true"
+        android:footerDividersEnabled="false">
+    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_id_actualSumatorioCH"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/et_gramos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="5"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="5dp"/>
-            <Button
-                android:id="@+id/bt_id_addAlimento"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:onClick="añadirOtroOnClick"
-                android:background="@android:drawable/ic_input_add"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ly_id_listaingesta_fc"
-            android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_id_actualBoloC"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/ly_id_listaingesta_fc_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_id_listaingesta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/listaingesta"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/colorPrimaryDark"/>
-                <Button
-                    android:id="@+id/bt_id_removeAlimento"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:onClick="removeOnClick"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="120dp"
-                    android:background="@android:drawable/ic_delete"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ly_id_listView_ingesta"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:weightSum="100"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-                <TextView
-                    android:id="@+id/tv_id_listView_alimento"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="80"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="start"
-                    android:text="@string/tv_lv_nombreAlimento"/>
-                <TextView
-                    android:id="@+id/tv_id_listView_gr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
-                    android:text="@string/tv_lv_gr"
-                    android:gravity="end" />
-
-                <TextView
-                    android:id="@+id/tv_id_listView_ig"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginRight="10dp"
-                    android:text="@string/tv_lv_ig"
-                    android:gravity="end"/>
-
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/lv_id_listaingesta_fc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:drawSelectorOnTop="false">
-            </ListView>
-            <TextView
-                android:id="@+id/tv_id_actualSumatorioCH"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="start"/>
-            <TextView
-                android:id="@+id/tv_id_actualBoloC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:gravity="start"/>
-
-        </LinearLayout>
+            android:layout_weight="50"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="12sp" />
     </LinearLayout>
     <Button
         android:id="@+id/bt_finalizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bt_finalizar"
-        android:background="@drawable/btns_carbohidratos"
-        android:textColor="#ffffff"
-        android:onClick="finalizarOnClick"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="right" />
-
+        android:layout_marginTop="5dp"
+        android:background="@drawable/btns_carbohidratos"
+        android:onClick="finalizarOnClick"
+        android:text="@string/bt_finalizar"
+        android:textColor="#ffffff"
+        android:layout_marginRight="20dp" />
 </LinearLayout>
-

@@ -37,7 +37,7 @@ public class MenuPrincipal extends AppCompatActivity {
         //Toast.makeText(MenuPrincipal.this, "Bienvenido "+ nomUser , Toast.LENGTH_LONG).show();
 
 
-        String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial)};
+        String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial),getString(R.string.main_registroIngestas)};
 
         ListView listaMenu = (ListView) findViewById(R.id.lv_opciones);
         ArrayAdapter<String> adaptlv = new ArrayAdapter<>(getApplicationContext(),R.layout.list_black_text,opciones);
@@ -56,6 +56,10 @@ public class MenuPrincipal extends AppCompatActivity {
                     startActivity(i);
                 }else if(position == 1){
                     Intent i = new Intent(getApplicationContext(), Historial.class);
+                    startActivity(i);
+                }else if (position == 2){
+                    //Pruebas para consultar los registros de ingesta
+                    Intent i = new Intent(getApplicationContext(), RegistroListaIngesta.class);
                     startActivity(i);
                 }
             }

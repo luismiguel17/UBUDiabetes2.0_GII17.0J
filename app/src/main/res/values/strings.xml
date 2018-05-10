@@ -39,6 +39,8 @@
     <string name="rapida">rapida</string>
     <string name="ultrarrapida">ultrarrapida</string>
     <string name="glucemia">glucemia</string>
+    <!--- Nuevo decimales bolo corrector -->
+
 
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>
@@ -47,6 +49,7 @@
     <string name="bt_bolo">Calcular bolo</string>
     <string name="main_registro">Registro de glucemias</string>
     <string name="main_historial">Historial de glucemias</string>
+    <string name="main_registroIngestas">Consultar Registros Ingestas</string>
 
     <string-array name="opciones">
         <item>Registro de glucemias</item>
@@ -90,6 +93,8 @@
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
     <string name="title_activity_launcher">Launcher</string>
+    <string name="registro_lista_ingesta_correcta">Lista Ingesta registrada correctamente</string>
+
 
     <!-- Strings de Perfil (Nuevo) -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -100,19 +105,42 @@
     <string name="alturaUser">Altura (cm)</string>
     <string name="pesoUser">Peso (kg)</string>
     <string name="datosMedicos">Datos Médicos</string>
-    <string name="valoresGlucemiadeseados">Valores de Glucemia deseados (Entre 80 y 250 mg/dl)</string>
+    <string name="valoresGlucemiadeseados">Valores de Glucemia deseados\n
+        \t\t\t(Entre 80 y 250 mg/dl)</string>
     <string name="glu_min">Mínimo</string>
     <string name="glu_max">Máximo.</string>
+    <string name="decimalesBolo">Decimales en el Bolo Corrector:</string>
+    <string name="decimal_bc_cero">Cero</string>
+    <string name="decimal_bc_dos">Uno</string>
+    <string name="decimal_bc_tres">Dos</string>
+    <string name="image_perfil">Imagen</string>
 
     <!-- Buscador de Alimentos-->
     <string name="buscaralimento">Buscar alimento</string>
     <string name="tv_selecionAlimento">Seleccione alimento</string>
     <!-- Strings nuevos-Cambios -->
     <string name="listaingesta">Lista de Ingesta:</string>
-    <!-- ListView Ingesta Alimentos Usuario-->
+
+    <!-- Strings de Registro lista Ingesta-->
+    <string name="registros">Registro de Ingestas</string>
     <string name="tv_lv_nombreAlimento">Alimento</string>
     <string name="tv_lv_gr">Cantidad(gr)</string>
     <string name="tv_lv_ig">I.G.</string>
-
-
+    <string name="title_activity_registro_lista_ingesta">RegistroListaIngesta</string>
+    <string name="id_rli">Id</string>
+    <string name="fecha_rli">Fecha</string>
+    <string name="sumHC_rli">HC</string>
+    <string name="boloC_rli">Bolo C.</string>
+    <!-- Strings de Detalles lista Ingesta-->
+    <string name="title_activity_detalles__lista_ingesta">Detalles_ListaIngesta</string>
+    <string name="detalles_lista">Detalles Lista</string>
+    <string name="id_dli">ID</string>
+    <string name="id_lista_dli">Id Lista</string>
+    <string name="nomAlimento_dli">Alimento</string>
+    <string name="cantidad_dli">Cantidad</string>
+    <!-- Strings de Detalles lista Ingesta-->
+    <string name="nombrealimento_detallelista">Alimento:</string>
+    <string name="cantidad_detallelista">Cantidad:</string>
+    <string name="indiceglu_detallelista">I.G:</string>
+    <string name="sumHC_detallelista">H.C:</string>
 </resources>

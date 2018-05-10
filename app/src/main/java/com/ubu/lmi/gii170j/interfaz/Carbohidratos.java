@@ -2,11 +2,13 @@ package com.ubu.lmi.gii170j.interfaz;
 
 //imports Android
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,7 +30,10 @@ import com.ubu.lmi.gii170j.calculos.CalculaBolo;
 import com.ubu.lmi.gii170j.persistencia.DataBaseManager;
 import com.ubu.lmi.gii170j.persistencia.ValoresPOJO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class Carbohidratos extends AppCompatActivity {
 
@@ -75,6 +80,7 @@ public class Carbohidratos extends AppCompatActivity {
     private String indiceGlucemico="";
     private double sumatorioRaciones=0;
     private double actualSumatorioBoloC=0;
+    private double boloResult=0;
 
     ArrayList<String> arrayAlimentos = new ArrayList<>();
     ArrayList<Integer> arrayRaciones = new ArrayList<>();
@@ -97,13 +103,13 @@ public class Carbohidratos extends AppCompatActivity {
 
     //Prueba mostrar sumatorioCH
     private TextView editTextActualSumatoriHC;
-    private TextView editTextAcuanlBoloC;
+    private TextView editTextActualBoloC;
 
     //Nuevo-Para la listview con varias columnas
 
     private Alimento alimento_ingesta;
     private ArrayList<Alimento> userlist_ingesta;
-    private IngestaUsuario_ListAdapter adp_ListaIngesta;
+    private IngestaAlimento_ListAdapter adp_ListaIngesta;
 
     //para eliminar items de la lisview
     private int itemSelec=0;
@@ -123,6 +129,8 @@ public class Carbohidratos extends AppCompatActivity {
 
         //Obtenemos la referencia a la listView del Xml
         listViewIngesta = (ListView) findViewById(R.id.lv_id_listaingesta_fc);
+        //listViewIngesta.setScrollContainer(true);
+        //listViewIngesta.setFastScrollAlwaysVisible(true);
         //Obtenemos la referencia al button add del Xml
         buttonAddAlimento = (Button) findViewById(R.id.bt_id_addAlimento);
         //Obtenemos la referencia al button remove del Xml
@@ -145,14 +153,14 @@ public class Carbohidratos extends AppCompatActivity {
         //mostrar sumatorioCH
         editTextActualSumatoriHC =(TextView)findViewById(R.id.tv_id_actualSumatorioCH);
        //mostrar BoloC actual
-        editTextAcuanlBoloC = (TextView)findViewById(R.id.tv_id_actualBoloC);
+        editTextActualBoloC = (TextView)findViewById(R.id.tv_id_actualBoloC);
 
 
         //** Nuevo- Para la listView con varias columnas
         userlist_ingesta = new ArrayList<>();
-        adp_ListaIngesta = new IngestaUsuario_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
+        adp_ListaIngesta = new IngestaAlimento_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
         listViewIngesta.setAdapter(adp_ListaIngesta);
-       // adp_ListaIngesta = new IngestaUsuario_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
+       // adp_ListaIngesta = new IngestaAlimento_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
         //listViewIngesta.setAdapter(adp_ListaIngesta)
 
         //Nuevo ValoresPojo
@@ -184,6 +192,7 @@ public class Carbohidratos extends AppCompatActivity {
 
             }
         });
+        //listViewIngesta.setOnIt
 
     }
 
@@ -221,7 +230,7 @@ public class Carbohidratos extends AppCompatActivity {
             alimento_ingesta = new Alimento(nom_alimento, gramos ,ig_alimento);
             userlist_ingesta.add(0,alimento_ingesta);
             editTextActualSumatoriHC.setText("Actual Sum HC: " + sumatorioRaciones);
-            editTextAcuanlBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
+            editTextActualBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
             editTextGramos.setText("0");
             autoCompleteTextViewBuscador.setText("");
             listaComida.setSelection(0);
@@ -252,8 +261,10 @@ public class Carbohidratos extends AppCompatActivity {
 
 
         userlist_ingesta.remove(itemSelec);
+        listViewIngesta.clearChoices();
+        listViewIngesta.requestLayout();
         adp_ListaIngesta.notifyDataSetChanged();
-        listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        //listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
 
         Toast.makeText(Carbohidratos.this,  nom_alimento + " Eliminado", Toast.LENGTH_LONG).show();
@@ -269,7 +280,7 @@ public class Carbohidratos extends AppCompatActivity {
         }
 
         editTextActualSumatoriHC.setText("Actual Sum HC: " + sumatorioRaciones);
-        editTextAcuanlBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
+        editTextActualBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Eliminacion alimento: " + nom_alimento);
@@ -330,7 +341,7 @@ public class Carbohidratos extends AppCompatActivity {
 
         int num_decimal = -1;
 
-        double boloResult = calculaBoloCorrector(sumatorioRaciones);
+        boloResult = calculaBoloCorrector(sumatorioRaciones);
         if (bc_cero){
             num_decimal = 0;
         }else if(bc_uno){
@@ -338,10 +349,14 @@ public class Carbohidratos extends AppCompatActivity {
         }else if(bc_dos){
             num_decimal = 2;
         }
+
+        /**
+         * LLamada a la asynktask
+         */
+        new RegistrosListaIngesta().execute("registrar_datos");
+
         String comentarioFinal = generaComentarioBolo(boloResult,num_decimal);
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Carbohidratos.this);
         builder.setMessage(comentarioFinal)
                 .setTitle(getString(R.string.bolo))
                 .setCancelable(false)
@@ -393,6 +408,113 @@ public class Carbohidratos extends AppCompatActivity {
         }
 
         return comentario;
+    }
+
+    class RegistrosListaIngesta extends AsyncTask<String,Void,String> {
+        private long id_lista=0;
+        private String fecha_registro;
+        private double sumatorio_HC;
+        private double bolo_c;
+        //private id_lista;
+
+
+        //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+        //SharedPreferences.Editor editorPreferencias = misPreferencias.edit(); // Nuevo cambio para ir a la Activity MenuPrincipal despues de registrarse
+
+
+        DataBaseManager dbmanager = new DataBaseManager(getBaseContext());
+        ContentValues values;// = new ContentValues();
+
+
+        @Override
+        protected void onPreExecute() {
+            //super.onPreExecute();
+            Toast.makeText(Carbohidratos.this, "Registrando datos...:", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            //Toast.makeText(Registro.this, "Cargando datos...:" , Toast.LENGTH_LONG).show();
+            rellenarTablaListaIngesta();
+            rellenarTablaDetallesListaIngesta();
+            //editorPreferencias.putBoolean("tablaAlimentos", true);
+            //editorPreferencias.apply();
+            return strings[0];
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            // super.onPostExecute(s);
+
+            Toast.makeText(Carbohidratos.this, "Finalizado Carga de datos...", Toast.LENGTH_LONG).show();
+            //Intent menuPrincipal = new Intent(Registro.this, MenuPrincipal.class);
+            //menuPrincipal.putExtra("usuario", nombreEt.getText().toString());
+            //startActivity(menuPrincipal);
+            //finish();
+        }
+
+        private void rellenarTablaListaIngesta() {
+            long insertarlista = dbmanager.insertar("listaIngesta", generarContentValuesLista(sumatorioRaciones, boloResult));
+            if (insertarlista != -1) {
+                //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Insertada lista_ingesta con id: " + insertarlista);
+                id_lista = insertarlista;
+            }
+
+
+        }
+        public ContentValues generarContentValuesLista(double arg_sumatorioHc, double arg_boloC ){
+            values = new ContentValues();
+            fecha_registro = getDateTime();
+            values.put("fecha", fecha_registro);
+            sumatorio_HC = (double)Math.round(arg_sumatorioHc * 100d) / 100d;
+            values.put("sum_HC", sumatorio_HC);
+            bolo_c= arg_boloC;
+            values.put("bolo_corrector", bolo_c);
+            return values;
+        }
+
+        /**
+         * Función que genera la fecha actual con un formato determinado
+         */
+        private String getDateTime() {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(
+                    "dd-MM-yyyy", Locale.getDefault());
+            Date date = new Date();
+            return dateFormat.format(date);
+        }
+
+        private void rellenarTablaDetallesListaIngesta() {
+            long insertarDetalles=0;
+            String nombre_al="";
+            double cantidad = 0;
+            for(int i= 0; i < userlist_ingesta.size();i++){
+                nombre_al = userlist_ingesta.get(i).getNombre();
+                cantidad =  Double.parseDouble(userlist_ingesta.get(i).getGramos());
+                insertarDetalles = dbmanager.insertar("detalleslistaingesta", generarContentValuesDetalles(id_lista,nombre_al,cantidad));
+                if (insertarDetalles != -1) {
+                    //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Insertada Detalle_lista_ingesta con id: " + insertarDetalles);
+                    Log.d(TAG, "id_lista: " + id_lista);
+                    Log.d(TAG, "Alimento: " + nombre_al);
+                    Log.d(TAG, "cantidad: " + cantidad);
+
+                }
+            }
+
+        }
+        public ContentValues generarContentValuesDetalles(long arg_idlista,String arg_alimento, double arg_cantidad ){
+            values = new ContentValues();
+            values.put("id_lista", arg_idlista);
+            values.put("alimento", arg_alimento);
+            values.put("cantidad", arg_cantidad);
+            return values;
+        }
+
+
     }
 
 }

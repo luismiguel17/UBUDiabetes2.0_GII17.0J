@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorReddish">#FF7575</color>
+    <color name="colorToneBlue">#8CD1E6</color>
+    <color name="colorGreenish">#4BFE78</color>
+    <color name="colorYellowish">#fef359</color>
+    <color name="colorUbuDiabetes">#00c4eb</color>
 </resources>
