@@ -249,7 +249,7 @@ public class Registro extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             //super.onPreExecute();
-            Toast.makeText(Registro.this, "Cargando datos...:", Toast.LENGTH_LONG).show();
+            Toast.makeText(Registro.this, "Cargando datos...", Toast.LENGTH_LONG).show();
 
         }
 
@@ -269,7 +269,7 @@ public class Registro extends AppCompatActivity {
         protected void onPostExecute(String s) {
             // super.onPostExecute(s);
 
-            Toast.makeText(Registro.this, "Finalizado Carga de datos...", Toast.LENGTH_LONG).show();
+            Toast.makeText(Registro.this, "Carga finalizada", Toast.LENGTH_LONG).show();
             //Intent menuPrincipal = new Intent(Registro.this, MenuPrincipal.class);
             //menuPrincipal.putExtra("usuario", nombreEt.getText().toString());
             //startActivity(menuPrincipal);

@@ -1,8 +1,10 @@
 package com.ubu.lmi.gii170j.interfaz;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,6 +22,37 @@ public class MenuPrincipal extends AppCompatActivity {
 
     SharedPreferences misPreferencias;
     SharedPreferences.Editor editorPreferencias;
+
+    @Override
+    public void onBackPressed() {
+        //Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_LONG).show();
+        //super.onBackPressed();
+        //finish();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Salir");
+        alertDialogBuilder
+                .setMessage("¿Quiere salir de la aplicación?")
+                .setCancelable(false)
+                .setPositiveButton("Sí",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                moveTaskToBack(true);
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                                System.exit(1);
+                            }
+                        })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

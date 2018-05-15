@@ -1,6 +1,6 @@
 package com.ubu.lmi.gii170j.interfaz;
 
-import android.content.ContentValues;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -8,9 +8,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
+
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,8 +22,9 @@ import com.ubu.lmi.gii170j.R;
 import com.ubu.lmi.gii170j.persistencia.DataBaseManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RegistroListaIngesta extends Activity {
+public class RegistroListaIngesta extends AppCompatActivity {
 
     /**
      * Tag for log.
@@ -33,7 +36,7 @@ public class RegistroListaIngesta extends Activity {
     public static final int COLUMNA_BOLOC = 3;
 
     //para eliminar items de la lisview
-    private int itemSelec=0;
+    private int idListSelected =0;
 
     ListaIngesta listaIngesta;
     private ArrayList<ListaIngesta> registro_listIngesta;
@@ -41,9 +44,20 @@ public class RegistroListaIngesta extends Activity {
     ListView lv_registro_ingestas;
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent intent = new Intent(this, MenuPrincipal.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_lista_ingesta);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
@@ -63,19 +77,27 @@ public class RegistroListaIngesta extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 lv_registro_ingestas.setSelector(new ColorDrawable(Color.CYAN));
-                itemSelec = position;
 
+                ListaIngesta obj_selected = (ListaIngesta) parent.getItemAtPosition(position);
+                idListSelected = Integer.parseInt(obj_selected.getId_lista());
+                //idListSelected = position;
                 if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Se va a consultar el item: " + itemSelec);
+                    Log.d(TAG, "Se va a consultar la lista con id: " + idListSelected);
                 }
             }
         });
+
     }
 
     public void consultarItemLista(View view) {
-        Intent intent = new Intent(RegistroListaIngesta.this, ConsultaDetallesListaIngesta.class);
-        intent.putExtra("id_lista", (itemSelec+1));
-        startActivity(intent);
+        if(idListSelected != 0){
+            Intent intent = new Intent(RegistroListaIngesta.this, ConsultaDetallesListaIngesta.class);
+            intent.putExtra("id_lista", (idListSelected));
+            startActivity(intent);
+        }else{
+            Toast.makeText(getBaseContext(), "Seleccione un item" , Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
@@ -116,7 +138,7 @@ public class RegistroListaIngesta extends Activity {
                     bolo_C = cursorRegistrosIngesta.getString(COLUMNA_BOLOC);
 
                     listaIngesta = new ListaIngesta(id_listaIngesta,fecha,sumatorioHC,bolo_C);
-                    registro_listIngesta.add(listaIngesta);
+                    registro_listIngesta.add(0,listaIngesta);
                     adp_registro_listIngesta.notifyDataSetChanged();
                 }
             }finally{
@@ -124,17 +146,18 @@ public class RegistroListaIngesta extends Activity {
                 if (cursorRegistrosIngesta != null && !cursorRegistrosIngesta.isClosed())
                     cursorRegistrosIngesta.close();
             }
-            dbmanager.closeBD();
+            //dbmanager.closeBD();
         }
         @Override
         protected void onPostExecute(String s) {
             // super.onPostExecute(s);
 
-            Toast.makeText(RegistroListaIngesta.this, "Finalizado Carga de datos...", Toast.LENGTH_LONG).show();
+            //Toast.makeText(RegistroListaIngesta.this, "Finalizado Carga de datos...", Toast.LENGTH_LONG).show();
             //Intent menuPrincipal = new Intent(Registro.this, MenuPrincipal.class);
             //menuPrincipal.putExtra("usuario", nombreEt.getText().toString());
             //startActivity(menuPrincipal);
             //finish();
+            dbmanager.closeBD();
         }
 
 

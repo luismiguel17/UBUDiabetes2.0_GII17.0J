@@ -17,6 +17,7 @@ public class Launcher extends AppCompatActivity {
         Intent menuPrincipal = new Intent(this, MenuPrincipal.class);
 
         if(!arranque){
+
             startActivity(menuPrincipal);
             startActivity(perfil);
 

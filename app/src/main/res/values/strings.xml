@@ -99,7 +99,7 @@
     <!-- Strings de Perfil (Nuevo) -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="datosPersonales">Datos Personales</string>
-    <string name="nameUser">Nombre</string>
+    <string name="nameUser">Nombre y Apellidos</string>
     <string name="apellidosUser">Apellidos</string>
     <string name="edadUser">Edad</string>
     <string name="alturaUser">Altura (cm)</string>
@@ -126,14 +126,14 @@
     <string name="tv_lv_nombreAlimento">Alimento</string>
     <string name="tv_lv_gr">Cantidad(gr)</string>
     <string name="tv_lv_ig">I.G.</string>
-    <string name="title_activity_registro_lista_ingesta">RegistroListaIngesta</string>
+    <string name="title_activity_registro_lista_ingesta">Listas de Ingestas</string>
     <string name="id_rli">Id</string>
     <string name="fecha_rli">Fecha</string>
     <string name="sumHC_rli">HC</string>
     <string name="boloC_rli">Bolo C.</string>
     <!-- Strings de Detalles lista Ingesta-->
-    <string name="title_activity_detalles__lista_ingesta">Detalles_ListaIngesta</string>
-    <string name="detalles_lista">Detalles Lista</string>
+    <string name="title_activity_detalles__lista_ingesta">Detalles Lista de Ingestas</string>
+    <string name="detalles_lista">Detalles de la Lista</string>
     <string name="id_dli">ID</string>
     <string name="id_lista_dli">Id Lista</string>
     <string name="nomAlimento_dli">Alimento</string>

@@ -8,17 +8,22 @@
             <set />
           </value>
         </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$APPLICATION_CONFIG_DIR$/consoles/jshell/jshell_console.snippet">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/build.gradle">
           <value>
             <set />
           </value>
@@ -33,17 +38,17 @@
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/calculos/CalculaBolo.java">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/Alimento.java">
-          <value>
-            <set />
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/Carbohidratos.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/ConsultaDetallesListaIngesta.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/Historial.java">
           <value>
             <set />
           </value>
@@ -53,7 +58,7 @@
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/Launcher.java">
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/MainActivity.java">
           <value>
             <set />
           </value>
@@ -63,17 +68,22 @@
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/Pruebas_Main.java">
-          <value>
-            <set />
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/Registro.java">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/SplashScreen.java">
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/RegistroGlucemias.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/interfaz/RegistroListaIngesta.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/ubu/lmi/gii170j/persistencia/DataBaseHelper.java">
           <value>
             <set />
           </value>
@@ -83,102 +93,57 @@
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/btn_circle.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_carbohidratos.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/btn_circle_default.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_detalles__lista_ingesta.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/btn_circle_pressed.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_lista_ingesta.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/btn_incidencias.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/content_carbohidratos.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/imageview_profile.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_incidencias.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/imageview_profile_default.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_registro_glucemias.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/imageview_profile_focused.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/list_detalles_lista_ingesta.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/imageview_profile_pressed.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/menu/menu_carbohidratos.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/menu/menu_detalles__lista_ingesta.xml">
           <value>
             <set />
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_carbohidratos.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_registro.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/layout/list_ingesta_alimentos.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/layout/pruebas.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/values/arrays.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+        <entry key="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/build.gradle">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/gradle.properties">
-          <value>
-            <set />
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/settings.gradle">
           <value>
             <set />
           </value>

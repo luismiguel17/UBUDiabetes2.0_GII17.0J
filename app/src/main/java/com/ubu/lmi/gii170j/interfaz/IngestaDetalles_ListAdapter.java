@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,20 +58,20 @@ public class IngestaDetalles_ListAdapter extends ArrayAdapter<DetallesListaInges
         //TextView tv_hidratosC = (TextView)convertView.findViewById(R.id.tv_id_itemvaluehidratos_list_detalles);
 
         tv_tipo.setText(tipo);
-        if(tipo == LACTEOS){
-            tv_tipo.setBackgroundColor(0x8C9EFF);
-        }else if (tipo == CEREALES){
-            tv_tipo.setBackgroundColor(0xFFAB91);
-        }else if (tipo == FRUTAS){
-            tv_tipo.setBackgroundColor(0xC51162);
-        }else if (tipo == HORTALIZAS){
-            tv_tipo.setBackgroundColor(0xE0E0E0);
-        }else if (tipo == FRUTAGRASA){
-            tv_tipo.setBackgroundColor(0xB388FF);
-        }else if (tipo == BEBIDAS){
-        tv_tipo.setBackgroundColor(0x40C4FF);
-        }else if (tipo == OTROS){
-        tv_tipo.setBackgroundColor(0xFFD180);
+        if(tipo.equals(LACTEOS)){
+            tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorLacteos));
+        }else if (tipo.equals(CEREALES)){
+            tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorCereales));
+        }else if (tipo.equals(FRUTAS)){
+            tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorFrutas));
+        }else if (tipo.equals(HORTALIZAS)){
+            tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorHortalizas));
+        }else if (tipo.equals(FRUTAGRASA)){
+            tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorFrutaGrasa));
+        }else if (tipo.equals(BEBIDAS)){
+        tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorBebidas));
+        }else if (tipo.equals(OTROS)){
+        tv_tipo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorOtros));
         }
         tv_nombreAlimento.setText(nombre);
         tv_cantidad.setText(cantidad);

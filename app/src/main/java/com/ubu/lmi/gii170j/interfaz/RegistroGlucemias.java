@@ -102,6 +102,7 @@ public class RegistroGlucemias extends AppCompatActivity {
 
             DataBaseManager dbmanager = new DataBaseManager(this);
             insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
+            insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
 
             if (insertar != -1) {
                 Toast.makeText(RegistroGlucemias.this, "Valor de glucemia guardado correctamente.", Toast.LENGTH_SHORT).show();

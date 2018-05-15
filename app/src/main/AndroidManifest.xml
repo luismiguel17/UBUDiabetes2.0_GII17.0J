@@ -44,7 +44,13 @@
         <activity
             android:name=".interfaz.Historial"
             android:label="@string/title_activity_historial"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".interfaz.MenuPrincipal" />
+        </activity>
+
         <activity
             android:name=".interfaz.Carbohidratos"
             android:label="@string/title_activity_carbohidratos"
@@ -55,7 +61,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".interfaz.RegistroGlucemias" />
         </activity>
-        <activity android:name=".interfaz.SplashScreen">
+        <activity
+            android:name=".interfaz.SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,10 +73,22 @@
         <activity android:name=".interfaz.Pruebas_Main" />
         <activity
             android:name=".interfaz.RegistroListaIngesta"
-            android:label="@string/title_activity_registro_lista_ingesta" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_registro_lista_ingesta"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".interfaz.MenuPrincipal" />
+        </activity>
         <activity
             android:name=".interfaz.ConsultaDetallesListaIngesta"
-            android:label="@string/title_activity_detalles__lista_ingesta"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_detalles__lista_ingesta"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".interfaz.RegistroListaIngesta" />
+        </activity>
     </application>
 
 </manifest>

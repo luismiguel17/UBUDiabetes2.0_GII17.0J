@@ -13,7 +13,7 @@
         android:text="@string/registros"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"/>
     <LinearLayout
         android:id="@+id/ly_id_rli"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="12"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:text="@string/id_rli"/>
@@ -38,9 +38,9 @@
             android:id="@+id/tv_id_fecha_rli"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="48"
+            android:layout_weight="52"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:text="@string/fecha_rli"/>
@@ -50,17 +50,17 @@
             android:layout_height="wrap_content"
             android:text="@string/sumHC_rli"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:layout_weight="15"/>
+            android:layout_weight="14"/>
         <TextView
             android:id="@+id/tv_id_boloC_rli"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="25"
+            android:layout_weight="22"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:text="@string/boloC_rli"/>
@@ -72,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:divider="@color/colorUbuDiabetes"
-        android:dividerHeight="5dp"
+        android:divider="@color/cardview_shadow_end_color"
+        android:dividerHeight="10dp"
         android:smoothScrollbar="true"
         android:footerDividersEnabled="false"
         android:drawSelectorOnTop="false"

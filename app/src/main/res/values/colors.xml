@@ -7,5 +7,13 @@
     <color name="colorToneBlue">#8CD1E6</color>
     <color name="colorGreenish">#4BFE78</color>
     <color name="colorYellowish">#fef359</color>
-    <color name="colorUbuDiabetes">#00c4eb</color>
+    <!--  Colores para los tipos de alimentos -->
+    <color name="colorLacteos">#8C9EFF</color>
+    <color name="colorCereales">#FFAB91</color>
+    <color name="colorFrutas">#C51162</color>
+    <color name="colorHortalizas">#E0E0E0</color>
+    <color name="colorFrutaGrasa">#B388FF</color>
+    <color name="colorBebidas">#40C4FF</color>
+    <color name="colorOtros">#FFD180</color>
+
 </resources>

@@ -49,6 +49,8 @@ public class Historial extends AppCompatActivity implements OnChartValueSelected
         setContentView(R.layout.activity_historial);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         valMax=Integer.parseInt(misPreferencias.getString("max",""));
         valMin=Integer.parseInt(misPreferencias.getString("min",""));
@@ -149,12 +151,21 @@ public class Historial extends AppCompatActivity implements OnChartValueSelected
     public ArrayList<Entry> generarCursores(ArrayList<String> fechas, String periodo){
         ArrayList<Entry> entries = new ArrayList<>();
         DataBaseManager dbmanager = new DataBaseManager(this);
+
         for(int i=0;i<7;i++){
             Cursor cursorDesayuno = dbmanager.selectGlucemia(fechas.get(i),periodo);
-            if(cursorDesayuno.moveToLast()){
-                entries.add(new BarEntry(Integer.parseInt(cursorDesayuno.getString(3)),i));
+            try {
+                if (cursorDesayuno.moveToLast()) {
+                    entries.add(new BarEntry(Integer.parseInt(cursorDesayuno.getString(3)), i));
+                }
+
+            }finally {
+                if (cursorDesayuno != null && !cursorDesayuno.isClosed())
+                    cursorDesayuno.close();
+                //dbmanager.closeBD();
             }
         }
+        dbmanager.closeBD();
         return entries;
     }
 
@@ -224,23 +235,35 @@ public class Historial extends AppCompatActivity implements OnChartValueSelected
         DataBaseManager dbmanager = new DataBaseManager(this);
         if(val<valMin||val>valMax){
             Cursor cursor = dbmanager.selectGlucemiaValor(fecha,val);
-            if(cursor.moveToLast()){
-                String id = cursor.getString(0);
-                Cursor cursorIncidencia = dbmanager.selectIncidencia(Integer.parseInt(id));
-                if(cursorIncidencia.moveToFirst()) {
-                    String incidencia = cursorIncidencia.getString(1);
-                    String observaciones = cursorIncidencia.getString(2);
-                    if (!observaciones.equals("")) {
-                        Toast.makeText(getApplicationContext(),getString(R.string.hist_incidencia)+" " + incidencia + ". "
-                                + getString(R.string.hist_observacion)+ " " + observaciones, Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.hist_incidencia)+" " + incidencia + ". " +getString(R.string.hist_sinobservaciones)
-                                , Toast.LENGTH_LONG).show();
+            try {
+                if(cursor.moveToLast()){
+                    String id = cursor.getString(0);
+                    Cursor cursorIncidencia = dbmanager.selectIncidencia(Integer.parseInt(id));
+                    try{
+                        if(cursorIncidencia.moveToFirst()) {
+                            String incidencia = cursorIncidencia.getString(1);
+                            String observaciones = cursorIncidencia.getString(2);
+                            if (!observaciones.equals("")) {
+                                Toast.makeText(getApplicationContext(),getString(R.string.hist_incidencia)+" " + incidencia + ". "
+                                        + getString(R.string.hist_observacion)+ " " + observaciones, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), getString(R.string.hist_incidencia)+" " + incidencia + ". " +getString(R.string.hist_sinobservaciones)
+                                        , Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    }finally {
+                        if (cursorIncidencia != null && !cursorIncidencia.isClosed())
+                            cursorIncidencia.close();
+                        //dbmanager.closeBD();
                     }
-
                 }
-
+            }finally {
+                if (cursor != null && !cursor.isClosed())
+                    cursor.close();
+                dbmanager.closeBD();
             }
+
         }else{
             Toast.makeText(getApplicationContext(),R.string.sinIncidencia,Toast.LENGTH_LONG).show();
         }

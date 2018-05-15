@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -32,6 +33,7 @@ import com.ubu.lmi.gii170j.persistencia.ValoresPOJO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -98,7 +100,7 @@ public class Carbohidratos extends AppCompatActivity {
     private AutoCompleteTextView autoCompleteTextViewBuscador;
     //Creamos nuestro objeto spinner para nuestra lista total de alimentos
     private Spinner listaComida;
-    private ArrayList<String> totalAlimentos;
+    private String[] totalAlimentosOrdenados;
     private ArrayList<String> ingestaAlimentosList;
 
     //Prueba mostrar sumatorioCH
@@ -115,6 +117,10 @@ public class Carbohidratos extends AppCompatActivity {
     private int itemSelec=0;
     //private int contItemsIngesta =0;
 
+    //Nuevo-Para el doble click de la listview  ingesta de aliemntos
+    private int previousPosition;
+    private int count;
+    private long previousMil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +131,7 @@ public class Carbohidratos extends AppCompatActivity {
 
 
         editTextGramos = (EditText) findViewById(R.id.et_gramos);
-        editTextGramos.setText("0");
+        //editTextGramos.setText("0");
 
         //Obtenemos la referencia a la listView del Xml
         listViewIngesta = (ListView) findViewById(R.id.lv_id_listaingesta_fc);
@@ -144,9 +150,14 @@ public class Carbohidratos extends AppCompatActivity {
         //Creamos un Arraylist para la lista de ingesta de alimentos del usuario
         ingestaAlimentosList = new ArrayList<String>();
 
-        //Creamos un adaptador para el buscador y el spinner de alimentos
-        ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
+        //Array Para la lista de alimentos
+        totalAlimentosOrdenados  = getResources().getStringArray(R.array.arrayAlimentos);
+        //ordenamos en orden alfabetico los alimentos
+        Arrays.sort(totalAlimentosOrdenados);
 
+        //Creamos un adaptador para el buscador y el spinner de alimentos
+        //ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
+        ArrayAdapter adpTodos = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,totalAlimentosOrdenados);
         autoCompleteTextViewBuscador.setAdapter(adpTodos);
         listaComida.setAdapter(adpTodos);
 
@@ -180,20 +191,51 @@ public class Carbohidratos extends AppCompatActivity {
 
 
 
-        // Comportamiento de la listview cuando se selecciona un item
+
+        previousPosition=-1;
+        count=0;
+        previousMil=0;
+        // Comportamiento de la listview cuando se selecciona un item: Deseleccionar
         listViewIngesta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(previousPosition==position)
+                {
+                    count++;
+                    if(count==2 && System.currentTimeMillis()-previousMil<=2000)
+                    {
+                        Toast.makeText(Carbohidratos.this,  "Mantenga pulsado para seleccionar", Toast.LENGTH_LONG).show();
+                        count=1;
+                    }
+                }
+                else
+                {
+                    previousPosition=position;
+                    count=1;
+                    previousMil=System.currentTimeMillis();
+                }
+                listViewIngesta.setSelection(-1);
+                listViewIngesta.requestLayout();
+                listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
+                buttonRemoveAlimento.setVisibility(View.INVISIBLE);
+
+
+            }
+
+        });
+        //Comportamiento de la listview cuando se selecciona un item: Seleccionar
+        listViewIngesta.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 listViewIngesta.setSelector(new ColorDrawable(Color.CYAN));
                 buttonRemoveAlimento.setVisibility(View.VISIBLE);
                 buttonAddAlimento.setVisibility(View.INVISIBLE);
                 itemSelec = position;
-
+                return true;
             }
         });
-        //listViewIngesta.setOnIt
-
     }
 
     /**
@@ -210,7 +252,7 @@ public class Carbohidratos extends AppCompatActivity {
         String nom_alimento = listaComida.getSelectedItem().toString();
         int numeroGramos = 0;
         //Si ha insertados los gramos del alimento
-        if (!gramos.equals("0")) {
+        if (!gramos.equals("")) {
             numeroGramos = Integer.parseInt(gramos);
             informationQuery = consulta_grHC_IG(nom_alimento);
             gr_HCperRation = informationQuery[0];
@@ -229,9 +271,9 @@ public class Carbohidratos extends AppCompatActivity {
 
             alimento_ingesta = new Alimento(nom_alimento, gramos ,ig_alimento);
             userlist_ingesta.add(0,alimento_ingesta);
-            editTextActualSumatoriHC.setText("Actual Sum HC: " + sumatorioRaciones);
+            editTextActualSumatoriHC.setText("Actual Sum HC: " + String.format("%.2f",  sumatorioRaciones));
             editTextActualBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
-            editTextGramos.setText("0");
+            editTextGramos.setText("");
             autoCompleteTextViewBuscador.setText("");
             listaComida.setSelection(0);
             adp_ListaIngesta.notifyDataSetChanged();
@@ -264,7 +306,7 @@ public class Carbohidratos extends AppCompatActivity {
         listViewIngesta.clearChoices();
         listViewIngesta.requestLayout();
         adp_ListaIngesta.notifyDataSetChanged();
-        //listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
 
         Toast.makeText(Carbohidratos.this,  nom_alimento + " Eliminado", Toast.LENGTH_LONG).show();
@@ -279,7 +321,7 @@ public class Carbohidratos extends AppCompatActivity {
             actualSumatorioBoloC = calculaBoloCorrector(sumatorioRaciones);
         }
 
-        editTextActualSumatoriHC.setText("Actual Sum HC: " + sumatorioRaciones);
+        editTextActualSumatoriHC.setText("Actual Sum HC: " +String.format("%.2f",  sumatorioRaciones));
         editTextActualBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
 
         if (BuildConfig.DEBUG) {
@@ -301,17 +343,25 @@ public class Carbohidratos extends AppCompatActivity {
         //Accedemos a la Bd
         DataBaseManager dbmanager = new DataBaseManager(this);
         final Cursor cursorAlimentos = dbmanager.selectAlimento(alimento);
-        if (cursorAlimentos.moveToFirst()) {
-            gr_perRation = cursorAlimentos.getString(COLUMNA_RACION);
-            ig_alimento = cursorAlimentos.getString(COLUMNA_IG);
-            retorno[0] = gr_perRation;
-            retorno[1] = ig_alimento;
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "Result Query: " + alimento);
-                Log.d(TAG, "Grams HC per ration: " + gr_perRation );
-                Log.d(TAG, "Indice Glucemico: " + ig_alimento);
+        try {
+            if (cursorAlimentos.moveToFirst()) {
+                gr_perRation = cursorAlimentos.getString(COLUMNA_RACION);
+                ig_alimento = cursorAlimentos.getString(COLUMNA_IG);
+                retorno[0] = gr_perRation;
+                retorno[1] = ig_alimento;
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Result Query: " + alimento);
+                    Log.d(TAG, "Grams HC per ration: " + gr_perRation );
+                    Log.d(TAG, "Indice Glucemico: " + ig_alimento);
+                }
             }
+        }finally {
+            if (cursorAlimentos != null && !cursorAlimentos.isClosed())
+                cursorAlimentos.close();
+            dbmanager.closeBD();
+
         }
+
         return retorno;
     }
 
@@ -449,20 +499,26 @@ public class Carbohidratos extends AppCompatActivity {
         protected void onPostExecute(String s) {
             // super.onPostExecute(s);
 
-            Toast.makeText(Carbohidratos.this, "Finalizado Carga de datos...", Toast.LENGTH_LONG).show();
-            //Intent menuPrincipal = new Intent(Registro.this, MenuPrincipal.class);
-            //menuPrincipal.putExtra("usuario", nombreEt.getText().toString());
-            //startActivity(menuPrincipal);
-            //finish();
+            Toast.makeText(Carbohidratos.this, "Finalizado Registro de datos", Toast.LENGTH_LONG).show();
+
+            dbmanager.closeBD();
         }
 
         private void rellenarTablaListaIngesta() {
-            long insertarlista = dbmanager.insertar("listaIngesta", generarContentValuesLista(sumatorioRaciones, boloResult));
-            if (insertarlista != -1) {
-                //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Insertada lista_ingesta con id: " + insertarlista);
-                id_lista = insertarlista;
+            long insertSQLExcp=0;
+            try{
+                long insertarlista = dbmanager.insertar("listaIngesta", generarContentValuesLista(sumatorioRaciones, boloResult));
+                insertSQLExcp = insertarlista;
+                if (insertarlista != -1) {
+                    //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Insertada lista_ingesta con id: " + insertarlista);
+                    id_lista = insertarlista;
+                }
+
+            }catch (SQLException e) {
+                Log.e(TAG, "Error inserting lista_ingesta " + insertSQLExcp, e);
             }
+
 
 
         }
@@ -488,22 +544,28 @@ public class Carbohidratos extends AppCompatActivity {
         }
 
         private void rellenarTablaDetallesListaIngesta() {
-            long insertarDetalles=0;
+            long insertSQLExcp=0;
             String nombre_al="";
             double cantidad = 0;
-            for(int i= 0; i < userlist_ingesta.size();i++){
-                nombre_al = userlist_ingesta.get(i).getNombre();
-                cantidad =  Double.parseDouble(userlist_ingesta.get(i).getGramos());
-                insertarDetalles = dbmanager.insertar("detalleslistaingesta", generarContentValuesDetalles(id_lista,nombre_al,cantidad));
-                if (insertarDetalles != -1) {
-                    //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "Insertada Detalle_lista_ingesta con id: " + insertarDetalles);
-                    Log.d(TAG, "id_lista: " + id_lista);
-                    Log.d(TAG, "Alimento: " + nombre_al);
-                    Log.d(TAG, "cantidad: " + cantidad);
+            try{
+                for(int i= 0; i < userlist_ingesta.size();i++){
+                    nombre_al = userlist_ingesta.get(i).getNombre();
+                    cantidad =  Double.parseDouble(userlist_ingesta.get(i).getGramos());
+                    long insertarDetalles = dbmanager.insertar("detalleslistaingesta", generarContentValuesDetalles(id_lista,nombre_al,cantidad));
+                    insertSQLExcp = insertarDetalles;
+                    if (insertarDetalles != -1) {
+                        //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Insertada Detalle_lista_ingesta con id: " + insertarDetalles);
+                        Log.d(TAG, "id_lista: " + id_lista);
+                        Log.d(TAG, "Alimento: " + nombre_al);
+                        Log.d(TAG, "cantidad: " + cantidad);
 
+                    }
                 }
+            }catch (SQLException e) {
+                Log.e(TAG, "Error inserting Detalle_lista_ingesta " + insertSQLExcp , e);
             }
+
 
         }
         public ContentValues generarContentValuesDetalles(long arg_idlista,String arg_alimento, double arg_cantidad ){

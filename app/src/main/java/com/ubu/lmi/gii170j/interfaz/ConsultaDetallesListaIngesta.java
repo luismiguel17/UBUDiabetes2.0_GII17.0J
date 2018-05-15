@@ -1,9 +1,13 @@
 package com.ubu.lmi.gii170j.interfaz;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -12,7 +16,7 @@ import com.ubu.lmi.gii170j.persistencia.DataBaseManager;
 
 import java.util.ArrayList;
 
-public class ConsultaDetallesListaIngesta extends Activity {
+public class ConsultaDetallesListaIngesta extends AppCompatActivity {
 
     private static String TAG = ConsultaDetallesListaIngesta.class.getName();
     public static final int COLUMNA_TIPO = 0;
@@ -31,6 +35,9 @@ public class ConsultaDetallesListaIngesta extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles__lista_ingesta);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         id_lista_select = getIntent().getExtras().getInt("id_lista");
@@ -47,6 +54,14 @@ public class ConsultaDetallesListaIngesta extends Activity {
         new AsyncTaskConsultaDetallesLista().execute("get_info");
     }
 
+    public void volver(View view) {
+
+        Intent intent = new Intent(getBaseContext(), RegistroListaIngesta.class);
+        startActivity(intent);
+        finish();
+
+    }
+
     class AsyncTaskConsultaDetallesLista extends AsyncTask<String,Void,String> {
         DataBaseManager dbmanager = new DataBaseManager(getBaseContext());
 
@@ -57,7 +72,7 @@ public class ConsultaDetallesListaIngesta extends Activity {
         @Override
         protected void onPreExecute() {
             //super.onPreExecute();
-            Toast.makeText(ConsultaDetallesListaIngesta.this, "Cargando detalles:", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ConsultaDetallesListaIngesta.this, "Cargando detalles:", Toast.LENGTH_LONG).show();
         }
 
 
@@ -83,6 +98,7 @@ public class ConsultaDetallesListaIngesta extends Activity {
 
                 if (cursorDetalleRegistrosIngesta != null && !cursorDetalleRegistrosIngesta.isClosed())
                     cursorDetalleRegistrosIngesta.close();
+                //dbmanager.closeBD();
             }
             //dbmanager.closeBD();
 
@@ -104,25 +120,26 @@ public class ConsultaDetallesListaIngesta extends Activity {
 
                     if (cursorAlimento != null && !cursorAlimento.isClosed())
                         cursorAlimento.close();
+                    //dbmanager.closeBD();
                 }
             }
 
-            //dbmanager.closeBD();
+
         }
 
         public void createListDetalles(){
 
             for(int j = 0;j < nom_alimento.size();j++){
                 detallesListaIngesta = new DetallesListaIngesta(tipo.get(j),nom_alimento.get(j),cantidad.get(j),ig.get(j));
-                detalle_listIngesta.add(detallesListaIngesta);
+                detalle_listIngesta.add(0,detallesListaIngesta);
                 adp_detalle_listIngesta.notifyDataSetChanged();
             }
+            //dbmanager.closeBD();
         }
         @Override
         protected void onPostExecute(String s) {
             dbmanager.closeBD();
         }
-
 
     }
 
