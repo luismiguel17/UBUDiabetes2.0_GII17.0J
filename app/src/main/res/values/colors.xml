@@ -15,5 +15,6 @@
     <color name="colorFrutaGrasa">#B388FF</color>
     <color name="colorBebidas">#40C4FF</color>
     <color name="colorOtros">#FFD180</color>
+    <color name="transparent">#00000000 </color>.
 
 </resources>

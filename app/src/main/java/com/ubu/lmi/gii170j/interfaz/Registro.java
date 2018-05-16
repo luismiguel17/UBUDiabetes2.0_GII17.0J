@@ -1,13 +1,27 @@
 package com.ubu.lmi.gii170j.interfaz;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.FileProvider;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,16 +34,15 @@ import com.ubu.lmi.gii170j.BuildConfig;
 import com.ubu.lmi.gii170j.R;
 import com.ubu.lmi.gii170j.persistencia.DataBaseManager;
 
+import java.io.File;
+
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 public class Registro extends AppCompatActivity {
 
-    /**
-     * Tag for log.
-     */
+    //Tag for log.
     private static String TAG = Registro.class.getName();
-    //DataBaseManager dbmanager;
-    //ContentValues values;
-    //SharedPreferences misPreferencias;
-    //SharedPreferences.Editor editorPreferencias;
 
     EditText nombreEt;
     EditText edadEt;
@@ -41,25 +54,25 @@ public class Registro extends AppCompatActivity {
     EditText udsRapidaEt;
     RadioButton rapidaCheck;
     RadioButton ultrarrapidaCheck;
-    //Nuevo Spinner decimales Bolo Corrector
     RadioButton decimal_BC_ceroCheck;
     RadioButton decimal_BC_dosCheck;
     RadioButton decimal_BC_tresCheck;
 
     ImageView imagePerfil;
-    Uri path;
+    String path;
+    String final_path = "";
+    String final_bitmap="";
+
     Bitmap bitmap;
+    //private final String CARPETA_RAIZ="ImagenesUBUDiabetes/";
+    //private final String RUTA_IMAGEN=CARPETA_RAIZ+"misFotos";
+    final int COD_SELECCIONA=10;
+    //final int COD_FOTO=20;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resgistro);
-
-        imagePerfil = (ImageView)findViewById(R.id.imgV2_fragmentperfil);
-        //dbmanager = new DataBaseManager(getBaseContext());
-        //values = new ContentValues();
-        //misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-        //editorPreferencias = misPreferencias.edit();
 
         nombreEt = (EditText) findViewById(R.id.et_id_nombre);
         edadEt = (EditText) findViewById(R.id.et_id_edad);
@@ -71,19 +84,26 @@ public class Registro extends AppCompatActivity {
         udsRapidaEt = (EditText) findViewById(R.id.et_udsRapida);
         rapidaCheck = (RadioButton) findViewById(R.id.rb_id_rapida);
         ultrarrapidaCheck = (RadioButton) findViewById(R.id.rb_id_ultrarrapida);
-
-        //Nuevo Spinner decimales Bolo Corrector
         decimal_BC_ceroCheck = (RadioButton) findViewById(R.id.rb_id_cero);
         decimal_BC_dosCheck = (RadioButton) findViewById(R.id.rb_id_uno);
         decimal_BC_tresCheck = (RadioButton) findViewById(R.id.rb_id_dos);
 
-        /**
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_add_a_photo_black_24dp);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
-        roundedBitmapDrawable.setCircular(true);
 
-        imagen.setImageDrawable(roundedBitmapDrawable);**/
+
+
         cargarPreferencias();
+        /**
+         * Nuevo-Para la carga de la imagen-Perfil
+         */
+        imagePerfil = (ImageView)findViewById(R.id.imgV2_fragmentperfil);
+
+
+        if(validaPermisos()){
+            imagePerfil.setEnabled(true);
+        }else{
+            imagePerfil.setEnabled(false);
+        }
+
     }
 
     /**
@@ -103,12 +123,11 @@ public class Registro extends AppCompatActivity {
         EditText uds2Et2 = (EditText) findViewById(R.id.et_udsRapida);
         RadioButton rapidaCheck2 = (RadioButton) findViewById(R.id.rb_id_rapida);
         RadioButton ultrarrapidaCheck2 = (RadioButton) findViewById(R.id.rb_id_ultrarrapida);
-        //Nuevo Spinner decimales Bolo Corrector
         RadioButton decimal_BC_ceroCheck2 = (RadioButton) findViewById(R.id.rb_id_cero);
         RadioButton decimal_BC_dosCheck2 = (RadioButton) findViewById(R.id.rb_id_uno);
         RadioButton decimal_BC_tresCheck2 = (RadioButton) findViewById(R.id.rb_id_dos);
         //Nuevo-Para la imagen de perfil
-        //ImageView imagePerfil2 = (ImageView) findViewById(R.id.imgV2_fragmentperfil);
+        ImageView image_Profile2 = (ImageView) findViewById(R.id.imgV2_fragmentperfil);
 
 
         nombreEt2.setText(misPreferencias.getString(getString(R.string.nombre), ""));
@@ -121,17 +140,140 @@ public class Registro extends AppCompatActivity {
         uds2Et2.setText(misPreferencias.getString(getString(R.string.udsRapida), ""));
         rapidaCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.rapida), false));
         ultrarrapidaCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.ultrarrapida), false));
-        //Nuevo decimales bolo corrector
         decimal_BC_ceroCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_cero),false));
         decimal_BC_dosCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false));
         decimal_BC_tresCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false));
-
-        //Nuevo-Para la imagen de perfil
-        //Uri path_imageP = Uri.parse(misPreferencias.getString(getString(R.string.image_perfil), ""));
-        //imagePerfil2.setImageURI(path_imageP);
+        //nuevo-Para la imagen de perfil
+        Uri uri = Uri.parse(misPreferencias.getString(getString(R.string.image_perfil), ""));
+        image_Profile2.setImageURI(uri);
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Preferences loaded with previous values (if exist).");
+        }
+    }
+
+    /**
+     * validaPermisos. Metodo que comprueba si los permisos estan validados.
+     * @return
+     */
+    private boolean validaPermisos() {
+        //Comprobamos la version de nuestro dispositivo.
+        // M --> Marshmallow
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return true;
+        }
+        //Comprobamos los permisos de Camara y Escritura en SD estan Habilitados.
+        if((checkSelfPermission(CAMERA)== PackageManager.PERMISSION_GRANTED)&&
+                (checkSelfPermission(WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED)){
+            return true;
+        }
+        //Comprobamos si se deben solicitar los permisos de Camara y Escritura en SD.
+        if((shouldShowRequestPermissionRationale(CAMERA)) ||
+                (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE))){
+            cargarDialogoRecomendacion();
+        }else{
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==100){
+            if(grantResults.length==2 && grantResults[0]==PackageManager.PERMISSION_GRANTED
+                    && grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                imagePerfil.setEnabled(true);
+            }else{
+                solicitarPermisosManual();
+            }
+        }
+    }
+
+    /**
+     * solicitarPermisosManual. Metodo que vuelve a solicitar una configuracion de permisos de forma manual.
+     */
+    private void solicitarPermisosManual() {
+        final CharSequence[] opciones={"Sí","No"};
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Registro.this);
+        alertDialogBuilder.setTitle("Configuración Manual");
+        alertDialogBuilder.setMessage("¿Desea configurar los permisos de forma manual?");
+        alertDialogBuilder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Sí")){
+                    Intent intent=new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri=Uri.fromParts("package",getPackageName(),null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Los permisos NO fueron aceptados",Toast.LENGTH_SHORT).show();
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        alertDialogBuilder.show();
+    }
+
+    /**
+     * cargarDialogoRecomendacion. Metodo que carga un dialogo para asiganar permisos a la app.
+     */
+    private void cargarDialogoRecomendacion() {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Registro.this);
+        alertDialogBuilder.setTitle("Permisos Desactivados");
+        alertDialogBuilder
+                .setMessage("Aceptar los permisos para el correcto funcionamiento de la App")
+                .setCancelable(false)
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            //@RequiresApi(api = Build.VERSION_CODES.M)
+                            @TargetApi(Build.VERSION_CODES.M)
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+                            }
+                        });
+
+        //AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialogBuilder.show();
+    }
+
+
+
+    public void clickImage(View view) {
+        loadImage();
+    }
+
+    public void loadImage(){
+        final CharSequence[] opciones={"Cargar Imagen","Cancelar"};
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Registro.this);
+        alertDialogBuilder.setTitle("Seleccione una Opción");
+        alertDialogBuilder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Cargar Imagen")){
+                        Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/");
+                        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicación"),COD_SELECCIONA);
+                    }else{
+                        dialogInterface.dismiss();
+                    }
+                }
+        });
+        alertDialogBuilder.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            Uri miPath=data.getData();
+            imagePerfil.setImageURI(miPath);
+            final_path = miPath.toString();
+            imagePerfil.setBackgroundResource(R.color.transparent);
         }
     }
 
@@ -159,8 +301,7 @@ public class Registro extends AppCompatActivity {
         Boolean bc_dos = decimal_BC_dosCheck.isChecked();
         Boolean bc_tres = decimal_BC_tresCheck.isChecked();
         //Nuevo- Para la imagen de perfil
-        //String path_image = path.toString();
-
+        String path_image = final_path;
 
         int minVal = Integer.parseInt(min);
         int maxVal = Integer.parseInt(max);
@@ -188,10 +329,10 @@ public class Registro extends AppCompatActivity {
             editorPreferencias.putBoolean(getString(R.string.decimal_bc_cero), bc_cero);
             editorPreferencias.putBoolean(getString(R.string.decimal_bc_dos), bc_dos);
             editorPreferencias.putBoolean(getString(R.string.decimal_bc_tres), bc_tres);
-            //Nuevo - Para la imagen de perfil
-            //editorPreferencias.putString(getString(R.string.image_perfil),path.toString());
+            //Nuevo-Para la imagen de perfil
+            editorPreferencias.putString(getString(R.string.image_perfil),path_image);
 
-            editorPreferencias.apply(); // changed a commy by apply by recommendation of IntelliJ
+            editorPreferencias.apply();
 
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Saved new user preferences in profile.");
@@ -205,32 +346,11 @@ public class Registro extends AppCompatActivity {
                 //Llamar a la AsyncTask aqui:
                 new RegistroAlimentos().execute(nombre);
             }
-
-            //startActivity(menuPrincipal);
             finish();
         }
 
     }
 
-
-    public void cargarImage(View view) {
-        Intent intent= new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent,"Seleccionar Foto"),10);
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //Comprobamos si seleccionamos una imagen
-        if(resultCode==RESULT_OK){
-            //Uri path = data.getData();
-            path = data.getData();
-            //bitmap =
-            imagePerfil.setImageURI(path);
-        }
-    }
     class RegistroAlimentos extends AsyncTask<String,Void,String> {
         private String[] tipoAlimento;
         private String[] numeroTipoAlimento;
@@ -267,13 +387,8 @@ public class Registro extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            // super.onPostExecute(s);
 
             Toast.makeText(Registro.this, "Carga finalizada", Toast.LENGTH_LONG).show();
-            //Intent menuPrincipal = new Intent(Registro.this, MenuPrincipal.class);
-            //menuPrincipal.putExtra("usuario", nombreEt.getText().toString());
-            //startActivity(menuPrincipal);
-            //finish();
         }
 
         private void rellenarTablaAlimentos() {
