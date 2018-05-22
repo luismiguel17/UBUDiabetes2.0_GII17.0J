@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Created by LuisMiguel on 21/03/2018.
  */
-public class CalculaBoloTest {
+public class CalculaBolo_Preciso_Test {
 
     //Instanciamos un objeto de tipo ValoresPojo
     ValoresPOJO valoresP;
@@ -50,7 +50,7 @@ public class CalculaBoloTest {
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,200);
         //System.out.println("Ratio:" + (float)calculadorBolo.calculaRatio());
-        assertEquals((float)(500/(insulinaBasal+insulinaRapida)),(float)calculadorBolo.calculaRatio(),4);
+        assertEquals((float)(500/(insulinaBasal+insulinaRapida)),(float)calculadorBolo.calculaRatio(),0);
 
     }
 
@@ -72,8 +72,8 @@ public class CalculaBoloTest {
         valoresP = new ValoresPOJO(rapida,insulinaBasal,insulinaRapida,glucemiaMinima,glucemiaMaxima,glucemia);
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,200);
-        //System.out.println("FSI:" + (float)calculadorBolo.calculaFactorSensibilidad());
-        assertEquals((float)(1500/insTotal),(float)calculadorBolo.calculaFactorSensibilidad(),2);
+        //System.out.println("FSI(Rapida):" + (float)calculadorBolo.calculaFactorSensibilidad());
+        assertEquals((float)(1500/insTotal),(float)calculadorBolo.calculaFactorSensibilidad(),0);
     }
 
     /**
@@ -92,8 +92,8 @@ public class CalculaBoloTest {
         valoresP = new ValoresPOJO(rapida,insulinaBasal,insulinaRapida,glucemiaMinima,glucemiaMaxima,glucemia);
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,200);
-        //System.out.println("FSI:" + (float)calculadorBolo.calculaFactorSensibilidad());
-        assertEquals((float)(1800/insTotal),(float)calculadorBolo.calculaFactorSensibilidad(),2);
+        //System.out.println("FSI (Ultrarapida):" + (float)calculadorBolo.calculaFactorSensibilidad());
+        assertEquals((float)(1800/insTotal),(float)calculadorBolo.calculaFactorSensibilidad(),0);
     }
 
     /**
@@ -114,7 +114,7 @@ public class CalculaBoloTest {
         insTotal = insulinaBasal+ insulinaRapida;
         calculadorBolo = new CalculaBolo(valoresP,200);
         //System.out.println("GObjetivo:" + (float)calculadorBolo.calculaGlucemiaObjetivo());
-        assertEquals((float)((glucemiaMinima+glucemiaMaxima)/2),(float)calculadorBolo.calculaGlucemiaObjetivo(),3);
+        assertEquals((float)((glucemiaMinima+glucemiaMaxima)/2),(float)calculadorBolo.calculaGlucemiaObjetivo(),0);
     }
 
     /**
@@ -168,170 +168,6 @@ public class CalculaBoloTest {
         //System.out.println("Uds Bolo Corrector(class):" + (int)calculadorBolo.calculoBoloCorrector());
         //System.out.println("Uds Bolo Corrector(manual):" + (int)(uiGlucemia + uiAlimentos));
         assertEquals((int)(uiGlucemia + uiAlimentos),(int)calculadorBolo.calculoBoloCorrector());
-    }
-
-    /**
-     * calculoBoloCorrectorSinAlimentos1. Test que realiza las pruebas para el calculo de la recomendación del bolo de insulina final (uds).
-     * Calculo debolo de insulina para 14 pacientes diferentes con distintas necesidades de insulina diaria
-     * glucemia objetivo de 120 mg/dl y una glucemia de 250, 225, 200 y 175.
-     * Este test se realizará teniendo en cuenta los resultados que aparecen en la hoja de calculo "Casos validación UBUdiabetes.xlsx" (Hoja: "Sin Aliemntos 1" )
-     * que nos proporcionó Diego Serrano Gómez.
-     * @throws Exception
-     */
-    @Test
-    public void calculoBoloCorrectorSinAlimentos1_A() throws Exception {
-        boolean rapida = true;
-        double grHC = 0.0;
-        rapida = true;
-        //double glucemiaObjetivo = 120.0;
-        /*
-         * Para obtener la glucemia minima y la maxima, (Valores necesarios para crear el objeto "ValoresPojo")
-         * se tendra en cuenta la formula para el calculo de la Glucemia objetivo = (glucemiaMinima+glucemiaMaxima)/2
-         * si glucemiaObjetivo = 120.0 --> glu_min = 120.0 & glu_max = 120.0
-         */
-        double glu_min = 120.0;
-        double glu_max = 120.0;
-        double glucemia = 250.0;
-        double [] insulinaRapida ={10.0 ,12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0, 36.0};
-        double [] insulinaLenta = {8.0, 10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0,};
-        double [] UdsInsEsperado = {1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 5.0};
-        double media_Teorica_Esperada = 2.84 ;
-        double media_Teorica_Obtenida = 0.0 ;
-
-        for (int i= 0; i< insulinaLenta.length; i++){
-
-            valoresP = new ValoresPOJO(rapida,insulinaLenta[i],insulinaRapida[i],glu_min,glu_max,glucemia);
-            calculadorBolo = new CalculaBolo(valoresP,grHC);
-
-            //System.out.println("Resultado Esperado " + UdsInsEsperado[i]);
-            //System.out.println("Resultado Obtenido " + Math.floor(calculadorBolo.calculoBoloCorrector()));
-            //System.out.println("----------------------------------------------------------------");
-            assertEquals((float)UdsInsEsperado[i],(float)Math.floor(calculadorBolo.calculoBoloCorrector()),1);
-            media_Teorica_Obtenida += Math.floor(calculadorBolo.calculoBoloCorrector());
-
-        }
-        media_Teorica_Obtenida = media_Teorica_Obtenida/UdsInsEsperado.length;
-        //System.out.println("Resultado Esperado " + media_Teorica_Esperada);
-        //System.out.println("Resultado Obtenido " + media_Teorica_Obtenida);
-        assertEquals((float)media_Teorica_Esperada,(float)media_Teorica_Obtenida,1);
-
-    }
-
-    @Test
-    public void calculoBoloCorrectorSinAlimentos1_B() throws Exception {
-        boolean rapida = true;
-        double grHC = 0.0;
-        rapida = true;
-        //double glucemiaObjetivo = 120.0;
-        /*
-         * Para obtener la glucemia minima y la maxima, (Valores necesarios para crear el objeto "ValoresPojo")
-         * se tendra en cuenta la formula para el calculo de la Glucemia objetivo = (glucemiaMinima+glucemiaMaxima)/2
-         * si glucemiaObjetivo = 120.0 --> glu_min = 120.0 & glu_max = 120.0
-         */
-        double glu_min = 120.0;
-        double glu_max = 120.0;
-        double glucemia = 225.0;
-        double [] insulinaRapida ={10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0, 36.0};
-        double [] insulinaLenta = {8.0, 10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0};
-        double [] UdsInsEsperado = {1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0};
-        double media_Teorica_Esperada = 2.36 ;
-        double media_Teorica_Obtenida = 0.0 ;
-
-        for (int i= 0; i< insulinaLenta.length; i++){
-
-            valoresP = new ValoresPOJO(rapida,insulinaLenta[i],insulinaRapida[i],glu_min,glu_max,glucemia);
-            calculadorBolo = new CalculaBolo(valoresP,grHC);
-
-            //System.out.println("Resultado Esperado " + UdsInsEsperado[i]);
-            //System.out.println("Resultado Obtenido " + Math.floor(calculadorBolo.calculoBoloCorrector()));
-            //System.out.println("----------------------------------------------------------------");
-            assertEquals((float) UdsInsEsperado[i],(float) Math.floor(calculadorBolo.calculoBoloCorrector()),1);
-            media_Teorica_Obtenida += Math.floor(calculadorBolo.calculoBoloCorrector());
-
-        }
-        media_Teorica_Obtenida = media_Teorica_Obtenida/UdsInsEsperado.length;
-        //System.out.println("Resultado Esperado " + media_Teorica_Esperada);
-        //System.out.println("Resultado Obtenido " + media_Teorica_Obtenida);
-        assertEquals((float)media_Teorica_Esperada,(float)media_Teorica_Obtenida,1);
-
-    }
-
-    @Test
-    public void calculoBoloCorrectorSinAlimentos1_C() throws Exception {
-        boolean rapida = true;
-        double grHC = 0.0;
-        rapida = true;
-        //double glucemiaObjetivo = 120.0;
-        /*
-         * Para obtener la glucemia minima y la maxima, (Valores necesarios para crear el objeto "ValoresPojo")
-         * se tendra en cuenta la formula para el calculo de la Glucemia objetivo = (glucemiaMinima+glucemiaMaxima)/2
-         * si glucemiaObjetivo = 120.0 --> glu_min = 120.0 & glu_max = 120.0
-         */
-        double glu_min = 120.0;
-        double glu_max = 120.0;
-        double glucemia = 200.0;
-        double [] insulinaRapida ={10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0, 36.0};
-        double [] insulinaLenta = {8.0, 10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0};
-        double [] UdsInsEsperado = {1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0};
-        double media_Teorica_Esperada = 1.84 ;
-        double media_Teorica_Obtenida = 0.0 ;
-
-        for (int i= 0; i< insulinaLenta.length; i++){
-
-            valoresP = new ValoresPOJO(rapida,insulinaLenta[i],insulinaRapida[i],glu_min,glu_max,glucemia);
-            calculadorBolo = new CalculaBolo(valoresP,grHC);
-
-            //System.out.println("Resultado Esperado " + UdsInsEsperado[i]);
-            //System.out.println("Resultado Obtenido " + Math.floor(calculadorBolo.calculoBoloCorrector()));
-            //System.out.println("----------------------------------------------------------------");
-            assertEquals((float) UdsInsEsperado[i],(float) Math.floor(calculadorBolo.calculoBoloCorrector()),1);
-            media_Teorica_Obtenida += Math.floor(calculadorBolo.calculoBoloCorrector());
-
-        }
-        media_Teorica_Obtenida = media_Teorica_Obtenida/UdsInsEsperado.length;
-        //System.out.println("Resultado Esperado " + media_Teorica_Esperada);
-        //System.out.println("Resultado Obtenido " + media_Teorica_Obtenida);
-        assertEquals((float)media_Teorica_Esperada,(float)media_Teorica_Obtenida,1);
-
-    }
-
-    @Test
-    public void calculoBoloCorrectorSinAlimentos1_D() throws Exception {
-        boolean rapida = true;
-        double grHC = 0.0;
-        rapida = true;
-        //double glucemiaObjetivo = 120.0;
-        /*
-         * Para obtener la glucemia minima y la maxima, (Valores necesarios para crear el objeto "ValoresPojo")
-         * se tendra en cuenta la formula para el calculo de la Glucemia objetivo = (glucemiaMinima+glucemiaMaxima)/2
-         * si glucemiaObjetivo = 120.0 --> glu_min = 120.0 & glu_max = 120.0
-         */
-        double glu_min = 120.0;
-        double glu_max = 120.0;
-        double glucemia = 175.0;
-        double [] insulinaRapida ={10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0, 36.0};
-        double [] insulinaLenta = {8.0, 10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 34.0};
-        double [] UdsInsEsperado = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0};
-        double media_Teorica_Esperada = 1.35 ;
-        double media_Teorica_Obtenida = 0.0 ;
-
-        for (int i= 0; i< insulinaLenta.length; i++){
-
-            valoresP = new ValoresPOJO(rapida,insulinaLenta[i],insulinaRapida[i],glu_min,glu_max,glucemia);
-            calculadorBolo = new CalculaBolo(valoresP,grHC);
-
-            //System.out.println("Resultado Esperado " + UdsInsEsperado[i]);
-            //System.out.println("Resultado Obtenido " + Math.floor(calculadorBolo.calculoBoloCorrector()));
-            //System.out.println("----------------------------------------------------------------");
-            assertEquals((float) UdsInsEsperado[i],(float) Math.floor(calculadorBolo.calculoBoloCorrector()),1);
-            media_Teorica_Obtenida += Math.floor(calculadorBolo.calculoBoloCorrector());
-
-        }
-        media_Teorica_Obtenida = media_Teorica_Obtenida/UdsInsEsperado.length;
-        //System.out.println("Media Resultado Esperado " + media_Teorica_Esperada);
-        //System.out.println("Media Resultado Obtenido " + media_Teorica_Obtenida);
-        assertEquals((float)media_Teorica_Esperada,(float)media_Teorica_Obtenida,1);
-
     }
 
     /**
@@ -417,10 +253,12 @@ public class CalculaBoloTest {
        for (int i = 0; i<alimentos.length; i++){
            grHC = (gramosConsumo * 10.0 ) / racionHCenGr[i];
            calculadorBolo = new CalculaBolo(valoresP,grHC);
-           //System.out.println("Resultado Esperado " + UdsInsEsperado[i]);
-           //System.out.println("Resultado Obtenido " + calculadorBolo.calculoBoloCorrector());
+           //System.out.println("Resultado Esperado " +  UdsInsEsperado[i]);
+           //redondeamos a dos decimales--> n * 100/100
+           //System.out.println("Resultado Obtenido " + (Math.rint(calculadorBolo.calculoBoloCorrector()*100)/100));
            //System.out.println("----------------------------------------------------------------");
-           assertEquals((float)UdsInsEsperado[i],(float)calculadorBolo.calculoBoloCorrector(),3);
+           assertEquals((float)UdsInsEsperado[i],(float)(Math.rint(calculadorBolo.calculoBoloCorrector()*100)/100),0.05);
+
 
        }
 
