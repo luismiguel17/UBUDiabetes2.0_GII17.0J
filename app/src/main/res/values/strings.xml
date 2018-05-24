@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UBUDiabetes 2.0</string>
+    <string name="app_name">UBUDiabetes</string>
     <string name="title_activity_perfil">Perfil</string>
     <string name="action_settings">Ajustes de perfil</string>
     <string name="action_acerca">Acerca de...</string>
@@ -7,7 +7,6 @@
 
 
     <!--- StringsRegistrorfil -->
-
     <string name="tv_txt_perfil">Perfil de Usuario</string>
     <string name="h_nombre_de_usuario">Introduce tu nombre</string>
     <string name="h_edad">Introduce tu edad</string>
@@ -26,6 +25,7 @@
     <string name="minmax_incorrecto">Introduce valores min y max de glucemia entre los valores indicados</string>
     <string name="minmax_orden">El valor min de glucemia no puedes ser mayor que el valor máximo</string>
     <string name="textfieldEmpty">Rellene todos los campos</string>
+    <string name="noRadioButtonsChecked">Algún elemento sin seleccionar</string>
 
     <string name="primeraEjecucion">primeraEjecucion</string>
     <string name="nombre">nombre</string>
@@ -49,12 +49,8 @@
     <string name="bt_bolo">Calcular bolo</string>
     <string name="main_registro">Registro de glucemias</string>
     <string name="main_historial">Historial de glucemias</string>
-    <string name="main_registroIngestas">Consultar Registros Ingestas</string>
-
-    <string-array name="opciones">
-        <item>Registro de glucemias</item>
-        <item>Historial de glucemias</item>
-    </string-array>
+    <string name="main_registroIngestas">Consultar Ingestas</string>
+    <string name="welcome">Bienvenido</string>
 
 
     <!--- Strings de Registro de glucemia -->
@@ -94,6 +90,8 @@
     <string name="aceptar">Aceptar</string>
     <string name="title_activity_launcher">Launcher</string>
     <string name="registro_lista_ingesta_correcta">Lista Ingesta registrada correctamente</string>
+    <string name="textregistrando">Registrando datos...</string>
+    <string name="textregistrofinalizado">Registro finalizado</string>
 
 
     <!-- Strings de Perfil (Nuevo) -->
@@ -132,7 +130,7 @@
     <string name="sumHC_rli">HC</string>
     <string name="boloC_rli">Bolo C.</string>
     <!-- Strings de Detalles lista Ingesta-->
-    <string name="title_activity_detalles__lista_ingesta">Detalles Lista de Ingestas</string>
+    <string name="title_activity_detalles__lista_ingesta">Detalles de la lista</string>
     <string name="detalles_lista">Detalles de la Lista</string>
     <string name="id_dli">ID</string>
     <string name="id_lista_dli">Id Lista</string>
@@ -143,4 +141,7 @@
     <string name="cantidad_detallelista">Cantidad:</string>
     <string name="indiceglu_detallelista">I.G:</string>
     <string name="sumHC_detallelista">H.C:</string>
+
+
+
 </resources>

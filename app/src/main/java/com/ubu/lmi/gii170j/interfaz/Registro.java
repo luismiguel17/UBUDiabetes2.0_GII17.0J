@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.ubu.lmi.gii170j.BuildConfig;
@@ -58,6 +59,8 @@ public class Registro extends AppCompatActivity {
     RadioButton decimal_BC_dosCheck;
     RadioButton decimal_BC_tresCheck;
 
+    RadioGroup radioGroup_insulinaBolo;
+    RadioGroup radioGroup_decimalesBolo;
     ImageView imagePerfil;
     String path;
     String final_path = "";
@@ -88,6 +91,8 @@ public class Registro extends AppCompatActivity {
         decimal_BC_dosCheck = (RadioButton) findViewById(R.id.rb_id_uno);
         decimal_BC_tresCheck = (RadioButton) findViewById(R.id.rb_id_dos);
 
+        radioGroup_insulinaBolo = (RadioGroup) findViewById(R.id.rg_id_profile);
+        radioGroup_decimalesBolo = (RadioGroup) findViewById(R.id.rg2_id_profile);
 
 
 
@@ -306,6 +311,7 @@ public class Registro extends AppCompatActivity {
         int minVal = Integer.parseInt(min);
         int maxVal = Integer.parseInt(max);
 
+        //Comprobaciones de los valores introducidos
         if (minVal < 80 || maxVal > 250) {
             Toast.makeText(Registro.this, R.string.minmax_incorrecto, Toast.LENGTH_SHORT).show();
         } else if (minVal > maxVal) {
@@ -313,6 +319,8 @@ public class Registro extends AppCompatActivity {
         } else if (nombre.length() == 0 || edad.length() == 0 || estatura.length() == 0 || peso.length() == 0 || max.length() == 0 || min.length() == 0 ||
                 udsBasal.length() == 0 || udsRapida.length() == 0) {
             Toast.makeText(Registro.this, R.string.textfieldEmpty, Toast.LENGTH_SHORT).show();
+        } else if (radioGroup_insulinaBolo.getCheckedRadioButtonId() == -1 || radioGroup_decimalesBolo.getCheckedRadioButtonId() == -1){
+            Toast.makeText(Registro.this, R.string.noRadioButtonsChecked, Toast.LENGTH_SHORT).show();
         } else {
 
             editorPreferencias.putBoolean("primeraEjecucion", true);

@@ -67,7 +67,9 @@ dependencies {
     implementation files('libs/mpandroidchartlibrary-2-1-6.jar')
     androidTestImplementation 'com.android.support.test.espresso:espresso-accessibility:3.0.0'
     androidTestImplementation 'com.google.guava:guava:20.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
 
-    //SONARQUBE
-    //implementation 'com.google.guava:guava:21.0'
+    //Circle Menu
+    implementation 'com.github.Hitomis:CircleMenu:v1.0.2'
+
 }

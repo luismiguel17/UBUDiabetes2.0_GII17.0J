@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,14 +53,6 @@ public class ConsultaDetallesListaIngesta extends AppCompatActivity {
          * LLamada a la asynktask
          */
         new AsyncTaskConsultaDetallesLista().execute("get_info");
-    }
-
-    public void volver(View view) {
-
-        Intent intent = new Intent(getBaseContext(), RegistroListaIngesta.class);
-        startActivity(intent);
-        finish();
-
     }
 
     class AsyncTaskConsultaDetallesLista extends AsyncTask<String,Void,String> {

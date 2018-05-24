@@ -3,6 +3,7 @@ package com.ubu.lmi.gii170j.interfaz;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hitomi.cmlibrary.CircleMenu;
+import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.ubu.lmi.gii170j.R;
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -22,12 +26,13 @@ public class MenuPrincipal extends AppCompatActivity {
 
     SharedPreferences misPreferencias;
     SharedPreferences.Editor editorPreferencias;
+    //String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial),getString(R.string.main_registroIngestas)};
+    CircleMenu circleMenuPrincipal;
+    TextView welcome;
+    TextView welcomeUser;
 
     @Override
     public void onBackPressed() {
-        //Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_LONG).show();
-        //super.onBackPressed();
-        //finish();
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Salir");
         alertDialogBuilder
@@ -61,17 +66,59 @@ public class MenuPrincipal extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        welcome = (TextView)findViewById(R.id.tx_id_welcome);
+        welcomeUser = (TextView)findViewById(R.id.tv_id_welcomeuser);
         misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         editorPreferencias = misPreferencias.edit();
-        //Nuevoooooooooooooo
+
+        welcomeUser.setText(misPreferencias.getString(getString(R.string.nombre), ""));
+
+        circleMenuPrincipal = (CircleMenu)findViewById(R.id.cm_id_fragmentMenuPrincipal);
+
+        circleMenuPrincipal.setMainMenu(Color.parseColor("#fef359"),R.drawable.ic_lock_open_black_24dp,R.drawable.ic_lock_outline_black_24dp)
+                .addSubMenu(Color.parseColor("#00aacc"),R.mipmap.ic_calcular_bolo_menu)
+                .addSubMenu(Color.parseColor("#FFE0B2"),R.drawable.ic_create_black_24dp)
+                .addSubMenu(Color.parseColor("#00E676"),R.drawable.ic_timeline_black_24dp)
+                .addSubMenu(Color.parseColor("#FFB74D"),R.drawable.ic_search_black_24dp)
 
 
-        //String nomUser = getIntent().getStringExtra("usuario");
-        //Toast.makeText(MenuPrincipal.this, "Bienvenido "+ nomUser , Toast.LENGTH_LONG).show();
+                .setOnMenuSelectedListener(new OnMenuSelectedListener() {
+                    @Override
+                    public void onMenuSelected(int item) {
+
+                        if(item == 0){
+                            //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+                            //SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
+                            editorPreferencias.putBoolean("boloCorrector",true);
+                            editorPreferencias.apply();
+
+                            Intent paso1 = new Intent(getApplicationContext(), RegistroGlucemias.class);
+                            startActivity(paso1);
+
+                        } else if (item == 1) {
+                            //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+                            //SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
+                            editorPreferencias.putBoolean("boloCorrector",false);
+                            editorPreferencias.apply();
+                            Intent i = new Intent(getApplicationContext(), RegistroGlucemias.class);
+                            startActivity(i);
+                        }else if(item == 2){
+                            Intent i = new Intent(getApplicationContext(), Historial.class);
+                            startActivity(i);
+                        }else if (item == 3){
+                            //Pruebas para consultar los registros de ingesta
+                            Intent i = new Intent(getApplicationContext(), RegistroListaIngesta.class);
+                            startActivity(i);
+                        }
+
+                    }
+                });
 
 
-        String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial),getString(R.string.main_registroIngestas)};
 
+
+
+        /**
         ListView listaMenu = (ListView) findViewById(R.id.lv_opciones);
         ArrayAdapter<String> adaptlv = new ArrayAdapter<>(getApplicationContext(),R.layout.list_black_text,opciones);
         listaMenu.setAdapter(adaptlv);
@@ -97,6 +144,8 @@ public class MenuPrincipal extends AppCompatActivity {
                 }
             }
         });
+         */
+
 
     }
 
@@ -121,6 +170,7 @@ public class MenuPrincipal extends AppCompatActivity {
     /**
      * Función que define el comportamiento de la aplicacion al pulsar el boton Calcular Bolo
      */
+    /**
     public void calcularBoloOnClick(View view){
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
@@ -131,5 +181,6 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(paso1);
 
     }
+     */
 
 }

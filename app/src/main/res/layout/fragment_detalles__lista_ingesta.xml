@@ -13,13 +13,13 @@
         android:text="@string/detalles_lista"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"/>
 
     <ListView
         android:id="@+id/lv_id_detalleslistaingesta_dli"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:divider="@color/cardview_shadow_end_color"
@@ -29,15 +29,5 @@
         android:drawSelectorOnTop="false"
         android:scrollbars="vertical">
     </ListView>
-    <Button
-        android:id="@+id/bt_volver_dli"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="end"
-        android:background="@drawable/btns_carbohidratos"
-        android:textColor="#ffffff"
-        android:onClick="volver"
-        android:text="Volver"/>
 
 </LinearLayout>

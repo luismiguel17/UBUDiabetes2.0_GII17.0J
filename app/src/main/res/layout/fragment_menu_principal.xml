@@ -13,27 +13,33 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         tools:showIn="@layout/activity_menu_principal">
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/lv_opciones"
-            android:entries="@array/opciones"
-            android:textFilterEnabled="false"
-            android:isScrollContainer="false"/>
-
-        <Button
-            android:id="@+id/bt_bolo"
+        <TextView
+            android:id="@+id/tx_id_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/bt_bolo"
-            android:background="@drawable/btn_circle"
-            android:textColor="#ffffff"
-            android:onClick="calcularBoloOnClick"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="@string/welcome"/>
+        <TextView
+            android:id="@+id/tv_id_welcomeuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:layout_gravity="center"/>
 
+        <com.hitomi.cmlibrary.CircleMenu
+            android:id="@+id/cm_id_fragmentMenuPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:gravity="center_horizontal"
+            />
     </LinearLayout>
 </ScrollView>
 

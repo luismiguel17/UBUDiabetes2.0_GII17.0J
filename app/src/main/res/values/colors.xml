@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <!--  Colores para el Theme  -->
+    <color name="colorPrimary">#00aacc</color>
+    <color name="colorPrimaryTool">#0080ff</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="colorReddish">#FF7575</color>
     <color name="colorToneBlue">#8CD1E6</color>
     <color name="colorGreenish">#4BFE78</color>
@@ -16,5 +19,11 @@
     <color name="colorBebidas">#40C4FF</color>
     <color name="colorOtros">#FFD180</color>
     <color name="transparent">#00000000 </color>.
+    <!--  Colores para el Menu Principal -->
+    <color name="mainMenu">#009688 </color>.
+    <color name="menuCalcularbolo">#00aacc </color>.
+    <color name="menuRegistroglucemias">#FFE0B2 </color>.
+    <color name="menuHistorialglucemias">#00E676</color>.
+    <color name="menuConsultarRegistrosIngestas">#FFB74D</color>.
 
 </resources>
