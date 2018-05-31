@@ -1288,5 +1288,12 @@
         <item>0</item>
     </string-array>
 
+    <!-- Items a cargar para los Ajustes -->
+    <string-array name="itemsAjustes">
+        <item>Perfil</item>
+        <item>Copia de Seguridad</item>
+        <item>Liberar Espacio</item>
+    </string-array>
+
 
 </resources>

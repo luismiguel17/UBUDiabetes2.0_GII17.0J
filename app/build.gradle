@@ -71,5 +71,7 @@ dependencies {
 
     //Circle Menu
     implementation 'com.github.Hitomis:CircleMenu:v1.0.2'
+    //Circle Image
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 }

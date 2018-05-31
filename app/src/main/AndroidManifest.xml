@@ -5,8 +5,9 @@
     <!-- Permiso para poder Acceder a imagenes de nuestra galeria -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- Permiso para poder Acceder a la camara-->
+    <!-- Permiso para poder Acceder a la camara -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -52,7 +53,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".interfaz.MenuPrincipal" />
         </activity>
-
         <activity
             android:name=".interfaz.Carbohidratos"
             android:label="@string/title_activity_carbohidratos"
@@ -75,8 +75,8 @@
         <activity android:name=".interfaz.Pruebas_Main" />
         <activity
             android:name=".interfaz.RegistroListaIngesta"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_registro_lista_ingesta"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,8 +84,8 @@
         </activity>
         <activity
             android:name=".interfaz.ConsultaDetallesListaIngesta"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_detalles__lista_ingesta"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -99,8 +99,18 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity
+            android:name=".interfaz.Ajustes"
+            android:label="@string/title_activity_ajustes"
+            android:parentActivityName=".interfaz.MenuPrincipal"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ubu.lmi.gii170j.interfaz.MenuPrincipal" />
+        </activity>
     </application>
 
 </manifest>

@@ -57,7 +57,11 @@ public class DataBaseManager {
     public long insertar(String tabla, ContentValues valores){
         long result;
         result= db.insert(tabla,null,valores);
-
+        return result;
+    }
+    public int eliminar(String tabla ){
+        int result;
+        result =db.delete(tabla,null,null);
         return result;
     }
 

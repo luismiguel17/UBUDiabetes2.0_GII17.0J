@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">UBUDiabetes</string>
     <string name="title_activity_perfil">Perfil</string>
-    <string name="action_settings">Ajustes de perfil</string>
+    <string name="action_settings">Ajustes</string>
     <string name="action_acerca">Acerca de...</string>
-    <string name="action_idioma">Idioma</string>
+
 
 
     <!--- StringsRegistrorfil -->
@@ -27,6 +27,7 @@
     <string name="textfieldEmpty">Rellene todos los campos</string>
     <string name="noRadioButtonsChecked">Algún elemento sin seleccionar</string>
 
+    <!--- SharedPreferences -->
     <string name="primeraEjecucion">primeraEjecucion</string>
     <string name="nombre">nombre</string>
     <string name="edad">edad</string>
@@ -39,7 +40,8 @@
     <string name="rapida">rapida</string>
     <string name="ultrarrapida">ultrarrapida</string>
     <string name="glucemia">glucemia</string>
-    <!--- Nuevo decimales bolo corrector -->
+    <string name="lastBackUp">ultimaCopiaSeguridad</string>
+
 
 
     <!--- Strings de Menu principal -->
@@ -141,7 +143,12 @@
     <string name="cantidad_detallelista">Cantidad:</string>
     <string name="indiceglu_detallelista">I.G:</string>
     <string name="sumHC_detallelista">H.C:</string>
-
+    <string name="title_activity_ajustes">Ajustes</string>
+    <!-- Strings de Ajustes-->
+    <string name="tv_ajustes_personal">Personal</string>
+    <string name="copia_seguridad">Copia de Seguridad</string>
+    <string name="comentario_copiaSeguridad">Se realizará una copia de seguridad de sus registros en su tarjeta SD</string>
+    <string name="comentario_eliminarRegistros">¿ Está seguro que desea eliminar sus registros ?</string>
 
 
 </resources>
