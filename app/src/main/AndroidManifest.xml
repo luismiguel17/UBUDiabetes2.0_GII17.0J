@@ -14,57 +14,57 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".interfaz.Launcher" />
+        <activity android:name=".view.Launcher" />
         <activity
-            android:name=".interfaz.Registro"
+            android:name=".view.Registro"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".interfaz.MenuPrincipal"
+            android:name=".view.MenuPrincipal"
             android:label="@string/title_activity_menu_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".interfaz.RegistroGlucemias"
+            android:name=".view.RegistroGlucemias"
             android:label="@string/title_activity_registro_glucemias"
-            android:parentActivityName=".interfaz.MenuPrincipal"
+            android:parentActivityName=".view.MenuPrincipal"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ubu.lmi.gii170j.interfaz.MenuPrincipal" />
+                android:value="com.ubu.lmi.gii170j.view.MenuPrincipal" />
         </activity>
         <activity
-            android:name=".interfaz.Incidencias"
+            android:name=".view.Incidencias"
             android:label="@string/title_activity_incidencias"
-            android:parentActivityName=".interfaz.RegistroGlucemias"
+            android:parentActivityName=".view.RegistroGlucemias"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ubu.lmi.gii170j.interfaz.RegistroGlucemias" />
+                android:value="com.ubu.lmi.gii170j.view.RegistroGlucemias" />
         </activity>
         <activity
-            android:name=".interfaz.Historial"
+            android:name=".view.Historial"
             android:label="@string/title_activity_historial"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".interfaz.MenuPrincipal" />
+                android:value=".view.MenuPrincipal" />
         </activity>
         <activity
-            android:name=".interfaz.Carbohidratos"
+            android:name=".view.Carbohidratos"
             android:label="@string/title_activity_carbohidratos"
-            android:parentActivityName=".interfaz.RegistroGlucemias"
+            android:parentActivityName=".view.RegistroGlucemias"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".interfaz.RegistroGlucemias" />
+                android:value=".view.RegistroGlucemias" />
         </activity>
         <activity
-            android:name=".interfaz.SplashScreen"
+            android:name=".view.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,24 +72,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".interfaz.Pruebas_Main" />
+        <activity android:name=".view.Pruebas_Main" />
         <activity
-            android:name=".interfaz.RegistroListaIngesta"
+            android:name=".view.RegistroListaIngesta"
             android:label="@string/title_activity_registro_lista_ingesta"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".interfaz.MenuPrincipal" />
+                android:value=".view.MenuPrincipal" />
         </activity>
         <activity
-            android:name=".interfaz.ConsultaDetallesListaIngesta"
+            android:name=".view.ConsultaDetallesListaIngesta"
             android:label="@string/title_activity_detalles__lista_ingesta"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".interfaz.RegistroListaIngesta" />
+                android:value=".view.RegistroListaIngesta" />
         </activity>
 
         <provider
@@ -103,13 +103,13 @@
         </provider>
 
         <activity
-            android:name=".interfaz.Ajustes"
+            android:name=".view.Ajustes"
             android:label="@string/title_activity_ajustes"
-            android:parentActivityName=".interfaz.MenuPrincipal"
+            android:parentActivityName=".view.MenuPrincipal"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ubu.lmi.gii170j.interfaz.MenuPrincipal" />
+                android:value="com.ubu.lmi.gii170j.view.MenuPrincipal" />
         </activity>
     </application>
 
