@@ -99,7 +99,7 @@ public class RegistroGlucemias extends AppCompatActivity {
             editorPreferencias.apply();
 
             DataBaseManager dbmanager = new DataBaseManager(this);
-            insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
+            //insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
             insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
 
             if (insertar != -1) {
@@ -176,7 +176,7 @@ public class RegistroGlucemias extends AppCompatActivity {
      */
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "dd-MM-yyyy", Locale.getDefault());
+                "dd/MM/yyyy HH:mm", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
     }

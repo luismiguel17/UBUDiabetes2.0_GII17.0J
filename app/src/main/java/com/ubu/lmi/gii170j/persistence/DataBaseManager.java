@@ -92,16 +92,28 @@ public class DataBaseManager {
     }
 
     /**
+     * Función que devuelve el resultado de una consulta de una glucemia por mes
+     */
+    public Cursor selectGlucemia(String fecha){
+        return db.rawQuery("select * from Glucemias where Fecha LIKE'%"+fecha+"%'",null);
+    }
+    /**
      * Función que devuelve el resultado de una consulta de una glucemia por fecha y periodo
      */
     public Cursor selectGlucemia(String fecha, String periodo){
         return db.rawQuery("select * from Glucemias where Fecha='"+fecha+"' and Periodo='"+periodo+"'",null);
     }
     /**
+     * Función que devuelve el resultado de una consulta de una glucemia por Hora y periodo
+     */
+    public Cursor selectGlucemiaHora(String fecha, String periodo){
+        return db.rawQuery("select * from Glucemias where Fecha='"+fecha+"' and Periodo='"+periodo+"'",null);
+    }
+    /**
      * Función que devuelve el resultado de una consulta de una glucemia por fecha y valor
      */
-    public Cursor selectGlucemiaValor(String fecha, int valor){
-        return db.rawQuery("select * from Glucemias where Fecha='"+fecha+"' and Valor='"+valor+"'",null);
+    public Cursor selectGlucemiaValor(String fecha, int periodo){
+        return db.rawQuery("select * from Glucemias where Fecha LIKE'%\"+fecha+\"%' and Periodo='"+periodo+"'",null);
     }
     /**
      * Función que devuelve el resultado de una consulta de una incidencia por el id de la glucemia

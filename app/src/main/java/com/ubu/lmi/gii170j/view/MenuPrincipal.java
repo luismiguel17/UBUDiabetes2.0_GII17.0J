@@ -107,10 +107,10 @@ public class MenuPrincipal extends AppCompatActivity {
                             Intent i = new Intent(getApplicationContext(), RegistroGlucemias.class);
                             startActivity(i);
                         }else if(item == 2){
-                            Intent i = new Intent(getApplicationContext(), Historial.class);
+                            Intent i = new Intent(getApplicationContext(), Pruebas_Main.class);
                             startActivity(i);
                         }else if (item == 3){
-                            //Pruebas para consultar los registros de ingesta
+
                             Intent i = new Intent(getApplicationContext(), RegistroListaIngesta.class);
                             startActivity(i);
                         }
@@ -132,6 +132,8 @@ public class MenuPrincipal extends AppCompatActivity {
         int id = item.getItemId();
         if(id== R.id.action_acerca){
             Toast.makeText(this, getString(R.string.acerca_de), Toast.LENGTH_LONG).show();
+            //Intent i = new Intent(this,Pruebas_Main.class);
+            //startActivity(i);
         }else if(id==R.id.action_settings){
             Intent i = new Intent(this,Ajustes.class);
             startActivity(i);
