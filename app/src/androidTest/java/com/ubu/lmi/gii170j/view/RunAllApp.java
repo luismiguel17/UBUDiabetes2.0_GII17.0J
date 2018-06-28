@@ -32,6 +32,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Test UI
+ */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class RunAllApp {
