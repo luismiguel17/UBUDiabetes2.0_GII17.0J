@@ -14,28 +14,28 @@ import static org.junit.Assert.*;
 public class CalculaBolo_CasoClinico_FalloTest {
 
     //Instanciamos un objeto de tipo ValoresPojo
-    ValoresPOJO valoresP;
+    private ValoresPOJO valoresP;
     //Instanciamos un onjeto de tipo CalculaBolo
-    CalculaBolo calculadorBolo;
-    double udsInsulina;
+    private CalculaBolo calculadorBolo;
+    private double udsInsulina;
     //Obtiene si se usa o no insulina rápida.
-    boolean rapida = true;
+    private boolean rapida = true;
     //uds Insulina Basal
-    double insulinaBasal = 20.0;
+    private double insulinaBasal = 20.0;
     //uds Insulina rapida
-    double insulinaRapida = 20.0;
+    private double insulinaRapida = 20.0;
     //uds min Glucemia en la normalidad
-    double glucemiaMinima = 100.0;
+    private double glucemiaMinima = 100.0;
     ////uds max Glucemia en la normalidad
-    double glucemiaMaxima = 120.0;
+    private double glucemiaMaxima = 120.0;
     //lectura actual de glucemia mg/dl
-    double glucemia = 130.0;
+    private double glucemia = 130.0;
     //uds insulina total en 24h
-    double insTotal;
+    private double insTotal;
     //Alimentos Antes DESAYUNO
-    double hcLecheEntera = 12.5;
-    double hcKiwi = 10.0;
-    double gramosHC = hcLecheEntera + hcKiwi;
+    private double hcLecheEntera = 12.5;
+    private double hcKiwi = 10.0;
+    private double gramosHC = hcLecheEntera + hcKiwi;
 
     /**
      * calculaRatio. Test que realiza las pruebas de calculo del Ratio.
@@ -87,7 +87,7 @@ public class CalculaBolo_CasoClinico_FalloTest {
     }
 
     /**
-     * calculaGr_HC_Ratio. Test que realiza las pruebas del calculo del valor de gramos de HC per ratio.
+     * calculagrHcRatio. Test que realiza las pruebas del calculo del valor de gramos de HC per ratio.
      * @throws Exception exception.
      */
     @Test
@@ -99,7 +99,7 @@ public class CalculaBolo_CasoClinico_FalloTest {
 
         double ratio = 500/insTotal;
         //System.out.println("GR_HC per Ratio:" + (gramosHC/ratio));
-        assertEquals((float)(gramosHC/ratio),(float)calculadorBolo.calculaGr_HC_Ratio(),3);
+        assertEquals((float)(gramosHC/ratio),(float)calculadorBolo.calculagrHcRatio(),3);
     }
 
     /**

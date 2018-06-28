@@ -2,8 +2,7 @@
     <string name="app_name">UBUDiabetes</string>
     <string name="title_activity_perfil">Perfil</string>
     <string name="action_settings">Ajustes</string>
-    <string name="action_acerca">Acerca de...</string>
-
+    <string name="action_acerca">Acerca de</string>
 
 
     <!--- StringsRegistrorfil -->
@@ -43,11 +42,10 @@
     <string name="lastBackUp">ultimaCopiaSeguridad</string>
 
 
-
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_menu_principal">Menu Principal</string>
-    <string name="acerca_de">UBUDiabetes 2.0 Aplicación de control de la diabetes en dispositivos móviles. Realizada la versión 2.0 por Luis Miguel Inapanta (febrero 2016). \n\</string>
+    <string name="title_activity_menu_principal">Menú Principal</string>
+    <string name="acerca_de">UBUDiabetes 2.0 Aplicación de control de la diabetes en dispositivos móviles.\n\</string>
     <string name="bt_bolo">Calcular bolo</string>
     <string name="main_registro">Registro de glucemias</string>
     <string name="main_historial">Historial de glucemias</string>
@@ -67,7 +65,7 @@
     <string name="incidencia_correcta">Incidencia registrada correctamente</string>
 
     <!--- Strings de Historial -->
-    <string name="title_activity_historial">Historial</string>
+    <string name="title_activity_historial">Historial de glucemias</string>
     <string name="leyenda_desayuno">Antes de desayunar</string>
     <string name="leyenda_comida">Después de comer</string>
     <string name="leyenda_cena">Antes de cenar</string>
@@ -92,7 +90,7 @@
     <string name="aceptar">Aceptar</string>
     <string name="title_activity_launcher">Launcher</string>
     <string name="registro_lista_ingesta_correcta">Lista Ingesta registrada correctamente</string>
-    <string name="textregistrando">Registrando datos...</string>
+    <string name="textregistrando">Registrando datos</string>
     <string name="textregistrofinalizado">Registro finalizado</string>
 
 
@@ -122,7 +120,7 @@
     <string name="listaingesta">Lista de Ingesta:</string>
 
     <!-- Strings de Registro lista Ingesta-->
-    <string name="registros">Registro de Ingestas</string>
+    <string name="registros">Registros diarios</string>
     <string name="tv_lv_nombreAlimento">Alimento</string>
     <string name="tv_lv_gr">Cantidad(gr)</string>
     <string name="tv_lv_ig">I.G.</string>
@@ -132,7 +130,7 @@
     <string name="sumHC_rli">HC</string>
     <string name="boloC_rli">Bolo C.</string>
     <!-- Strings de Detalles lista Ingesta-->
-    <string name="title_activity_detalles__lista_ingesta">Detalles de la lista</string>
+    <string name="title_activity_detalles__lista_ingesta">Detalles</string>
     <string name="detalles_lista">Detalles de la Lista</string>
     <string name="id_dli">ID</string>
     <string name="id_lista_dli">Id Lista</string>
@@ -147,8 +145,11 @@
     <!-- Strings de Ajustes-->
     <string name="tv_ajustes_personal">Personal</string>
     <string name="copia_seguridad">Copia de Seguridad</string>
-    <string name="comentario_copiaSeguridad">Se realizará una copia de seguridad de sus registros en su tarjeta SD</string>
+    <string name="comentario_copiaSeguridad">Se realizará una copia de seguridad de sus registros en la memoria de su dispositivo.</string>
     <string name="comentario_eliminarRegistros">¿ Está seguro que desea eliminar sus registros ?</string>
+    <string name="title_activity_psadsadasd">psadsadasd</string>
+    <!-- Strings de Historial-->
+    <string name="buscar">Buscar</string>
 
 
 </resources>

@@ -14,6 +14,7 @@ import com.ubu.lmi.gii170j.R;
 public class CarbohidratosFragment extends Fragment {
 
     public CarbohidratosFragment() {
+        // Required empty public constructor
     }
 
     @Override

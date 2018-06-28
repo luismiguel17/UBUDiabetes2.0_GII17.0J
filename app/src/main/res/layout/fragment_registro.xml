@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView_fragmentProfile"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".interfaz.Registro">
+    tools:context=".view.Registro">
     <LinearLayout
         android:id="@+id/ly_fragmentProfile"
         android:layout_width="match_parent"
@@ -27,7 +26,6 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:background="@drawable/imageview_profile"
-                android:clickable="true"
                 android:onClick="clickImage"/>
         </LinearLayout>
         <LinearLayout
@@ -45,7 +43,8 @@
                 android:text="@string/datosPersonales"
                 android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:id="@+id/tv_nombreUs_fragmentProfile"
@@ -54,7 +53,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/nameUser"
-                android:textSize="15dp" />
+                android:textSize="15sp"
+                android:layout_marginStart="20dp" />
 
             <EditText
                 android:id="@+id/et_id_nombre"
@@ -83,7 +83,7 @@
                     android:layout_weight="33"
                     android:text="@string/edadUser"
                     android:gravity="center"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_alturadUs_fragmentProfile"
@@ -92,7 +92,7 @@
                     android:layout_weight="33"
                     android:gravity="center"
                     android:text="@string/alturaUser"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_pesodUs_fragmentProfile"
@@ -101,7 +101,7 @@
                     android:layout_weight="33"
                     android:gravity="center"
                     android:text="@string/pesoUser"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -158,7 +158,8 @@
                 android:text="@string/datosMedicos"
                 android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:id="@+id/tv_ly_dm_fragmentProfile"
@@ -199,7 +200,8 @@
                     android:layout_weight="20"
                     android:gravity="center"
                     android:text="@string/glu_max"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:layout_marginStart="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -230,7 +232,8 @@
                     android:layout_weight="20"
                     android:ems="5"
                     android:gravity="center"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:layout_marginStart="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -327,7 +330,8 @@
                         android:layout_weight="30"
                         android:gravity="center"
                         android:text="@string/h_rapida"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:layout_marginStart="20dp" />
 
                 </LinearLayout>
 
@@ -359,7 +363,8 @@
                         android:layout_weight="30"
                         android:ems="5"
                         android:gravity="center"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:layout_marginStart="20dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -398,7 +403,8 @@
                         android:paddingRight="10dp"
                         android:text="@string/decimal_bc_cero"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:paddingEnd="10dp" />
 
                     <RadioButton
                         android:id="@+id/rb_id_uno"
@@ -408,7 +414,8 @@
                         android:paddingRight="10dp"
                         android:text="@string/decimal_bc_dos"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:paddingEnd="10dp" />
 
                     <RadioButton
                         android:id="@+id/rb_id_dos"

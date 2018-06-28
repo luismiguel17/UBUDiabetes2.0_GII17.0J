@@ -1,8 +1,5 @@
 package com.ubu.lmi.gii170j.calculations;
 
-import android.util.Log;
-
-import com.ubu.lmi.gii170j.BuildConfig;
 import com.ubu.lmi.gii170j.persistence.ValoresPOJO;
 
 /**
@@ -20,15 +17,11 @@ public class CalculaBolo {
      * Valores.
      */
     private ValoresPOJO valores;
-    /**
-     * Tag for log.
-     */
-    private static String TAG = CalculaBolo.class.getName();
 
     /**
-     * Constructor.
+     * CalculaBolo. Constructor.
      *
-     * @param sumatorio
+     * @param sumatorio sumatorio HC.
      */
     public CalculaBolo(ValoresPOJO valoresPOJO, double sumatorio) {
 
@@ -47,10 +40,8 @@ public class CalculaBolo {
     }
 
     /**
-     * CAMBIO: DE PRIVATE A PUBLIC
-     * Realiza el calculo del factor de sensibilidad.
-     *
-     * @return FSI factor de sensibilidad
+     * calculaFactorSensibilidad. Realiza el calculo del factor de sensibilidad.
+     * @return FSI factor de sensibilidad.
      */
     public double calculaFactorSensibilidad() {
         double suma = valores.getInsulinaBasal() + valores.getInsulinaRapida();
@@ -60,9 +51,7 @@ public class CalculaBolo {
     }
 
     /**
-     * CAMBIO: DE PRIVATE A PUBLIC
-     * Calcula la glucemia objetivo como la media de la glucemia máxima y la mínima.
-     *
+     * calculaGlucemiaObjetivo. Calcula la glucemia objetivo como la media de la glucemia máxima y la mínima.
      * @return glucemia objetivo
      */
     public double calculaGlucemiaObjetivo() {
@@ -70,8 +59,8 @@ public class CalculaBolo {
     }
 
     /**
-     * calculaUdsGlucemia. cálculo de Unidades de Insulina según glucemia
-     * @return
+     * calculaUdsGlucemia. cálculo de Unidades de Insulina según glucemia.
+     * @return operando uds glucemia.
      */
 
     public double calculaUdsGlucemia(){
@@ -85,22 +74,21 @@ public class CalculaBolo {
     }
 
     /**
-     * Realiza el calculo del bolo corrector aplicando las formulas necesarias.
+     * calculagrHcRatio. Realiza el calculo del bolo corrector aplicando las formulas necesarias.
      */
 
-    public double calculaGr_HC_Ratio(){
-        double operando = gramosHidratosCarbono / calculaRatio();
-        return operando;
+    public double calculagrHcRatio(){
+
+        return gramosHidratosCarbono / calculaRatio();
     }
 
+    /**
+     * calculoBoloCorrector. Método que devuelve el bolo corrector.
+     * @return bolo corrector.
+     */
     public double calculoBoloCorrector() {
-        double operando1 = calculaGr_HC_Ratio();
+        double operando1 = calculagrHcRatio();
         double operando2 = calculaUdsGlucemia();
-
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Grams HC por Ratio Insulina : " + operando1 );
-            Log.d(TAG, "UDs Glucemia: " + operando2);
-        }
         return (operando1 + operando2);
     }
 }

@@ -3,11 +3,8 @@ package com.ubu.lmi.gii170j.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -24,26 +19,17 @@ import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.XAxis.XAxisPosition;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
 
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.ubu.lmi.gii170j.R;
-import com.ubu.lmi.gii170j.model.DetallesIngesta;
-
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
+
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Chart_ListAdapter extends ArrayAdapter<LineData>{
+public class ChartListAdapter extends ArrayAdapter<LineData>{
 
 
     private Context mContext;
@@ -51,7 +37,7 @@ public class Chart_ListAdapter extends ArrayAdapter<LineData>{
     private final String[] semanas;
     private int valMax, valMin;
 
-    public Chart_ListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<LineData> objects, String[] semana2){
+    public ChartListAdapter(@NonNull Context context, int resource, @NonNull List<LineData> objects, String[] semana2){
 
         super(context, resource , objects);
         mContext = context;
@@ -62,7 +48,6 @@ public class Chart_ListAdapter extends ArrayAdapter<LineData>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //BarData data = getItem(position);
         SharedPreferences misPreferencias = mContext.getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         valMax=Integer.parseInt(misPreferencias.getString("max",""));
         valMin=Integer.parseInt(misPreferencias.getString("min",""));
@@ -80,8 +65,8 @@ public class Chart_ListAdapter extends ArrayAdapter<LineData>{
 
             holder.chart = (LineChart) convertView.findViewById(R.id.lc_id_chart);
             convertView.setTag(holder);
-            TextView fecha_tv = (TextView)convertView.findViewById(R.id.tv_id_fecha_chart);
-            fecha_tv.setText(semanas[position]);
+            TextView fechaTv = (TextView)convertView.findViewById(R.id.tv_id_fecha_chart);
+            fechaTv.setText(semanas[position]);
 
         } else {
             holder = (ViewHolder) convertView.getTag();

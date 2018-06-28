@@ -29,8 +29,8 @@ public class RegistroGlucemias extends AppCompatActivity {
     private static String TAG = RegistroGlucemias.class.getName();
 
     private String periodo;
-    private final int REQUEST_EXIT = 0;
-    private final int REQUEST_EXIT_BOLO = 1;
+    private static final int REQUEST_EXIT = 0;
+    private static final int REQUEST_EXIT_BOLO = 1;
     private boolean bolo;
 
 
@@ -65,7 +65,7 @@ public class RegistroGlucemias extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                //// Required empty public method.
             }
         });
 
@@ -99,19 +99,16 @@ public class RegistroGlucemias extends AppCompatActivity {
             editorPreferencias.apply();
 
             DataBaseManager dbmanager = new DataBaseManager(this);
-            //insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
             insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
 
             if (insertar != -1) {
                 Toast.makeText(RegistroGlucemias.this, "Valor de glucemia guardado correctamente.", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Insertada glucemia con id: " + insertar);
+
             } else {
                 Toast.makeText(RegistroGlucemias.this, "Valor incorrecto, compruebe que ha introducido valores numéricos.", Toast.LENGTH_SHORT).show();
             }
 
             if (bolo) {
-                // Eliminamos el paso de actividad física y se salta directamente
-                // al cálcuto de carbohidratos para el cálculo del bolo
                 Log.d(TAG, "Lanzando la actividad de carbohidratos.");
                 Intent i = new Intent(this, Carbohidratos.class);
                 startActivityForResult(i, REQUEST_EXIT);
@@ -131,6 +128,7 @@ public class RegistroGlucemias extends AppCompatActivity {
                 super.onBackPressed();
             }
 
+
         }
     }
 
@@ -147,15 +145,13 @@ public class RegistroGlucemias extends AppCompatActivity {
         if (bolo) {
             if (requestCode == REQUEST_EXIT_BOLO) {
                 finish();
-            }
-            else if (requestCode == REQUEST_EXIT) {
+            } else if (requestCode == REQUEST_EXIT) {
                 finish();
             }
         } else if (requestCode == REQUEST_EXIT) {
             finish();
         }
     }
-
     /**
      * Función que genera el ContentValues para poder realizar el insert en la base de datos
      *

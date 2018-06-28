@@ -14,6 +14,7 @@ import com.ubu.lmi.gii170j.R;
 public class RegistroGlucemiasFragment extends Fragment {
 
     public RegistroGlucemiasFragment() {
+        // Required empty public constructor
     }
 
     @Override

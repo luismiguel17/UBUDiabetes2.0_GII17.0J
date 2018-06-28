@@ -14,6 +14,7 @@ import com.ubu.lmi.gii170j.R;
 public class RegistroFragment extends Fragment {
 
     public RegistroFragment() {
+        // Required empty public constructor
     }
 
     @Override

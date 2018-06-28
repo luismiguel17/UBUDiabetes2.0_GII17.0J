@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class CarbohidratosTest {
     //Instanciamos un onjeto de tipo CalculaBolo
-    Carbohidratos carboHidratos;
+    private Carbohidratos carboHidratos;
 
-    double grHCLecheEntera;
-    double grHCArrozCocido;
-    double grHCMandarinas;
+    private double grHCLecheEntera;
+    private double grHCArrozCocido;
+    private double grHCMandarinas;
     @Test
     public void calcularGramosDeHidratosDeCarbono() throws Exception {
         carboHidratos = new Carbohidratos();
@@ -39,14 +39,6 @@ public class CarbohidratosTest {
         //System.out.println("Cálculo de gramos de HC en 200 gramos de mandarina " + grHCMandarinas );
         assertEquals((float) grHCMandarinas,(float) carboHidratos.calcularGramosDeHidratosDeCarbono(grMandarinas,grPerRacionMan),3);
 
-    }
-    @Test
-    public void añadirOtroOnClick() throws Exception {
-
-    }
-
-    @Test
-    public void finalizarOnClick() throws Exception {
     }
 
 }

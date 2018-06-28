@@ -49,7 +49,7 @@ public class DataBaseManager {
             +"id_lista integer not null,"
             +"alimento text not null,"
             +"cantidad real not null,"
-            +"CONSTRAINT fk_listaIngesta FOREIGN KEY(id_lista) REFERENCES lista_ingesta(id_lista),"
+            +"CONSTRAINT fk_listaIngesta FOREIGN KEY(id_lista) REFERENCES listaingesta(id_lista),"
             +"CONSTRAINT fk_alimento FOREIGN KEY(alimento) REFERENCES alimentos(alimento));";
     /**
      * Función que inserta una entrada en una determinada tabla
@@ -66,7 +66,7 @@ public class DataBaseManager {
     }
 
     /**
-     * Función que devuelve el resultado de una consulta de todos los alimentos
+     * Función que devuelve el resultado de una consulta de todos los alimentos.
      */
     public Cursor consultarAlimentos(){
 
@@ -76,8 +76,8 @@ public class DataBaseManager {
     public Cursor consultarRegistroIngesta(){
         return db.rawQuery("select * from listaingesta",null);
     }
-    public Cursor consultarDetallesIngesta(int arg_idLista){
-        return db.rawQuery("select * from detalleslistaingesta where id_lista ='"+arg_idLista+"'",null);
+    public Cursor consultarDetallesIngesta(int argIdLista){
+        return db.rawQuery("select * from detalleslistaingesta where id_lista ='"+argIdLista+"'",null);
     }
     /**
      * Función que devuelve el resultado de una consulta de un alimento a partir de su id
@@ -86,7 +86,7 @@ public class DataBaseManager {
         return db.rawQuery("select * from Alimentos where Alimento='"+id+"'",null);
     }
 
-    String columnas[]=new String[]{"id","fecha","periodo","valor"};
+    String[] columnas=new String[]{"id","fecha","periodo","valor"};
     public Cursor consultarGlucemias(){
         return db.query("Glucemias",columnas,null,null,null,null,null);
     }
@@ -113,7 +113,7 @@ public class DataBaseManager {
      * Función que devuelve el resultado de una consulta de una glucemia por fecha y valor
      */
     public Cursor selectGlucemiaValor(String fecha, int periodo){
-        return db.rawQuery("select * from Glucemias where Fecha LIKE'%\"+fecha+\"%' and Periodo='"+periodo+"'",null);
+        return db.rawQuery("select * from Glucemias where Fecha LIKE'%"+fecha+"%' and Periodo='"+periodo+"'",null);
     }
     /**
      * Función que devuelve el resultado de una consulta de una incidencia por el id de la glucemia

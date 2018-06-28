@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -35,7 +34,9 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class Registro extends AppCompatActivity {
 
     //Tag for log.
-    private static String TAG = Registro.class.getName();
+    private static final String TAG = Registro.class.getName();
+    private static final String PREFERENCES_USER = "PreferenciasUsuario";
+    private SharedPreferences misPreferencias;
 
     EditText nombreEt;
     EditText edadEt;
@@ -47,22 +48,18 @@ public class Registro extends AppCompatActivity {
     EditText udsRapidaEt;
     RadioButton rapidaCheck;
     RadioButton ultrarrapidaCheck;
-    RadioButton decimal_BC_ceroCheck;
-    RadioButton decimal_BC_dosCheck;
-    RadioButton decimal_BC_tresCheck;
+    RadioButton decimalBCCeroCheck;
+    RadioButton decimalBCDosCheck;
+    RadioButton decimalBcTresCheck;
 
-    RadioGroup radioGroup_insulinaBolo;
-    RadioGroup radioGroup_decimalesBolo;
+    RadioGroup radioGroupInsulinaBolo;
+    RadioGroup radioGroupDecimalesBolo;
     ImageView imagePerfil;
     String path;
-    String final_path = "";
-    String final_bitmap="";
+    String finalPath = "";
 
-    Bitmap bitmap;
-    //private final String CARPETA_RAIZ="ImagenesUBUDiabetes/";
-    //private final String RUTA_IMAGEN=CARPETA_RAIZ+"misFotos";
-    final int COD_SELECCIONA=10;
-    //final int COD_FOTO=20;
+    private static final int COD_SELECCIONA=10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -79,12 +76,12 @@ public class Registro extends AppCompatActivity {
         udsRapidaEt = (EditText) findViewById(R.id.et_udsRapida);
         rapidaCheck = (RadioButton) findViewById(R.id.rb_id_rapida);
         ultrarrapidaCheck = (RadioButton) findViewById(R.id.rb_id_ultrarrapida);
-        decimal_BC_ceroCheck = (RadioButton) findViewById(R.id.rb_id_cero);
-        decimal_BC_dosCheck = (RadioButton) findViewById(R.id.rb_id_uno);
-        decimal_BC_tresCheck = (RadioButton) findViewById(R.id.rb_id_dos);
+        decimalBCCeroCheck = (RadioButton) findViewById(R.id.rb_id_cero);
+        decimalBCDosCheck = (RadioButton) findViewById(R.id.rb_id_uno);
+        decimalBcTresCheck = (RadioButton) findViewById(R.id.rb_id_dos);
 
-        radioGroup_insulinaBolo = (RadioGroup) findViewById(R.id.rg_id_profile);
-        radioGroup_decimalesBolo = (RadioGroup) findViewById(R.id.rg2_id_profile);
+        radioGroupInsulinaBolo = (RadioGroup) findViewById(R.id.rg_id_profile);
+        radioGroupDecimalesBolo = (RadioGroup) findViewById(R.id.rg2_id_profile);
 
 
 
@@ -107,7 +104,7 @@ public class Registro extends AppCompatActivity {
      * Función que carga en los editText los datos previamente registrados si los hubiera
      */
     public final void cargarPreferencias() {
-        SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+        misPreferencias = getSharedPreferences(PREFERENCES_USER, MODE_PRIVATE);
 
 
         EditText nombreEt2 = (EditText) findViewById(R.id.et_id_nombre);
@@ -120,11 +117,11 @@ public class Registro extends AppCompatActivity {
         EditText uds2Et2 = (EditText) findViewById(R.id.et_udsRapida);
         RadioButton rapidaCheck2 = (RadioButton) findViewById(R.id.rb_id_rapida);
         RadioButton ultrarrapidaCheck2 = (RadioButton) findViewById(R.id.rb_id_ultrarrapida);
-        RadioButton decimal_BC_ceroCheck2 = (RadioButton) findViewById(R.id.rb_id_cero);
-        RadioButton decimal_BC_dosCheck2 = (RadioButton) findViewById(R.id.rb_id_uno);
-        RadioButton decimal_BC_tresCheck2 = (RadioButton) findViewById(R.id.rb_id_dos);
+        RadioButton decimalBCCeroCheck2 = (RadioButton) findViewById(R.id.rb_id_cero);
+        RadioButton decimalBCDosCheck2 = (RadioButton) findViewById(R.id.rb_id_uno);
+        RadioButton decimalBCTresCheck2 = (RadioButton) findViewById(R.id.rb_id_dos);
         //Nuevo-Para la imagen de perfil
-        ImageView image_Profile2 = (ImageView) findViewById(R.id.imgV2_fragmentperfil);
+        ImageView imageProfile2 = (ImageView) findViewById(R.id.imgV2_fragmentperfil);
 
 
         nombreEt2.setText(misPreferencias.getString(getString(R.string.nombre), ""));
@@ -137,12 +134,12 @@ public class Registro extends AppCompatActivity {
         uds2Et2.setText(misPreferencias.getString(getString(R.string.udsRapida), ""));
         rapidaCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.rapida), false));
         ultrarrapidaCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.ultrarrapida), false));
-        decimal_BC_ceroCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_cero),false));
-        decimal_BC_dosCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false));
-        decimal_BC_tresCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false));
+        decimalBCCeroCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_cero),false));
+        decimalBCDosCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false));
+        decimalBCTresCheck2.setChecked(misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false));
         //nuevo-Para la imagen de perfil
         Uri uri = Uri.parse(misPreferencias.getString(getString(R.string.image_perfil), ""));
-        image_Profile2.setImageURI(uri);
+        imageProfile2.setImageURI(uri);
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Preferences loaded with previous values (if exist).");
@@ -233,8 +230,6 @@ public class Registro extends AppCompatActivity {
                                 requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
                             }
                         });
-
-        //AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialogBuilder.show();
     }
 
@@ -269,7 +264,7 @@ public class Registro extends AppCompatActivity {
         if (resultCode==RESULT_OK){
             Uri miPath=data.getData();
             imagePerfil.setImageURI(miPath);
-            final_path = miPath.toString();
+            finalPath = miPath.toString();
             imagePerfil.setBackgroundResource(R.color.transparent);
         }
     }
@@ -280,7 +275,7 @@ public class Registro extends AppCompatActivity {
      */
     public void guardarperfilOnClick(View view) {
 
-        SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+        misPreferencias = getSharedPreferences(PREFERENCES_USER, MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
 
         String nombre = nombreEt.getText().toString();
@@ -294,11 +289,11 @@ public class Registro extends AppCompatActivity {
         Boolean rapida = rapidaCheck.isChecked();
         Boolean ultrarrapida = ultrarrapidaCheck.isChecked();
         //Nuevo Spinner decimales Bolo Corrector
-        Boolean bc_cero = decimal_BC_ceroCheck.isChecked();
-        Boolean bc_dos = decimal_BC_dosCheck.isChecked();
-        Boolean bc_tres = decimal_BC_tresCheck.isChecked();
+        Boolean bcCero = decimalBCCeroCheck.isChecked();
+        Boolean bcDos = decimalBCDosCheck.isChecked();
+        Boolean bcTres = decimalBcTresCheck.isChecked();
         //Nuevo- Para la imagen de perfil
-        String path_image = final_path;
+        String pathImage = finalPath;
 
         int minVal = Integer.parseInt(min);
         int maxVal = Integer.parseInt(max);
@@ -311,7 +306,7 @@ public class Registro extends AppCompatActivity {
         } else if (nombre.length() == 0 || edad.length() == 0 || estatura.length() == 0 || peso.length() == 0 || max.length() == 0 || min.length() == 0 ||
                 udsBasal.length() == 0 || udsRapida.length() == 0) {
             Toast.makeText(Registro.this, R.string.textfieldEmpty, Toast.LENGTH_SHORT).show();
-        } else if (radioGroup_insulinaBolo.getCheckedRadioButtonId() == -1 || radioGroup_decimalesBolo.getCheckedRadioButtonId() == -1){
+        } else if (radioGroupInsulinaBolo.getCheckedRadioButtonId() == -1 || radioGroupDecimalesBolo.getCheckedRadioButtonId() == -1){
             Toast.makeText(Registro.this, R.string.noRadioButtonsChecked, Toast.LENGTH_SHORT).show();
         } else {
 
@@ -326,11 +321,11 @@ public class Registro extends AppCompatActivity {
             editorPreferencias.putString(getString(R.string.udsRapida), udsRapida);
             editorPreferencias.putBoolean(getString(R.string.rapida), rapida);
             editorPreferencias.putBoolean(getString(R.string.ultrarrapida), ultrarrapida);
-            editorPreferencias.putBoolean(getString(R.string.decimal_bc_cero), bc_cero);
-            editorPreferencias.putBoolean(getString(R.string.decimal_bc_dos), bc_dos);
-            editorPreferencias.putBoolean(getString(R.string.decimal_bc_tres), bc_tres);
+            editorPreferencias.putBoolean(getString(R.string.decimal_bc_cero), bcCero);
+            editorPreferencias.putBoolean(getString(R.string.decimal_bc_dos), bcDos);
+            editorPreferencias.putBoolean(getString(R.string.decimal_bc_tres), bcTres);
             //Nuevo-Para la imagen de perfil
-            editorPreferencias.putString(getString(R.string.image_perfil),path_image);
+            editorPreferencias.putString(getString(R.string.image_perfil),pathImage);
 
             editorPreferencias.apply();
 
@@ -352,14 +347,9 @@ public class Registro extends AppCompatActivity {
     }
 
     class RegistroAlimentos extends AsyncTask<String,Void,String> {
-        private String[] tipoAlimento;
-        private String[] numeroTipoAlimento;
-        private String[] alimento;
-        private String[] indicesGlucemico;
-        private String[] raciones;
 
-        SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-        SharedPreferences.Editor editorPreferencias = misPreferencias.edit(); // Nuevo cambio para ir a la Activity MenuPrincipal despues de registrarse
+        SharedPreferences misPreferenciasRA = getSharedPreferences(PREFERENCES_USER, MODE_PRIVATE);
+        SharedPreferences.Editor editorPreferencias = misPreferenciasRA.edit(); // Nuevo cambio para ir a la Activity MenuPrincipal despues de registrarse
 
 
         DataBaseManager dbmanager = new DataBaseManager(getBaseContext());
@@ -368,16 +358,13 @@ public class Registro extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            //super.onPreExecute();
             Toast.makeText(Registro.this, "Cargando datos...", Toast.LENGTH_LONG).show();
-
         }
 
 
         @Override
         protected String doInBackground(String... strings) {
 
-            //Toast.makeText(Registro.this, "Cargando datos...:" , Toast.LENGTH_LONG).show();
             rellenarTablaAlimentos();
             editorPreferencias.putBoolean("tablaAlimentos", true);
             editorPreferencias.apply();
@@ -393,15 +380,15 @@ public class Registro extends AppCompatActivity {
 
         private void rellenarTablaAlimentos() {
             //Categoria de loas Alimentos.
-            tipoAlimento = getResources().getStringArray(R.array.arrayTipoAlimento);
+            String[] tipoAlimento = getResources().getStringArray(R.array.arrayTipoAlimento);
             //Numero total de alimentos en cada categoria
-            numeroTipoAlimento = getResources().getStringArray(R.array.numeroTipoAlimento);
+            String[] numeroTipoAlimento = getResources().getStringArray(R.array.numeroTipoAlimento);
             //Todos los alimentos (Todas las categorias)
-            alimento = getResources().getStringArray(R.array.arrayAlimentos);
+            String[] alimento = getResources().getStringArray(R.array.arrayAlimentos);
             //Indices Glucemicos de todos los alimentos
-            indicesGlucemico = getResources().getStringArray(R.array.arrayIndicesGlucemicos);
+            String[] indicesGlucemico = getResources().getStringArray(R.array.arrayIndicesGlucemicos);
             //RACIÓN DE HC(EN GRAMOS) de todos loas alimentos
-            raciones = getResources().getStringArray(R.array.arrayRacionesHC);
+            String[] raciones = getResources().getStringArray(R.array.arrayRacionesHC);
 
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Total alimentos: " + alimento.length);

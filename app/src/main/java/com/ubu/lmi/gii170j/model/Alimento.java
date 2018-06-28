@@ -8,10 +8,10 @@ public class Alimento {
     //Indice Glucemico del alimento
     private String ig;
 
-    public Alimento(String name, String gr_alimento, String i_g) {
+    public Alimento(String name, String grAlimento, String iG) {
         this.nombre = name;
-        this.gramos = gr_alimento;
-        this.ig = i_g;
+        this.gramos = grAlimento;
+        this.ig = iG;
     }
 
     public String getNombre() {

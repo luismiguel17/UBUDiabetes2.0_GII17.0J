@@ -72,7 +72,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Pruebas_Main" />
         <activity
             android:name=".view.RegistroListaIngesta"
             android:label="@string/title_activity_registro_lista_ingesta"

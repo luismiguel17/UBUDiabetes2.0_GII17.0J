@@ -1,35 +1,26 @@
 package com.ubu.lmi.gii170j.model;
 
 public class DetallesIngesta {
-    private String tipo_alimento;
-    private String indice_glucemico;
-    //private String hidratos_carbono;
-    //private String id_lineaLista;
-    //private String id_lista;
+    private String tipoAlimento;
+    private String indiceGlucemico;
     private String nomAlimento;
     private String cantidad;
 
-    public DetallesIngesta(String arg_tipo, String arg_nomAlimento, String arg_cantidad , String arg_ig) {
-        this.tipo_alimento = arg_tipo;
-        this.nomAlimento = arg_nomAlimento;
-        this.cantidad = arg_cantidad;
-        this.indice_glucemico = arg_ig;
-        //this.hidratos_carbono = arg_hc;
+    public DetallesIngesta(String argTipo, String argNomAlimento, String argCantidad , String argIg) {
+        this.tipoAlimento = argTipo;
+        this.nomAlimento = argNomAlimento;
+        this.cantidad = argCantidad;
+        this.indiceGlucemico = argIg;
     }
 
-    public String getTipo_alimento() {
-        return tipo_alimento;
+    public String getTipoAlimento() {
+        return tipoAlimento;
     }
 
-    public String getIndice_glucemico() {
-        return indice_glucemico;
+    public String getIndiceGlucemico() {
+        return indiceGlucemico;
     }
 
-    /**
-    public String getHidratos_carbono() {
-        return hidratos_carbono;
-    }
-    */
     public String getNomAlimento() {
         return nomAlimento;
     }

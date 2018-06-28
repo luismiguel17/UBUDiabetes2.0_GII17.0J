@@ -12,13 +12,10 @@ import android.widget.TextView;
 
 import com.ubu.lmi.gii170j.R;
 import com.ubu.lmi.gii170j.model.Alimento;
+import java.util.List;
 
-import java.util.ArrayList;
+public class IngestaAlimentoListAdapter extends ArrayAdapter<Alimento>{
 
-public class IngestaAlimento_ListAdapter extends ArrayAdapter<Alimento>{
-    //private LayoutInflater ly_inflater;
-   //private ArrayList<Alimento> alimentos;
-    //private int viewResource_id;
     private Context mContext;
     int mResource;
 
@@ -27,10 +24,8 @@ public class IngestaAlimento_ListAdapter extends ArrayAdapter<Alimento>{
     static final int MODERADO_MAX = 69;
     static final int BAJO = 55;
 
-    public IngestaAlimento_ListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Alimento> objects) {
+    public IngestaAlimentoListAdapter(@NonNull Context context, int resource, @NonNull List<Alimento> objects) {
         super(context, resource, objects);
-        //this.alimentos = objects;
-         //ly_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
         mResource =  resource;
 
@@ -46,22 +41,22 @@ public class IngestaAlimento_ListAdapter extends ArrayAdapter<Alimento>{
 
         Alimento alimento = new Alimento(nombre,gramos,iglu);
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView= inflater.inflate(mResource,parent,false);
+        convertView = inflater.inflate(mResource,parent,false);
 
-        TextView tv_nombre = (TextView)convertView.findViewById(R.id.tv_id_item_list_ingesta);
-        TextView tv_grHC = (TextView)convertView.findViewById(R.id.tv_id_gralimento);
-        TextView tv_ig = (TextView)convertView.findViewById(R.id.tv_id_ig);
+        TextView tvNombre = (TextView)convertView.findViewById(R.id.tv_id_item_list_ingesta);
+        TextView tvGrHC = (TextView)convertView.findViewById(R.id.tv_id_gralimento);
+        TextView tvIg = (TextView)convertView.findViewById(R.id.tv_id_ig);
 
-        tv_nombre.setText(nombre);
-        tv_grHC.setText(gramos);
-        tv_ig.setText(iglu);
+        tvNombre.setText(alimento.getNombre());
+        tvGrHC.setText(alimento.getGramos());
+        tvIg.setText(alimento.getIg());
         if(indiceGlucemico == ELEVADO || indiceGlucemico > ELEVADO){
-            tv_ig.setBackgroundColor(Color.RED);
+            tvIg.setBackgroundColor(Color.RED);
 
         }else if (indiceGlucemico < MODERADO_MAX  && indiceGlucemico > MODERADO_MIN){
-            tv_ig.setBackgroundColor(Color.YELLOW);
+            tvIg.setBackgroundColor(Color.YELLOW);
         }else if(indiceGlucemico == BAJO || indiceGlucemico < BAJO){
-            tv_ig.setBackgroundColor(Color.GREEN);
+            tvIg.setBackgroundColor(Color.GREEN);
         }
 
 

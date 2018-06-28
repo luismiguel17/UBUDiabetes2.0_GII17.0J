@@ -24,9 +24,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     SharedPreferences misPreferencias;
     SharedPreferences.Editor editorPreferencias;
-    //String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial),getString(R.string.main_registroIngestas)};
     CircleMenu circleMenuPrincipal;
-    TextView welcome;
     TextView welcomeUser;
     ImageView imageViewPerfil;
 
@@ -65,7 +63,6 @@ public class MenuPrincipal extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        welcome = (TextView)findViewById(R.id.tx_id_welcome);
         welcomeUser = (TextView)findViewById(R.id.tv_id_welcomeuser);
         imageViewPerfil = (ImageView)findViewById(R.id.iv_id_imageprofile_MP);
 
@@ -74,8 +71,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
         welcomeUser.setText(misPreferencias.getString(getString(R.string.nombre), ""));
         Uri uri = Uri.parse(misPreferencias.getString(getString(R.string.image_perfil), ""));
-        Intent intent = getIntent();
-        //Uri uri =  Uri.parse(intent.getStringExtra("imagenPerfil"));
         imageViewPerfil.setImageURI(uri);
 
 
@@ -91,8 +86,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     public void onMenuSelected(int item) {
 
                         if(item == 0){
-                            //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-                            //SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
+
                             editorPreferencias.putBoolean("boloCorrector",true);
                             editorPreferencias.apply();
 
@@ -100,14 +94,13 @@ public class MenuPrincipal extends AppCompatActivity {
                             startActivity(paso1);
 
                         } else if (item == 1) {
-                            //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-                            //SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
+
                             editorPreferencias.putBoolean("boloCorrector",false);
                             editorPreferencias.apply();
                             Intent i = new Intent(getApplicationContext(), RegistroGlucemias.class);
                             startActivity(i);
                         }else if(item == 2){
-                            Intent i = new Intent(getApplicationContext(), Pruebas_Main.class);
+                            Intent i = new Intent(getApplicationContext(), Historial.class);
                             startActivity(i);
                         }else if (item == 3){
 
@@ -132,8 +125,7 @@ public class MenuPrincipal extends AppCompatActivity {
         int id = item.getItemId();
         if(id== R.id.action_acerca){
             Toast.makeText(this, getString(R.string.acerca_de), Toast.LENGTH_LONG).show();
-            //Intent i = new Intent(this,Pruebas_Main.class);
-            //startActivity(i);
+
         }else if(id==R.id.action_settings){
             Intent i = new Intent(this,Ajustes.class);
             startActivity(i);

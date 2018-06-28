@@ -7,14 +7,14 @@ package com.ubu.lmi.gii170j.persistence;
 public class ValoresPOJO {
 
     /**
-     * Constructor.
+     * ValoresPOJO. Constructor.
      *
-     * @param rapida
-     * @param insulinaBasal
-     * @param insulinaRapida
-     * @param glucemiaMinima
-     * @param glucemiaMaxima
-     * @param glucemia       glucemia inicial
+     * @param rapida insulina rápida.
+     * @param insulinaBasal insulina basal.
+     * @param insulinaRapida insulina rápida.
+     * @param glucemiaMinima glucemia mínima.
+     * @param glucemiaMaxima glucemia máxima.
+     * @param glucemia glucemia inicial.
      */
     public ValoresPOJO(boolean rapida, double insulinaBasal, double insulinaRapida,
                        double glucemiaMinima, double glucemiaMaxima, double glucemia) {

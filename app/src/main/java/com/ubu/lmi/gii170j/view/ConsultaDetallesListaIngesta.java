@@ -6,28 +6,29 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ubu.lmi.gii170j.R;
 import com.ubu.lmi.gii170j.model.DetallesIngesta;
 import com.ubu.lmi.gii170j.persistence.DataBaseManager;
-import com.ubu.lmi.gii170j.util.IngestaDetalles_ListAdapter;
+import com.ubu.lmi.gii170j.util.IngestaDetallesListAdapter;
 
 import java.util.ArrayList;
 
 public class ConsultaDetallesListaIngesta extends AppCompatActivity {
 
-    private static String TAG = ConsultaDetallesListaIngesta.class.getName();
     public static final int COLUMNA_TIPO = 0;
     public static final int COLUMNA_IG = 3;
     public static final int COLUMNA_ALIMENTO = 2;
     public static final int COLUMNA_CANTIDAD = 3;
 
-    public int id_lista_select=0;
+    public int idListaSelect =0;
 
     DetallesIngesta detallesListaIngesta;
-    private ArrayList<DetallesIngesta> detalle_listIngesta;
-    private IngestaDetalles_ListAdapter adp_detalle_listIngesta;
-    ListView lv_detalle_ingesta;
+    private ArrayList<DetallesIngesta> detalleListIngesta;
+    private IngestaDetallesListAdapter adpDetalleListIngesta;
+    ListView lvDetalleIngesta;
+    TextView tVDetallesLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,16 @@ public class ConsultaDetallesListaIngesta extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        id_lista_select = getIntent().getExtras().getInt("id_lista");
-        lv_detalle_ingesta = (ListView)findViewById(R.id.lv_id_detalleslistaingesta_dli);
+        idListaSelect = getIntent().getExtras().getInt("id_lista");
+        lvDetalleIngesta = (ListView)findViewById(R.id.lv_id_detalleslistaingesta_dli);
 
+        tVDetallesLista = (TextView)findViewById(R.id.tv_id_dli);
+        String txtEncabezadoLista = getString(R.string.detalles_lista) + ": " + idListaSelect;
+        tVDetallesLista.setText(txtEncabezadoLista);
 
-        detalle_listIngesta = new ArrayList<>();
-        adp_detalle_listIngesta = new IngestaDetalles_ListAdapter(this,R.layout.list_detalles_lista_ingesta,detalle_listIngesta);
-        lv_detalle_ingesta.setAdapter(adp_detalle_listIngesta);
+        detalleListIngesta = new ArrayList<>();
+        adpDetalleListIngesta = new IngestaDetallesListAdapter(this,R.layout.list_detalles_lista_ingesta, detalleListIngesta);
+        lvDetalleIngesta.setAdapter(adpDetalleListIngesta);
 
         /**
          * LLamada a la asynktask
@@ -55,50 +59,43 @@ public class ConsultaDetallesListaIngesta extends AppCompatActivity {
     class AsyncTaskConsultaDetallesLista extends AsyncTask<String,Void,String> {
         DataBaseManager dbmanager = new DataBaseManager(getBaseContext());
 
-        ArrayList<String> tipo = new ArrayList<String>();
-        ArrayList<String> nom_alimento = new ArrayList<String>();
-        ArrayList<String> cantidad = new ArrayList<String>();
-        ArrayList<String> ig = new ArrayList<String>();
+        ArrayList<String> tipo = new ArrayList<>();
+        ArrayList<String> nomAlimento = new ArrayList<>();
+        ArrayList<String> cantidad = new ArrayList<>();
+        ArrayList<String> ig = new ArrayList<>();
         @Override
         protected void onPreExecute() {
-            //super.onPreExecute();
-            //Toast.makeText(ConsultaDetallesListaIngesta.this, "Cargando detalles:", Toast.LENGTH_LONG).show();
+            // Required empty protected method
         }
 
 
         @Override
         protected String doInBackground(String... strings) {
-
-            //Toast.makeText(Registro.this, "Cargando datos...:" , Toast.LENGTH_LONG).show();
-
             consultaDetallesListaIngesta();
             consultarAlimento();
             createListDetalles();
             return strings[0];
         }
         public void consultaDetallesListaIngesta(){
-            final Cursor cursorDetalleRegistrosIngesta = dbmanager.consultarDetallesIngesta(id_lista_select);
+            final Cursor cursorDetalleRegistrosIngesta = dbmanager.consultarDetallesIngesta(idListaSelect);
             try{
                 while(cursorDetalleRegistrosIngesta.moveToNext()){
 
-                    nom_alimento.add(cursorDetalleRegistrosIngesta.getString(COLUMNA_ALIMENTO));
+                    nomAlimento.add(cursorDetalleRegistrosIngesta.getString(COLUMNA_ALIMENTO));
                     cantidad.add(cursorDetalleRegistrosIngesta.getString(COLUMNA_CANTIDAD));
                 }
             }finally{
+                cursorDetalleRegistrosIngesta.close();
 
-                if (cursorDetalleRegistrosIngesta != null && !cursorDetalleRegistrosIngesta.isClosed())
-                    cursorDetalleRegistrosIngesta.close();
-                //dbmanager.closeBD();
             }
-            //dbmanager.closeBD();
 
         }
 
         public void consultarAlimento(){
 
 
-            for(int i=0;i<nom_alimento.size();i++){
-                final Cursor cursorAlimento = dbmanager.selectAlimento(nom_alimento.get(i));
+            for(int i = 0; i< nomAlimento.size(); i++){
+                final Cursor cursorAlimento = dbmanager.selectAlimento(nomAlimento.get(i));
                 try{
                     while(cursorAlimento.moveToNext()){
 
@@ -107,10 +104,8 @@ public class ConsultaDetallesListaIngesta extends AppCompatActivity {
 
                     }
                 }finally{
+                    cursorAlimento.close();
 
-                    if (cursorAlimento != null && !cursorAlimento.isClosed())
-                        cursorAlimento.close();
-                    //dbmanager.closeBD();
                 }
             }
 
@@ -119,12 +114,11 @@ public class ConsultaDetallesListaIngesta extends AppCompatActivity {
 
         public void createListDetalles(){
 
-            for(int j = 0;j < nom_alimento.size();j++){
-                detallesListaIngesta = new DetallesIngesta(tipo.get(j),nom_alimento.get(j),cantidad.get(j),ig.get(j));
-                detalle_listIngesta.add(0,detallesListaIngesta);
-                adp_detalle_listIngesta.notifyDataSetChanged();
+            for(int j = 0; j < nomAlimento.size(); j++){
+                detallesListaIngesta = new DetallesIngesta(tipo.get(j), nomAlimento.get(j),cantidad.get(j),ig.get(j));
+                detalleListIngesta.add(0,detallesListaIngesta);
+                adpDetalleListIngesta.notifyDataSetChanged();
             }
-            //dbmanager.closeBD();
         }
         @Override
         protected void onPostExecute(String s) {

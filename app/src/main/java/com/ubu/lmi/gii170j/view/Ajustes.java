@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import com.ubu.lmi.gii170j.R;
 import com.ubu.lmi.gii170j.persistence.DataBaseManager;
-import com.ubu.lmi.gii170j.util.Ajustes_ListAdapter;
+import com.ubu.lmi.gii170j.util.AjustesListAdapter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,18 +32,16 @@ import java.util.Date;
 public class Ajustes extends AppCompatActivity {
 
     private static String TAG = Ajustes.class.getName();
-    private final int RESULT_EXIT = 0;
-    //AlertDialog  alertBackUp;
-    //AlertDialog  alertDeletingRecords;
+    private static final int RESULT_EXIT = 0;
 
-    private String [] items_ajustes;
+    private String [] itemsAjustes;
 
-    private Integer[] images_id={
+    private Integer[] imagesId ={
         R.mipmap.ic_perfil_ajustes,
                 R.mipmap.ic_copiaseguridad_ajustes,
             R.mipmap.ic_liberarespacio_ajustes
                 };
-    private ListView lista_ajustes;
+    private ListView listaAjustes;
     SharedPreferences misPreferencias;
     SharedPreferences.Editor editorPreferencias;
     DataBaseManager dbmanager;
@@ -56,11 +54,11 @@ public class Ajustes extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        items_ajustes = getResources().getStringArray(R.array.itemsAjustes);
-        Ajustes_ListAdapter adapter_listAjustes=new Ajustes_ListAdapter(this,items_ajustes,images_id);
-        lista_ajustes=(ListView)findViewById(R.id.lv_id_listaajustes);
-        lista_ajustes.setAdapter(adapter_listAjustes);
-        lista_ajustes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemsAjustes = getResources().getStringArray(R.array.itemsAjustes);
+        AjustesListAdapter ajustesListAdapter=new AjustesListAdapter(this, itemsAjustes, imagesId);
+        listaAjustes =(ListView)findViewById(R.id.lv_id_listaajustes);
+        listaAjustes.setAdapter(ajustesListAdapter);
+        listaAjustes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -75,10 +73,7 @@ public class Ajustes extends AppCompatActivity {
                     //Ajuestes-Liberar espacio
                 }else if(position == 2){
                     alertDialogDeleteRecords();
-                    //Toast.makeText(getBaseContext(),  "Ajustes Liberar espacio", Toast.LENGTH_LONG).show();
-
                 }
-                //finish();
             }
         });
     }
@@ -91,32 +86,41 @@ public class Ajustes extends AppCompatActivity {
         String packageName = null;
         String sourceDBName = null;
         String targetDBName = null;
-        String fecha = null;
+
         File currentDB = null;
         File backupDB = null;
+        File newdirectory= null;
         misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         editorPreferencias = misPreferencias.edit();
         try {
-            //getExternalStoragePublicDierectory
+
+
             sd = Environment.getExternalStorageDirectory();
+            //sd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             data = Environment.getDataDirectory();
             packageName = getPackageName();
             sourceDBName = "dataBase.sqlite";
             targetDBName = "UBUDiabetes_BackUp";
+            // a este path añadimos una nueva ruta de directorio.
+            newdirectory = new File(sd.getAbsolutePath() + "/UBUDiabetes/");
+            // creamos el directorio si no existia
+            newdirectory.mkdir();
             if (sd.canWrite()) {
-                Date now = new Date();
+                //Path donde se encuentra nuestra base de datos
                 String currentDBPath = "data/" + packageName + "/databases/" + sourceDBName;
+                //Fecha para el backup
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
                 Date today = Calendar.getInstance().getTime();
                 String reportDate = dateFormat.format(today);
-                String backupDBPath = targetDBName + reportDate + ".db";
+                //Nombre del backup
+                String backupDBName = targetDBName + reportDate + ".db";
 
                 currentDB = new File(data, currentDBPath);
-                backupDB = new File(sd, backupDBPath);
+                backupDB = new File(newdirectory, backupDBName);
 
-                Log.i("backup", "backupDB=" + backupDB.getAbsolutePath());
-                Log.i("backup", "sourceDB=" + currentDB.getAbsolutePath());
-                Log.i("backup", "dateString=" +  reportDate);
+                Log.d(TAG, "backupDB=" + backupDB.getAbsolutePath());
+                Log.d(TAG, "sourceDB=" + currentDB.getAbsolutePath());
+                Log.d(TAG, "dateString=" +  reportDate);
 
                 try (FileChannel src = new FileInputStream(currentDB).getChannel()) {
                     try (FileChannel dst = new FileOutputStream(backupDB).getChannel()) {
@@ -173,7 +177,6 @@ public class Ajustes extends AppCompatActivity {
             deletelistaingesta = dbmanager.eliminar("listaingesta");
             deletedetalleslistaingesta = dbmanager.eliminar("detalleslistaingesta");
             if (deleteglucemias != 0 && deleteincidencias !=0 && deletelistaingesta != 0 && deletedetalleslistaingesta != 0) {
-                //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Registros Eliminados correctamente");
 
             }

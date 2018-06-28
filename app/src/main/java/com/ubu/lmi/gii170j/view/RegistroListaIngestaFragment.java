@@ -14,6 +14,7 @@ import com.ubu.lmi.gii170j.R;
 public class RegistroListaIngestaFragment extends Fragment {
 
     public RegistroListaIngestaFragment() {
+        // Required empty public constructor
     }
 
     @Override

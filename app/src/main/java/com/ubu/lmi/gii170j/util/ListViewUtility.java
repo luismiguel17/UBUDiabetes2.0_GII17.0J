@@ -11,9 +11,13 @@ import android.widget.ListView;
  */
 
 public class ListViewUtility {
+
+    private ListViewUtility() {
+    }
     /**
+
      * Función que recibe una listView y define su tamaño en funcion de su numero de items
-     * @param listView
+     * @param listView lista.
      */
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();

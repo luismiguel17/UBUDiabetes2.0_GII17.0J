@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class Incidencias extends AppCompatActivity {
 
-    final private int RESULT_EXIT = 0;
+    private static final int RESULT_EXIT = 0;
     private String incidencia;
 
     @Override
@@ -34,7 +34,6 @@ public class Incidencias extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int valor = bundle.getInt("valor");
         int max = bundle.getInt("max");
-        int min = bundle.getInt("min");
 
         final ArrayAdapter adapter;
         Spinner listaIncidencias = (Spinner) findViewById(R.id.sp_incidencias);
@@ -43,7 +42,7 @@ public class Incidencias extends AppCompatActivity {
         //el spinner en consecuencia
         if (valor > max) {
             adapter = ArrayAdapter.createFromResource(this, R.array.spinnerIncidenciasAlto, android.R.layout.simple_spinner_item);
-        } else {
+        }else {
             adapter = ArrayAdapter.createFromResource(this, R.array.spinnerIncidenciasBajo, android.R.layout.simple_spinner_item);
         }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -57,6 +56,7 @@ public class Incidencias extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                // Required empty public method
             }
         });
     }

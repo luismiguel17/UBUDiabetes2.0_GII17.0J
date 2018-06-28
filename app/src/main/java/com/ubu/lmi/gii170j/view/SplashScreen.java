@@ -28,7 +28,7 @@ public class SplashScreen extends Activity {
             }
 
             private void finish(){
-
+                // Required empty private method.
             }
         },splashInterval);
 

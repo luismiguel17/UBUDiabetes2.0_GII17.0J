@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".view.RegistroListaIngesta">
 
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registros"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"/>
@@ -23,6 +24,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="10dp"
         android:gravity="center"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_id_identificador_rli"
@@ -65,7 +67,6 @@
             android:textColor="@color/colorAccent"
             android:text="@string/boloC_rli"/>
     </LinearLayout>
-
     <ListView
         android:id="@+id/lv_id_listaingesta_rli"
         android:layout_width="match_parent"
@@ -77,18 +78,18 @@
         android:smoothScrollbar="true"
         android:footerDividersEnabled="false"
         android:drawSelectorOnTop="false"
+        android:layout_marginTop="100dp"
         android:scrollbars="vertical">
     </ListView>
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/bt_consultar_rli"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="end"
-        android:background="@drawable/btns_carbohidratos"
-        android:textColor="#ffffff"
+        android:layout_gravity="end|bottom"
         android:onClick="consultarItemLista"
-        android:text="Consultar"/>
+        app:fabSize="normal"
+        android:src="@drawable/ic_arrow_forward_white_24dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_margin="16dp" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

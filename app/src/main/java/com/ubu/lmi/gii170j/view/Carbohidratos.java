@@ -31,7 +31,7 @@ import com.ubu.lmi.gii170j.calculations.CalculaBolo;
 import com.ubu.lmi.gii170j.model.Alimento;
 import com.ubu.lmi.gii170j.persistence.DataBaseManager;
 import com.ubu.lmi.gii170j.persistence.ValoresPOJO;
-import com.ubu.lmi.gii170j.util.IngestaAlimento_ListAdapter;
+import com.ubu.lmi.gii170j.util.IngestaAlimentoListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class Carbohidratos extends AppCompatActivity {
 
     public static final int COLUMNA_IG = 3;
 
-    private final int RESULT_EXIT = 0;
+    private static final int RESULT_EXIT = 0;
     //Consultar Preferencias de Usuario
     private  SharedPreferences misPreferencias;
     private boolean rapida;
@@ -74,14 +74,11 @@ public class Carbohidratos extends AppCompatActivity {
     private double glucemiaMaxima;
     private double glucemia;
     private Boolean bc_cero;
-    private Boolean bc_uno;
-    private Boolean bc_dos;
+    private Boolean bcUno;
+    private Boolean bcDos;
     private ValoresPOJO valoresPOJO;
     private CalculaBolo cb;
 
-    private String comida;
-    private String gramosPorRacion ="";
-    private String indiceGlucemico="";
     private double sumatorioRaciones=0;
     private double actualSumatorioBoloC=0;
     private double boloResult=0;
@@ -103,7 +100,6 @@ public class Carbohidratos extends AppCompatActivity {
     //Creamos nuestro objeto spinner para nuestra lista total de alimentos
     private Spinner listaComida;
     private String[] totalAlimentosOrdenados;
-    private ArrayList<String> ingestaAlimentosList;
 
     //Prueba mostrar sumatorioCH
     private TextView editTextActualSumatoriHC;
@@ -111,13 +107,12 @@ public class Carbohidratos extends AppCompatActivity {
 
     //Nuevo-Para la listview con varias columnas
 
-    private Alimento alimento_ingesta;
-    private ArrayList<Alimento> userlist_ingesta;
-    private IngestaAlimento_ListAdapter adp_ListaIngesta;
+    private Alimento alimentoIngesta;
+    private ArrayList<Alimento> userlistIngesta;
+    private IngestaAlimentoListAdapter adpListaIngesta;
 
     //para eliminar items de la lisview
     private int itemSelec=0;
-    //private int contItemsIngesta =0;
 
     //Nuevo-Para el doble click de la listview  ingesta de aliemntos
     private int previousPosition;
@@ -133,12 +128,10 @@ public class Carbohidratos extends AppCompatActivity {
 
 
         editTextGramos = (EditText) findViewById(R.id.et_gramos);
-        //editTextGramos.setText("0");
 
         //Obtenemos la referencia a la listView del Xml
         listViewIngesta = (ListView) findViewById(R.id.lv_id_listaingesta_fc);
-        //listViewIngesta.setScrollContainer(true);
-        //listViewIngesta.setFastScrollAlwaysVisible(true);
+
         //Obtenemos la referencia al button add del Xml
         buttonAddAlimento = (Button) findViewById(R.id.bt_id_addAlimento);
         //Obtenemos la referencia al button remove del Xml
@@ -149,8 +142,6 @@ public class Carbohidratos extends AppCompatActivity {
         //Obtenemos la referencia al spinner de todos los alimentos
         listaComida = (Spinner) findViewById(R.id.spiner_alimentos);
 
-        //Creamos un Arraylist para la lista de ingesta de alimentos del usuario
-        ingestaAlimentosList = new ArrayList<String>();
 
         //Array Para la lista de alimentos
         totalAlimentosOrdenados  = getResources().getStringArray(R.array.arrayAlimentos);
@@ -158,24 +149,22 @@ public class Carbohidratos extends AppCompatActivity {
         Arrays.sort(totalAlimentosOrdenados);
 
         //Creamos un adaptador para el buscador y el spinner de alimentos
-        //ArrayAdapter adpTodos = ArrayAdapter.createFromResource(this, R.array.arrayAlimentos, android.R.layout.simple_spinner_item);
         ArrayAdapter adpTodos = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,totalAlimentosOrdenados);
         autoCompleteTextViewBuscador.setAdapter(adpTodos);
         listaComida.setAdapter(adpTodos);
 
         //mostrar sumatorioCH
         editTextActualSumatoriHC =(TextView)findViewById(R.id.tv_id_actualSumatorioCH);
-        editTextActualSumatoriHC.setText("Actual Sum HC: " + "0.0");
+        editTextActualSumatoriHC.setText("Actual Sum HC: 0.0");
        //mostrar BoloC actual
         editTextActualBoloC = (TextView)findViewById(R.id.tv_id_actualBoloC);
-        editTextActualBoloC.setText("Actual Bolo C.:" + "0.0");
+        editTextActualBoloC.setText("Actual Bolo C.: 0.0");
 
         //** Nuevo- Para la listView con varias columnas
-        userlist_ingesta = new ArrayList<>();
-        adp_ListaIngesta = new IngestaAlimento_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
-        listViewIngesta.setAdapter(adp_ListaIngesta);
-       // adp_ListaIngesta = new IngestaAlimento_ListAdapter(this,R.layout.list_ingesta_alimentos, userlist_ingesta);
-        //listViewIngesta.setAdapter(adp_ListaIngesta)
+        userlistIngesta = new ArrayList<>();
+        adpListaIngesta = new IngestaAlimentoListAdapter(this,R.layout.list_ingesta_alimentos, userlistIngesta);
+        listViewIngesta.setAdapter(adpListaIngesta);
+
 
         //Nuevo ValoresPojo
         misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
@@ -187,8 +176,8 @@ public class Carbohidratos extends AppCompatActivity {
         glucemiaMaxima = Double.parseDouble(misPreferencias.getString(getString(R.string.max), "0"));
         glucemia = misPreferencias.getInt(getString(R.string.glucemia), 0);
         bc_cero = misPreferencias.getBoolean(getString(R.string.decimal_bc_cero),false);
-        bc_uno = misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false);
-        bc_dos = misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false);
+        bcUno = misPreferencias.getBoolean(getString(R.string.decimal_bc_dos),false);
+        bcDos = misPreferencias.getBoolean(getString(R.string.decimal_bc_tres),false);
         valoresPOJO = new ValoresPOJO(rapida, insulinaBasal, insulinaRapida, glucemiaMinima, glucemiaMaxima, glucemia);
 
 
@@ -218,8 +207,7 @@ public class Carbohidratos extends AppCompatActivity {
                     count=1;
                     previousMil=System.currentTimeMillis();
                 }
-                //listViewIngesta.setSelection(-1);
-                //listViewIngesta.requestLayout();
+
                 listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
                 buttonRemoveAlimento.setVisibility(View.INVISIBLE);
                 buttonAddAlimento.setVisibility(View.VISIBLE);
@@ -250,37 +238,30 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public void añadirOtroOnClick(View view) {
         String[] informationQuery;
-        String gr_HCperRation = "";
-        String ig_alimento ="";
+        String grHCperRation = "";
+        String igAlimento ="";
         String gramos = editTextGramos.getText().toString();
-        String nom_alimento = listaComida.getSelectedItem().toString();
+        String nomAlimento = listaComida.getSelectedItem().toString();
         int numeroGramos = 0;
         //Si ha insertados los gramos del alimento
         if (!gramos.equals("")) {
             numeroGramos = Integer.parseInt(gramos);
-            informationQuery = consulta_grHC_IG(nom_alimento);
-            gr_HCperRation = informationQuery[0];
-            ig_alimento = informationQuery[1];
-            sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gr_HCperRation);
+            informationQuery = consulta_grHC_IG(nomAlimento);
+            grHCperRation = informationQuery[0];
+            igAlimento = informationQuery[1];
+            sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, grHCperRation);
             //Bolo corrector Temporal
-            //cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
             actualSumatorioBoloC = calculaBoloCorrector(sumatorioRaciones);
 
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "After Query: ");
-                Log.d(TAG, "Grams HC per ration: " + gr_HCperRation );
-                Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
-            }
 
-
-            alimento_ingesta = new Alimento(nom_alimento, gramos ,ig_alimento);
-            userlist_ingesta.add(0,alimento_ingesta);
+            alimentoIngesta = new Alimento(nomAlimento, gramos ,igAlimento);
+            userlistIngesta.add(0, alimentoIngesta);
             editTextActualSumatoriHC.setText("Actual Sum HC: " + String.format("%.2f",  sumatorioRaciones));
             editTextActualBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
             editTextGramos.setText("");
             autoCompleteTextViewBuscador.setText("");
             listaComida.setSelection(0);
-            adp_ListaIngesta.notifyDataSetChanged();
+            adpListaIngesta.notifyDataSetChanged();
 
 
 
@@ -295,29 +276,29 @@ public class Carbohidratos extends AppCompatActivity {
 
     public void removeOnClick(View view) {
         String[] informationQuery;
-        String gr_HCperRation = "";
+        String grHCperRation = "";
 
-        Alimento removable_food = userlist_ingesta.get(itemSelec);
-        String num_gramos = removable_food.getGramos();
-        String nom_alimento = removable_food.getNombre();
-
-
-        informationQuery = consulta_grHC_IG(nom_alimento);
-        gr_HCperRation = informationQuery[0];
+        Alimento removableFood = userlistIngesta.get(itemSelec);
+        String numGramos = removableFood.getGramos();
+        String nomAlimento = removableFood.getNombre();
 
 
-        userlist_ingesta.remove(itemSelec);
+        informationQuery = consulta_grHC_IG(nomAlimento);
+        grHCperRation = informationQuery[0];
+
+
+        userlistIngesta.remove(itemSelec);
         listViewIngesta.clearChoices();
         listViewIngesta.requestLayout();
-        adp_ListaIngesta.notifyDataSetChanged();
+        adpListaIngesta.notifyDataSetChanged();
         listViewIngesta.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
 
-        Toast.makeText(Carbohidratos.this,  nom_alimento + " Eliminado", Toast.LENGTH_LONG).show();
+        Toast.makeText(Carbohidratos.this,  nomAlimento + " Eliminado", Toast.LENGTH_LONG).show();
         buttonRemoveAlimento.setVisibility(View.INVISIBLE);
         buttonAddAlimento.setVisibility(View.VISIBLE);
 
-        sumatorioRaciones -= calcularGramosDeHidratosDeCarbono(Integer.parseInt(num_gramos), gr_HCperRation);
+        sumatorioRaciones -= calcularGramosDeHidratosDeCarbono(Integer.parseInt(numGramos), grHCperRation);
         if(sumatorioRaciones == 0.0){
 
             actualSumatorioBoloC =0.0;
@@ -329,7 +310,7 @@ public class Carbohidratos extends AppCompatActivity {
         editTextActualBoloC.setText("Actual Bolo C.:" + String.format("%.2f", actualSumatorioBoloC));
 
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Eliminacion alimento: " + nom_alimento);
+            Log.d(TAG, "Eliminacion alimento: " + nomAlimento);
 
         }
 
@@ -342,26 +323,21 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public String[] consulta_grHC_IG(String alimento){
         String[] retorno = new String[2];
-        String gr_perRation = "";
-        String ig_alimento="";
+        String grPerRation = "";
+        String igAlimento="";
         //Accedemos a la Bd
         DataBaseManager dbmanager = new DataBaseManager(this);
         final Cursor cursorAlimentos = dbmanager.selectAlimento(alimento);
         try {
             if (cursorAlimentos.moveToFirst()) {
-                gr_perRation = cursorAlimentos.getString(COLUMNA_RACION);
-                ig_alimento = cursorAlimentos.getString(COLUMNA_IG);
-                retorno[0] = gr_perRation;
-                retorno[1] = ig_alimento;
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Result Query: " + alimento);
-                    Log.d(TAG, "Grams HC per ration: " + gr_perRation );
-                    Log.d(TAG, "Indice Glucemico: " + ig_alimento);
-                }
+                grPerRation = cursorAlimentos.getString(COLUMNA_RACION);
+                igAlimento = cursorAlimentos.getString(COLUMNA_IG);
+                retorno[0] = grPerRation;
+                retorno[1] = igAlimento;
+
             }
         }finally {
-            if (cursorAlimentos != null && !cursorAlimentos.isClosed())
-                cursorAlimentos.close();
+            cursorAlimentos.close();
             dbmanager.closeBD();
 
         }
@@ -393,15 +369,15 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public void finalizarOnClick(View view) {
 
-        int num_decimal = -1;
+        int numDecimal = -1;
 
         boloResult = calculaBoloCorrector(sumatorioRaciones);
         if (bc_cero){
-            num_decimal = 0;
-        }else if(bc_uno){
-            num_decimal = 1;
-        }else if(bc_dos){
-            num_decimal = 2;
+            numDecimal = 0;
+        }else if(bcUno){
+            numDecimal = 1;
+        }else if(bcDos){
+            numDecimal = 2;
         }
 
         /**
@@ -409,7 +385,7 @@ public class Carbohidratos extends AppCompatActivity {
          */
         new RegistrosListaIngesta().execute("registrar_datos");
 
-        String comentarioFinal = generaComentarioBolo(boloResult,num_decimal);
+        String comentarioFinal = generaComentarioBolo(boloResult,numDecimal);
         AlertDialog.Builder builder = new AlertDialog.Builder(Carbohidratos.this);
         builder.setMessage(comentarioFinal)
                 .setTitle(getString(R.string.bolo))
@@ -427,12 +403,8 @@ public class Carbohidratos extends AppCompatActivity {
     }
 
     public double calculaBoloCorrector(Double sumatorioHc){
-        double retorno=0.0;
         cb = new CalculaBolo(valoresPOJO, sumatorioHc);
-
-        retorno = cb.calculoBoloCorrector();
-
-        return retorno;
+        return cb.calculoBoloCorrector();
     }
 
     /**
@@ -440,18 +412,18 @@ public class Carbohidratos extends AppCompatActivity {
      *
      * @param bolo resultado del calculo del bolo corrector
      */
-    private String generaComentarioBolo(double bolo, int n_decimal) {
+    private String generaComentarioBolo(double bolo, int nDecimal) {
 
         String comentario = "";
         String formato ="";
-        if(n_decimal == 0){
-            int bolo_int = (int) Math.rint(bolo);
-            formato =  String.format(" %d", bolo_int);
+        if(nDecimal == 0){
+            int boloInt = (int) Math.rint(bolo);
+            formato =  String.format(" %d", boloInt);
         }
-        if(n_decimal == 1){
+        if(nDecimal == 1){
             formato = String.format(" %.1f", bolo);
         }
-        if(n_decimal == 2) {
+        if(nDecimal == 2) {
             formato = String.format(" %.2f", bolo);
 
         }
@@ -465,24 +437,19 @@ public class Carbohidratos extends AppCompatActivity {
     }
 
     class RegistrosListaIngesta extends AsyncTask<String,Void,String> {
-        private long id_lista=0;
-        private String fecha_registro;
-        private double sumatorio_HC;
-        private double bolo_c;
-        //private id_lista;
-
-
-        //SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
-        //SharedPreferences.Editor editorPreferencias = misPreferencias.edit(); // Nuevo cambio para ir a la Activity MenuPrincipal despues de registrarse
+        private long idLista =0;
+        private String fechaRegistro;
+        private double sumatorioHC;
+        private double boloC;
 
 
         DataBaseManager dbmanager = new DataBaseManager(getBaseContext());
-        ContentValues values;// = new ContentValues();
+        ContentValues values;
 
 
         @Override
         protected void onPreExecute() {
-            //super.onPreExecute();
+
             Toast.makeText(Carbohidratos.this, R.string.textregistrando, Toast.LENGTH_SHORT).show();
 
         }
@@ -491,17 +458,14 @@ public class Carbohidratos extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            //Toast.makeText(Registro.this, "Cargando datos...:" , Toast.LENGTH_LONG).show();
             rellenarTablaListaIngesta();
             rellenarTablaDetallesListaIngesta();
-            //editorPreferencias.putBoolean("tablaAlimentos", true);
-            //editorPreferencias.apply();
+
             return strings[0];
         }
 
         @Override
         protected void onPostExecute(String s) {
-            // super.onPostExecute(s);
 
             Toast.makeText(Carbohidratos.this, R.string.textregistrofinalizado, Toast.LENGTH_SHORT).show();
 
@@ -509,31 +473,28 @@ public class Carbohidratos extends AppCompatActivity {
         }
 
         private void rellenarTablaListaIngesta() {
-            long insertSQLExcp=0;
+
             try{
-                long insertarlista = dbmanager.insertar("registroIngestas", generarContentValuesLista(sumatorioRaciones, boloResult));
-                insertSQLExcp = insertarlista;
+                long insertarlista = dbmanager.insertar("listaingesta", generarContentValuesLista(sumatorioRaciones, boloResult));
                 if (insertarlista != -1) {
-                    //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "Insertada lista_ingesta con id: " + insertarlista);
-                    id_lista = insertarlista;
+                    idLista = insertarlista;
                 }
 
             }catch (SQLException e) {
-                Log.e(TAG, "Error inserting lista_ingesta " + insertSQLExcp, e);
+                Log.e(TAG, "Error inserting lista_ingesta " +  e);
             }
 
 
 
         }
-        public ContentValues generarContentValuesLista(double arg_sumatorioHc, double arg_boloC ){
+        public ContentValues generarContentValuesLista(double argSumatorioHc, double argBoloC ){
             values = new ContentValues();
-            fecha_registro = getDateTime();
-            values.put("fecha", fecha_registro);
-            sumatorio_HC = (double)Math.round(arg_sumatorioHc * 100d) / 100d;
-            values.put("sum_HC", sumatorio_HC);
-            bolo_c= arg_boloC;
-            values.put("bolo_corrector", bolo_c);
+            fechaRegistro = getDateTime();
+            values.put("fecha", fechaRegistro);
+            sumatorioHC = (double)Math.round(argSumatorioHc * 100d) / 100d;
+            values.put("sum_HC", sumatorioHC);
+            boloC = argBoloC;
+            values.put("bolo_corrector", boloC);
             return values;
         }
 
@@ -542,28 +503,23 @@ public class Carbohidratos extends AppCompatActivity {
          */
         private String getDateTime() {
             SimpleDateFormat dateFormat = new SimpleDateFormat(
-                    "dd-MM-yyyy", Locale.getDefault());
+                    "dd/MM/yyyy HH:mm", Locale.getDefault());
             Date date = new Date();
             return dateFormat.format(date);
         }
 
         private void rellenarTablaDetallesListaIngesta() {
             long insertSQLExcp=0;
-            String nombre_al="";
+            String nombreAl="";
             double cantidad = 0;
             try{
-                for(int i= 0; i < userlist_ingesta.size();i++){
-                    nombre_al = userlist_ingesta.get(i).getNombre();
-                    cantidad =  Double.parseDouble(userlist_ingesta.get(i).getGramos());
-                    long insertarDetalles = dbmanager.insertar("detalleslistaingesta", generarContentValuesDetalles(id_lista,nombre_al,cantidad));
+                for(int i = 0; i < userlistIngesta.size(); i++){
+                    nombreAl = userlistIngesta.get(i).getNombre();
+                    cantidad =  Double.parseDouble(userlistIngesta.get(i).getGramos());
+                    long insertarDetalles = dbmanager.insertar("detalleslistaingesta", generarContentValuesDetalles(idLista,nombreAl,cantidad));
                     insertSQLExcp = insertarDetalles;
                     if (insertarDetalles != -1) {
-                        //Toast.makeText(Carbohidratos.this, R.string.registro_lista_ingesta_correcta, Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Insertada Detalle_lista_ingesta con id: " + insertarDetalles);
-                        Log.d(TAG, "id_lista: " + id_lista);
-                        Log.d(TAG, "Alimento: " + nombre_al);
-                        Log.d(TAG, "cantidad: " + cantidad);
-
+                        Log.d(TAG, "Inserting Detalle_lista_ingesta OK");
                     }
                 }
             }catch (SQLException e) {
@@ -572,11 +528,11 @@ public class Carbohidratos extends AppCompatActivity {
 
 
         }
-        public ContentValues generarContentValuesDetalles(long arg_idlista,String arg_alimento, double arg_cantidad ){
+        public ContentValues generarContentValuesDetalles(long argIdlista,String argAlimento, double argCantidad ){
             values = new ContentValues();
-            values.put("id_lista", arg_idlista);
-            values.put("alimento", arg_alimento);
-            values.put("cantidad", arg_cantidad);
+            values.put("id_lista", argIdlista);
+            values.put("alimento", argAlimento);
+            values.put("cantidad", argCantidad);
             return values;
         }
 
